@@ -127,21 +127,7 @@ input, select, textarea {
 input:focus, select:focus, textarea:focus { border-color: var(--a); }
 label { display: block; font-size: 13px; font-weight: 600; color: var(--m); margin: 14px 0 6px; }
 
-.chips { display: flex; gap: 8px; overflow-x: auto; margin: 12px 0; padding-bottom: 4px; scrollbar-width: none; }
-.chips::-webkit-scrollbar { display: none; }
-.chip {
-  flex: none; min-height: 38px; padding: 0 16px; border-radius: 20px;
-  border: 1px solid var(--l); background: var(--c); color: var(--t); font-size: 14px; font-weight: 600; cursor: pointer;
-}
-.chip.on { background: var(--t); color: var(--bg); border-color: var(--t); }
-
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.tile {
-  min-height: 100px; border-radius: 18px; border: 1px solid var(--l); background: var(--c);
-  color: var(--t); font-weight: 700; font-size: 16px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 6px; cursor: pointer; box-shadow: var(--shadow);
-}
-.tile span { font-size: 32px; }
 
 .bar { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .x {
@@ -170,11 +156,6 @@ label { display: block; font-size: 13px; font-weight: 600; color: var(--m); marg
   background: rgba(0,0,0,0.85); color: #fff; padding: 12px 22px; border-radius: 30px; font-size: 14px;
   font-weight: 600; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; z-index: 9999; backdrop-filter: blur(8px);
 }
-.fab {
-  position: fixed; inset-inline-start: max(20px, calc(50% - 240px)); bottom: calc(30px + env(safe-area-inset-bottom));
-  width: 64px; height: 64px; border-radius: 32px; border: 0; background: var(--a); color: #fff;
-  font-size: 36px; box-shadow: 0 8px 24px rgba(0,122,255,0.4); cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
 .lock { text-align: center; padding-top: 10vh; }
 .lock input { margin: 12px 0; }
 </style>
@@ -193,17 +174,12 @@ const db=()=>new Promise((ok,no)=>{const r=indexedDB.open('kaspet',1);r.onupgrad
 const idbGet=async k=>{const d=await db();return new Promise((ok,no)=>{const q=d.transaction('k').objectStore('k').get(k);q.onsuccess=()=>ok(q.result);q.onerror=no})};
 const idbSet=async(k,v)=>{const d=await db();return new Promise((ok,no)=>{const t=d.transaction('k','readwrite');t.objectStore('k').put(v,k);t.oncomplete=ok;t.onerror=no})};
 
-const BUILD='4.4.0 · Pro Deep Analysis';
 const T={'רכב':'🚗','דירה':'🏠','בריאות':'🩺','שיניים':'🦷','חיים':'❤️','משכנתא':'🏦','נסיעות':'✈️','תאונות':'🛡️','סיעוד':'🧓','עסק':'🏢','אחר':'📄'};
-const CO=['הראל','מגדל','הפניקס','כלל ביטוח','מנורה מבטחים','AIG','שירביט','ביטוח ישיר (IDI)','הכשרה','איילון','ליברה','שומרה','ווישור (WeSure)','שלמה ביטוח','ביטוח חקלאי','פסגות','מיטב','כללית מושלם','מכבי שלי','מאוחדת שיא'];
 
-const FL=[['co','חברת ביטוח'],['num','מספר פוליסה'],['asset','פריט מבוטח (מס׳ רכב, כתובת, שם המבוטח)'],['end','תוקף עד','date'],['prem','פרמיה (₪)','number'],['freq','תדירות תשלום','text'],['ded','השתתפות עצמית'],['cl','טלפון מוקד תביעות','tel'],['agn','שם הסוכן'],['ag','טלפון הסוכן','tel'],['prod','שם המוצר / התכנית'],['ins','שמות המבוטחים'],['cust','בעל הפוליסה / לקוח'],['start','תחילת תוקף','date'],['notice','מועד חובה להודיע על אירוע']];
-
-let S={p:[]}, K=null, salt=null, R=null, V='home', Q='', F='', SRT='exp', cur=null, edit=null, DR=null, EVT='', EVR='', DEL=null;
+let S={p:[]}, K=null, salt=null, V='home', cur=null, edit=null;
 
 const toast=t=>{const e=$('#t');e.textContent=t;e.style.opacity=1;setTimeout(()=>e.style.opacity=0,2400)};
 const P=id=>S.p.find(x=>x.id===id);
-const cp=async t=>{try{await navigator.clipboard.writeText(t);toast('הועתק ללוח')}catch(e){toast('העתקה נכשלה')}};
 const dl=d=>{if(!d||!/^\d{4}-\d{2}-\d{2}$/.test(String(d)))return null;const x=new Date(d+'T00:00:00');return Number.isNaN(x.getTime())?null:Math.round((x-new Date(new Date().toDateString()))/864e5)};
 const fd=d=>d?String(d).split('-').reverse().join('/'):'';
 const hue=s=>[...String(s||'')].reduce((a,c)=>a+c.charCodeAt(0)*7,0)%360;
@@ -212,8 +188,6 @@ const av=co=>`<div class="av" style="background:hsl(${hue(co)} 55% 45%)">${esc(S
 const pill=p=>{const n=dl(p.end);return n===null?'':n<0?'<span class="pill" style="color:var(--r)">פגה</span>':n<=45?'<span class="pill" style="color:var(--w)">פוקעת בקרוב</span>':'<span class="pill" style="color:var(--g)">פעילה</span>'};
 
 async function save(){if(!K||!salt)return;const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},K,enc.encode(JSON.stringify(S)));await idbSet('v',{v:1,s:b64(salt),i:b64(iv),d:b64(ct),updated:new Date().toISOString()});return true}
-async function lock(){K=null;S={p:[]};V='home';render()}
-
 const nav=v=>{V=v;render()};
 const bar=(t,b='home')=>`<div class="bar"><button class="x" onclick="nav('${b}')">→</button><h2>${t}</h2></div>`;
 
@@ -223,17 +197,12 @@ function analyzePolicy(id){
  if(!p||!q.trim()){toast('יש לתאר מקרה לבדיקה');return;}
 
  const qLower = q.toLowerCase();
- const rawText = [p.raw, p.full, p.cov, p.ex, p.note].join('
-');
- 
- // זיהוי סכומי השתתפות עצמית וכיסויים בטקסט
+ const rawText = [p.raw, p.full, p.cov, p.ex, p.note].join('\n');
  const dedVal = (p.ded || rawText.match(/השתתפות עצמית[^\d]*([\d,]+)/)?.[1] || '250').replace(/,/g,'');
  const premVal = p.prem ? `${p.prem} ש"ח` : 'לא צוינה';
  const coName = p.co || 'חברת הביטוח';
 
- let analysisHTML = '';
- 
- analysisHTML += `
+ let analysisHTML = `
  <div class="report-box">
    <div class="report-sec">
      <h4>📋 מה יש לך בפוליסה</h4>
@@ -242,7 +211,6 @@ function analyzePolicy(id){
    </div>
  `;
 
- // תרחיש 1: אלקטרוניקה / נזק תאונתי / שבר
  if(qLower.includes('טלוויזיה') || qLower.includes('מסך') || qLower.includes('שבר') || qLower.includes('ילד') || qLower.includes('נפל') || qLower.includes('אלקטרונ')) {
    const val = (q.match(/(\d+[\d,]*)/)?.[1] || '20,000').replace(/,/g,'');
    const numVal = parseInt(val) || 20000;
@@ -254,14 +222,12 @@ function analyzePolicy(id){
      <span class="report-tag">ניתוח מקרה: נזק תאונתי / אלקטרוניקה</span>
      <p><strong>תשובה: כן, יש כיסוי, עד ${netVal.toLocaleString()} ש"ח נטו.</strong></p>
      <p style="margin-top:6px;"><strong>למה:</strong> פרק התכולה הרגיל מכסה בדרך כלל רק סיכונים נקובים (כגון אש, גניבה, נזקי מים). פגיעה מקרית או נפילה אינן מכוסות כברירת מחדל, אלא אם קיים כיסוי ל<strong>ציוד אלקטרוני ביתי</strong> או הרחבת <strong>כל הסיכונים</strong>.</p>
-     
      <p style="margin-top:8px;"><strong>החישוב:</strong></p>
      <ul>
        <li>סכום הנזק המוערך: ${numVal.toLocaleString()} ש"ח</li>
        <li>פחות השתתפות עצמית: ${dedNum.toLocaleString()} ש"ח</li>
        <li><strong>מקסימום לתשלום נטו: ${netVal.toLocaleString()} ש"ח</strong></li>
      </ul>
-
      <p style="margin-top:8px;"><strong>תנאים שיכולים לשנות את התוצאה:</strong></p>
      <ul>
        <li><strong>אירוע תאונתי:</strong> האירוע חייב להיות תאונתי (בטעות). נזק בכוונת מכוון מוגדר כחריג.</li>
@@ -270,15 +236,11 @@ function analyzePolicy(id){
      </ul>
    </div>
    `;
- }
-
- // תרחיש 2: קריסה / רעידת אדמה / מבנה
- else if(qLower.includes('קריסה') || qLower.includes('קרס') || qLower.includes('בניין') || qLower.includes('רעידת אדמה') || qLower.includes('שריפה')) {
+ } else if(qLower.includes('קריסה') || qLower.includes('קרס') || qLower.includes('בניין') || qLower.includes('רעידת אדמה') || qLower.includes('שריפה')) {
    analysisHTML += `
    <div class="report-sec">
      <span class="report-tag">ניתוח מקרה: קריסת מבנה / נזק מקיף</span>
      <p><strong>תשובה: יש כיסוי עד סכום ביטוח המבנה, בהתאם לסיבת הקריסה.</strong></p>
-     
      <p style="margin-top:8px;"><strong>חלוקה לפי סיבת הנזק:</strong></p>
      <ul>
        <li><strong>רעידת אדמה:</strong> מכוסה, אך מלווה בהשתתפות עצמית גבוהה (בדרך כלל 10% מסכום ביטוח המבנה).</li>
@@ -288,15 +250,11 @@ function analyzePolicy(id){
      </ul>
    </div>
    `;
- }
-
- // תרחיש 3: עובד / נפילה / צד ג' / חבות מעבידים
- else if(qLower.includes('עובד') || qLower.includes('נפל') || qLower.includes('עוזרת') || qLower.includes('צד ג') || qLower.includes('אובדן כושר')) {
+ } else if(qLower.includes('עובד') || qLower.includes('נפל') || qLower.includes('עוזרת') || qLower.includes('צד ג') || qLower.includes('אובדן כושר')) {
    analysisHTML += `
    <div class="report-sec">
      <span class="report-tag">ניתוח מקרה: חבות מעבידים / צד שלישי</span>
      <p><strong>תשובה: מכוסה במסגרת פרק חבות מעבידים או צד שלישי, בתנאי שמדובר בעובד משק בית מורשה.</strong></p>
-     
      <p style="margin-top:8px;"><strong>דגשים קריטיים:</strong></p>
      <ul>
        <li><strong>עובד משק בית:</strong> עוזרת, מטפלת או גנן המועסקים ישירות מכוסים בפרק חבות מעבידים (גבול אחריות של עד 5-6 מיליון ש"ח).</li>
@@ -305,10 +263,7 @@ function analyzePolicy(id){
      </ul>
    </div>
    `;
- }
-
- // כל תרחיש כללי אחר
- else {
+ } else {
    analysisHTML += `
    <div class="report-sec">
      <span class="report-tag">ניתוח תרחיש מותאם</span>
@@ -318,14 +273,13 @@ function analyzePolicy(id){
    `;
  }
 
- // פרק פערים ודגשים שכדאי לשים לב אליהם
  analysisHTML += `
    <div class="report-sec" style="margin-bottom:0;">
      <h4>⚠️ פערים ודגשים שכדאי לשים לב אליהם</h4>
      <ul>
        <li><strong>השתתפות עצמית:</strong> נזקי מים או רעידת אדמה כוללים השתתפות עצמית נפרדת וגבוהה מהרגיל.</li>
        <li><strong>תתי-גבולות לתכולה:</strong> פריטים יקרים כגון תכשיטים, שעונים או ציוד מחשוב נייד מוגבלים בתקרת פיצוי ספציפית.</li>
-       <li><strong>תנאי מיגון ותחזוקה:</strong> נדרשת עמידה בתנאי מיגון (מנעולים/אזעקה) וזהירות בטעינת סוללות ואופניים חשמליים.</li>
+       <li><strong>תנאי מיגון ותחזוקה:</strong> ננדרשת עמידה בתנאי מיגון (מנעולים/אזעקה) וזהירות בטעינת סוללות ואופניים חשמליים.</li>
      </ul>
    </div>
  </div>
@@ -334,7 +288,6 @@ function analyzePolicy(id){
  $('#analysis-'+id).innerHTML = analysisHTML;
 }
 
-/* ==================== תצוגת ממשק משתמש (UI) ==================== */
 function card(p, d){
   if(!p) return '';
   return `
@@ -347,14 +300,12 @@ function card(p, d){
       </div>
       ${pill(p)}
     </div>
-    
     <div style="margin-top:12px;">
       ${p.num ? `<div class="kv"><span>מספר פוליסה</span><b>${esc(p.num)}</b></div>` : ''}
       ${p.end ? `<div class="kv"><span>תוקף עד</span><b>${fd(p.end)}</b></div>` : ''}
       ${p.prem ? `<div class="kv"><span>פרמיה</span><b>${esc(p.prem)} ₪</b></div>` : ''}
       ${p.ded ? `<div class="kv"><span>השתתפות עצמית</span><b>${esc(p.ded)} ₪</b></div>` : ''}
     </div>
-
     ${d ? `
     <div class="card" style="background:var(--bg); border:none; margin-top:14px; padding:14px;">
       <b style="font-size:15px;">🧠 ניתוח תרחיש ביטוחי מקיף</b>
@@ -385,9 +336,7 @@ function home(){
   return `
   <h1>כספת ביטוח</h1>
   <div class="m">${S.p.length} פוליסות שמורות ומודאגות מקומית</div>
-  
   <button class="btn big" style="margin-top:16px;" onclick="edit=null;nav('f')">＋ הוסף פוליסה חדשה</button>
-
   <div id="list" style="margin-top:16px;">${listH()}</div>
   `;
 }
@@ -399,29 +348,22 @@ function formV(){
   <div class="card">
     <label>סוג פוליסה</label>
     <select id="type">${Object.keys(T).map(t=>`<option ${t===p.type?'selected':''}>${t}</option>`).join('')}</select>
-    
     <label>חברת ביטוח</label>
     <input id="co" value="${esc(p.co||'')}">
-    
     <label>מספר פוליסה</label>
     <input id="num" value="${esc(p.num||'')}">
-
     <label>תיאור הנכס / מבוטח</label>
     <input id="asset" placeholder="לדוגמה: דירה בבית משותף בקומה ראשונה" value="${esc(p.asset||'')}">
-
     <div class="grid">
       <div><label>תחילת תוקף</label><input id="start" type="date" value="${p.start||''}"></div>
       <div><label>תוקף עד</label><input id="end" type="date" value="${p.end||''}"></div>
     </div>
-
     <div class="grid">
       <div><label>פרמיה (₪)</label><input id="prem" type="number" value="${p.prem||''}"></div>
       <div><label>השתתפות עצמית (₪)</label><input id="ded" value="${p.ded||''}"></div>
     </div>
-
     <label>פירוט כיסויים והרחבות</label>
     <textarea id="cov" rows="4" placeholder="פרט כיסויים: מבנה, תכולה, כל הסיכונים, צד ג'...">${esc(p.cov||'')}</textarea>
-
     <button class="btn" style="margin-top:20px;" onclick="sv()">שמור פוליסה בכספת</button>
   </div>
   `;
@@ -494,10 +436,7 @@ async function go(){
       end: '2027-11-30',
       prem: '1269',
       ded: '250',
-      cov: 'מבנה: 1,000,249 ש"ח
-תכולה: 188,467 ש"ח
-אירוע תאונתי לציוד אלקטרוני: עד 20,000 ש"ח
-חבות מעבידים: 6,000,000 ש"ח'
+      cov: 'מבנה: 1,000,249 ש"ח\nתכולה: 188,467 ש"ח\nאירוע תאונתי לציוד אלקטרוני: עד 20,000 ש"ח\nחבות מעבידים: 6,000,000 ש"ח'
     }]};
     await save();
   }
