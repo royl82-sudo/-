@@ -98,7 +98,7 @@ details{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin
 </style>
 </head>
 <body>
-<div id="app"><div class="lock"><div style="font-size:56px">🔒</div><h1>הכספת שלי</h1><div class="ver">גרסה 7.1.0 · 10.11.2026 · Smart Deep Analysis · מוצפן מקומית AES-GCM</div><p class="mut">צור סיסמת מאסטר. אין דרך לשחזר אותה — אם תאבד אותה המידע אבוד.</p><input id="pw" type="password" placeholder="סיסמה" autocomplete="off"><input id="pw2" type="password" placeholder="אימות סיסמה" autocomplete="off"><label class="row" style="justify-content:center"><input type="checkbox" id="rm" checked="" style="width:auto"> זכור במכשיר זה</label><button class="btn" onclick="go()">צור כספת</button><p class="small">המידע נשמר מוצפן ב־IndexedDB במכשיר בלבד. סריקת AI שולחת מסמך לספק חיצוני רק לאחר אישור מפורש שלך לכל סריקה.</p><p id="er" style="color:var(--red)"></p></div></div>
+<div id="app"><div class="lock"><div style="font-size:56px">🔒</div><h1>הכספת שלי</h1><div class="ver">גרסה 7.3.0 · 10.11.2026 · Smart Deep Analysis · מוצפן מקומית AES-GCM</div><p class="mut">צור סיסמת מאסטר. אין דרך לשחזר אותה — אם תאבד אותה המידע אבוד.</p><input id="pw" type="password" placeholder="סיסמה" autocomplete="off"><input id="pw2" type="password" placeholder="אימות סיסמה" autocomplete="off"><label class="row" style="justify-content:center"><input type="checkbox" id="rm" checked="" style="width:auto"> זכור במכשיר זה</label><button class="btn" onclick="go()">צור כספת</button><p class="small">המידע נשמר מוצפן ב־IndexedDB במכשיר בלבד. סריקת AI שולחת מסמך לספק חיצוני רק לאחר אישור מפורש שלך לכל סריקה.</p><p id="er" style="color:var(--red)"></p></div></div>
 <div class="toast" id="toast"></div>
 <div class="sheet" id="sheet"><div id="sheetBody"></div></div>
 <script>
@@ -110,7 +110,7 @@ const keyOf=async(pw,s)=>{const m=await crypto.subtle.importKey('raw',enc.encode
 const db=()=>new Promise((ok,no)=>{const r=indexedDB.open('kaspet',1);r.onupgradeneeded=()=>r.result.createObjectStore('k');r.onsuccess=()=>ok(r.result);r.onerror=no});
 const idbGet=async k=>{const d=await db();return new Promise((ok,no)=>{const q=d.transaction('k').objectStore('k').get(k);q.onsuccess=()=>ok(q.result);q.onerror=no})};
 const idbSet=async(k,v)=>{const d=await db();return new Promise((ok,no)=>{const t=d.transaction('k','readwrite');t.objectStore('k').put(v,k);t.oncomplete=ok;t.onerror=no})};
-const BUILD='7.1.0 · 10.11.2026 · Smart Deep Analysis';
+const BUILD='7.3.0 · 10.11.2026 · Smart Deep Analysis';
 const TYPES={'רכב':'🚗','דירה':'🏠','בריאות':'🩺','שיניים':'🦷','חיים':'❤️','משכנתא':'🏦','נסיעות':'✈️','תאונות':'🛡️','סיעוד':'🧓','עסק':'🏢','אחר':'📄'};
 const CO_LIST=['הראל','מגדל','הפניקס','כלל ביטוח','מנורה מבטחים','AIG ישראל','שירביט','ביטוח ישיר','הכשרה','איילון','ליברה','כללית','מכבי','מאוחדת','לאומית','פספורטכארד','הדר','שומרה','ווישור (WeSure)','9 מיליון','שלמה ביטוח','ביטוח חקלאי'];
 const INS_DB=[['הראל',['הראל','harel'],['harel-group.co.il','harel.co.il'],[]],['מגדל',['מגדל','migdal'],['migdal.co.il'],[]],['הפניקס',['הפניקס','פניקס','phoenix','fenix'],['fnx.co.il','phoenix.co.il'],[]],['כלל ביטוח',['כלל ביטוח','כלל חברה לביטוח','clal'],['clalbit.co.il','clal.co.il'],['clal']],['מנורה מבטחים',['מנורה מבטחים','מנורה','menora'],['menoramivt.co.il'],[]],['איילון',['איילון','ayalon'],['ayalon-ins.co.il'],[]],['הכשרה',['הכשרה','hachshara'],['hachshara.co.il'],[]],['שומרה',['שומרה','shomera'],['shomera.co.il'],[]],['שירביט',['שירביט','shirbit'],['shirbit.co.il'],[]],['AIG ישראל',['aig','איי איי ג׳י'],['aig.co.il'],[]],['ביטוח ישיר',['ביטוח ישיר','איי די איי','idi'],['555.co.il'],[]],['ליברה',['ליברה','libra'],['libra.co.il'],[]],['ווישור (WeSure)',['ווישור','wesure'],['wesure.co.il'],[]],['שלמה ביטוח',['שלמה ביטוח','shlomo'],['shlomo.co.il'],[]],['9 מיליון',['9 מיליון','9million'],[],[]],['ביטוח חקלאי',['ביטוח חקלאי'],[],[]],['הדר',['הדר חברה לביטוח','הדר ביטוח'],[],[]],['מכבי',['מכבי','maccabi'],['maccabi4u.co.il'],['מכבי']],['כללית',['כללית','clalit'],['clalit.co.il'],['כללית']],['מאוחדת',['מאוחדת','meuhedet'],['meuhedet.co.il'],[]],['לאומית',['לאומית'],['leumit.co.il'],['לאומית']],['פספורטכארד',['פספורטכארד','passportcard'],['passportcard.co.il'],[]]];
@@ -128,7 +128,7 @@ const wa=x=>{x=ph(x);return 'https://wa.me/'+(x[0]==='0'?'972'+x.slice(1):x.repl
 const rt=t=>String(t).split('\n').map(l=>l.trim()?'\u200F'+l:l).join('\n');
 let K=null,salt=null,R=null,V='home',F='',Q='',CU='',CUST_F='',VALID_F='',VIEW='card',cur=null,edit=null,SO='',GATE=false,FID=null,REM=false,EVT='',NV=false,H=0,SCAN_Q=[],SCAN_CUR=null;
 let S={p:[],family:{people:[],assets:[]},claims:[],renewals:[],tasks:[],history:[],me:'',bk:0,settings:{localOnly:false,autoLockMin:5,aiProvider:'gemini',aiKeys:{},aiAllowed:['gemini','groq','claude'],requireConsent:true},ai:{}};
-function defaults(s){s.p=s.p||[];s.family=s.family||{people:[],assets:[]};s.family.people=s.family.people||[];s.family.assets=s.family.assets||[];s.claims=s.claims||[];s.renewals=s.renewals||[];s.tasks=s.tasks||[];s.history=s.history||[];s.chat=s.chat||[];s.settings=Object.assign({theme:'light',localOnly:false,autoLockMin:5,aiProvider:'gemini',aiKeys:{},aiAllowed:['gemini','groq','claude'],requireConsent:true},s.settings||{});s.ai=s.ai||{};return s}
+function defaults(s){s.p=s.p||[];s.family=s.family||{people:[],assets:[]};s.family.people=s.family.people||[];s.family.assets=s.family.assets||[];s.claims=s.claims||[];s.renewals=s.renewals||[];s.tasks=s.tasks||[];s.history=s.history||[];s.chat=s.chat||[];s.settings=Object.assign({theme:'light',gh:{repo:'',branch:'main',file:'insurance-vault.html',versionFile:'version.json'},localOnly:false,autoLockMin:5,aiProvider:'gemini',aiKeys:{},aiAllowed:['gemini','groq','claude'],requireConsent:true},s.settings||{});s.ai=s.ai||{};return s}
 function logHist(action,detail){try{S.history.unshift({ts:Date.now(),action,detail:String(detail||'').slice(0,160)});S.history=S.history.slice(0,200)}catch(e){}}
 async function save(){if(!K)throw new Error('הכספת נעולה');try{const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},K,enc.encode(JSON.stringify(S)));await idbSet('v',{s:b64(salt),i:b64(iv),d:b64(ct)});return true}catch(e){toast('השמירה נכשלה — המידע לא נשמר. נסה שוב');throw e}}
 async function saveQuiet(){try{await save();return true}catch(e){return false}}
@@ -142,8 +142,8 @@ function closeSheet(){$('#sheet').classList.remove('open')}
 function nav(v){V=v;render()}
 function render(){const a=$('#app');window.scrollTo(0,0);if(K&&GATE){a.innerHTML=gateV();return}
 if(!K){a.innerHTML=lockV();return}
-let body='';if(V==='home')body=homeV();else if(V==='pol')body=polV();else if(V==='claims')body=claimsV();else if(V==='settings')body=settingsV();else if(V==='policy')body=policyV();else if(V==='claim')body=claimV();else if(V==='form')body=formV();else if(V==='family')body=familyV();else if(V==='coverage')body=coverageV();else if(V==='scan')body=scanV();else if(V==='assistant')body=assistantV();else if(V==='deep')body=deepAnalysisV();else if(V==='import')body=importV();else if(V==='backup')body=backupV();else body=homeV();
-a.innerHTML=`<div class="top"><h1>${V==='home'?'הכספת שלי':V==='pol'?'הפוליסות שלי':V==='claims'?'תביעות':V==='settings'?'הגדרות':V==='family'?'תיק משפחתי':V==='coverage'?'תמונת מצב':V==='scan'?'סריקת פוליסה':V==='assistant'?'עוזר חכם':V==='deep'?'ניתוח עומק':V==='import'?'ייבוא':V==='backup'?'גיבוי ושחזור':'הכספת שלי'}</h1><div style="display:flex;gap:8px;align-items:center;margin-top:4px;flex-wrap:wrap"><span style="background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800">גרסה ${BUILD}</span><button onclick="checkUpdate()" style="background:#fff;color:#122A4D;border:0;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800;cursor:pointer">↻ עדכן</button></div><p>${V==='home'?'ניהול הביטוחים המשפחתי':V==='pol'?'חיפוש, סינון וניהול':V==='claims'?'אירוע חדש, בדיקת כיסוי ומעקב':V==='settings'?'אבטחה, גיבוי, ייבוא והגדרות AI':'ניהול הביטוחים המשפחתי'}</p></div><div class="wrap">${body}</div>`+bottomNav();
+let body='';if(V==='home')body=homeV();else if(V==='pol')body=polV();else if(V==='claims')body=claimsV();else if(V==='settings')body=settingsV();else if(V==='policy')body=policyV();else if(V==='claim')body=claimV();else if(V==='form')body=formV();else if(V==='family')body=familyV();else if(V==='coverage')body=coverageV();else if(V==='scan')body=scanV();else if(V==='assistant')body=assistantV();else if(V==='deep')body=deepAnalysisV();else if(V==='update')body=updateV();else if(V==='import')body=importV();else if(V==='backup')body=backupV();else body=homeV();
+a.innerHTML=`<div class="top"><h1>${V==='home'?'הכספת שלי':V==='pol'?'הפוליסות שלי':V==='claims'?'תביעות':V==='settings'?'הגדרות':V==='family'?'תיק משפחתי':V==='coverage'?'תמונת מצב':V==='scan'?'סריקת פוליסה':V==='assistant'?'עוזר חכם':V==='deep'?'ניתוח עומק':V==='update'?'עדכון גרסה':V==='deep'?'ניתוח עומק':V==='import'?'ייבוא':V==='backup'?'גיבוי ושחזור':'הכספת שלי'}</h1><div style="display:flex;gap:8px;align-items:center;margin-top:4px;flex-wrap:wrap"><span style="background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800">גרסה ${BUILD}</span><button onclick="nav('update')" style="background:#fff;color:#122A4D;border:0;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800;cursor:pointer">↻ עדכן</button></div><p>${V==='home'?'ניהול הביטוחים המשפחתי':V==='pol'?'חיפוש, סינון וניהול':V==='claims'?'אירוע חדש, בדיקת כיסוי ומעקב':V==='settings'?'אבטחה, גיבוי, ייבוא והגדרות AI':'ניהול הביטוחים המשפחתי'}</p></div><div class="wrap">${body}</div>`+bottomNav();
 if(V==='pol')renderList();document.documentElement.setAttribute('data-theme',S.settings.theme||'light');if(V==='home')setTimeout(()=>drawExpenseChart(),60);
 }
 function bottomNav(){const b=(v,i,l)=>`<button class="${V===v||(v==='pol'&&V==='policy')?'on':''}" onclick="nav('${v}')"><i>${i}</i>${l}</button>`;return `<nav class="nav">${b('home','⌂','בית')}${b('pol','▦','פוליסות')}<button onclick="nav('scan')" style="color:var(--tur)"><i>◉</i>סריקה</button>${b('assistant','✦','עוזר')}${b('claims','!','תביעות')}${b('settings','⚙','הגדרות')}</nav>`}
@@ -155,7 +155,7 @@ const cs=coverageScore(), ins=smartInsights().slice(0,4);
 const attn=[...S.p].filter(p=>dl(p.end)!==null&&dl(p.end)<=45).sort((a,b)=>dl(a.end)-dl(b.end)).slice(0,3);
 const upcoming=[...S.p].filter(p=>dl(p.end)!==null).sort((a,b)=>dl(a.end)-dl(b.end)).slice(0,4);
 const R=cs.score, C=2*Math.PI*38, dash=(R/100)*C;
-return `<div class="hero fade"><div class="row between"><div><h2>שלום, ${esc(S.me||'ברוך הבא')}</h2><p>${new Date().toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long'})} · הכספת החכמה שלך מעודכנת</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center"><span class="chip2" style="font-weight:800">גרסה ${BUILD} · Deep Analysis</span><button class="chip2" onclick="checkUpdate()" style="font-weight:800;cursor:pointer">↻ בדוק עדכון / עדכן גרסה</button></div><div id="updMsg" class="mut" style="font-size:12px;margin-top:6px"></div></div><button class="chip2" onclick="toggleTheme()">${S.settings.theme==='dark'?'בהיר':'כהה'}</button></div>
+return `<div class="hero fade"><div class="row between"><div><h2>שלום, ${esc(S.me||'ברוך הבא')}</h2><p>${new Date().toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long'})} · הכספת החכמה שלך מעודכנת</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center"><span class="chip2" style="font-weight:800">גרסה ${BUILD} · Deep Analysis</span><button class="chip2" onclick="nav('update')" style="font-weight:800;cursor:pointer">↻ עדכן מ-GitHub</button></div><div id="updMsg" class="mut" style="font-size:12px;margin-top:6px"></div></div><button class="chip2" onclick="toggleTheme()">${S.settings.theme==='dark'?'בהיר':'כהה'}</button></div>
 <div class="scoreRow"><div class="ring"><svg width="92" height="92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="9"/><circle cx="46" cy="46" r="38" fill="none" stroke="#0FB5A8" stroke-width="9" stroke-linecap="round" stroke-dasharray="${dash} ${C}"/></svg><b>${R}</b></div>
 <div><b style="font-size:17px">ציון כיסוי ביטוחי · ${cs.grade}</b><div style="opacity:.88;font-size:13px">${esc(cs.summary)}</div><div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip2">${S.p.length} פוליסות</span><span class="chip2">₪${Math.round(st.sum)} / חודש</span><span class="chip2">${ins.length} תובנות חכמות</span></div></div></div></div>
 <div class="grid4"><div class="stat"><b>${S.p.length}</b><span>פוליסות מנוהלות</span></div><div class="stat ${need?'warn':''}"><b>${need}</b><span>דורשות בדיקה</span></div><div class="stat ${exp?'bad':''}"><b>${exp}</b><span>פוקעות בקרוב</span></div><div class="stat"><b>${R}</b><span>ציון כיסוי / 100</span></div></div>
@@ -374,7 +374,7 @@ ${prev?`<div class="mut" style="margin-top:8px">חידוש קודם (${new Date(
 <div class="card"><b>התראות חידוש</b><div class="mut">נשלחות / מוצגות 60, 30 ו־7 ימים לפני פקיעה. בדוק את רשימת “פוקעות בקרוב” במסך הבית.</div><div class="mut">פקיעה: ${p.end?fd(p.end)+' · '+remTxt(p):'לא ידוע'}</div></div>`;
 $('#sheetBody').innerHTML=html;$('#sheet').classList.add('open');$('#sheet').onclick=e=>{if(e.target.id==='sheet')closeSheet()}}
 async function saveRenewal(pid){const p=P(pid);S.renewals.push({id:uid(),policyId:pid,date:Date.now(),prem:$('#rn-prem').value,ded:$('#rn-ded').value,note:$('#rn-note').value});logHist('הצעת חידוש',p.co+' · '+p.num);await saveQuiet();closeSheet();toast('הצעת החידוש נשמרה')}
-function settingsV(){return `<div class="card"><h3>גרסה ועדכון</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><b style="font-size:18px">גרסה ${BUILD}</b><button class="btn sm" onclick="checkUpdate()">↻ בדוק עדכון</button><button class="btn o sm" onclick="nav('backup')">גבה לפני עדכון</button></div><div class="mut" style="margin-top:8px">הגרסה מוצגת תמיד בראש מסך הבית, בראש כל מסך, ועל מסך הנעילה. אם המספר כאן שונה מהמספר בקובץ החדש שקיבלת - אתה בישן.</div><div id="updMsg2" class="mut"></div></div><div class="card"><h3>מראה</h3><div class="seg"><button class=""+(S.settings.theme!=="dark"?"on":"")+"" onclick="setTheme(0)">בהיר פרימיום</button><button class=""+(S.settings.theme==="dark"?"on":"")+"" onclick="setTheme(1)">כהה אלגנטי</button></div><div class="small" style="margin-top:8px">הבחירה נשמרת בכספת.</div></div><div class="card"><h3>אבטחה ופרטיות</h3>
+function settingsV(){return `<div class="card"><h3>גרסה ועדכון</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><b style="font-size:18px">גרסה ${BUILD}</b><button class="btn sm" onclick="nav('update')">↻ בדוק עדכון</button><button class="btn o sm" onclick="nav('update')">עדכן מ-GitHub</button></div><div class="mut" style="margin-top:8px">הגרסה מוצגת תמיד בראש מסך הבית, בראש כל מסך, ועל מסך הנעילה. אם המספר כאן שונה מהמספר בקובץ החדש שקיבלת - אתה בישן.</div><div id="updMsg2" class="mut"></div></div><div class="card"><h3>מראה</h3><div class="seg"><button class=""+(S.settings.theme!=="dark"?"on":"")+"" onclick="setTheme(0)">בהיר פרימיום</button><button class=""+(S.settings.theme==="dark"?"on":"")+"" onclick="setTheme(1)">כהה אלגנטי</button></div><div class="small" style="margin-top:8px">הבחירה נשמרת בכספת.</div></div><div class="card"><h3>אבטחה ופרטיות</h3>
 <div class="mut"><b>Face ID / ביומטריה:</b> פתיחה במכשיר בלבד. אינה מצפינה את הכספת ואינה מחליפה סיסמה. ההצפנה תמיד AES-GCM עם מפתח הנגזר מהסיסמה.</div>
 <div class="row" style="margin-top:10px"><button class="btn sm" onclick="fidOn()">הפעל Face ID</button><button class="btn o sm" onclick="fidOff()">כבה Face ID</button><button class="btn o sm" onclick="lock()">נעל כספת</button></div>
 <label style="margin-top:12px">נעילה אוטומטית לאחר חוסר פעילות (דקות)</label><select id="al" onchange="setAutoLock(this.value)">${[1,2,5,10,30].map(m=>`<option ${S.settings.autoLockMin===m?'selected':''}>${m}</option>`).join('')}</select>
@@ -647,6 +647,148 @@ function checkUpdate(){
   alert(msg);
 }
 function versionBadge(){ return 'גרסה ' + BUILD; }
+
+
+
+function ghCfg(){ S.settings.gh = S.settings.gh || {}; return S.settings.gh; }
+function ghSaveCfg(){
+  const cfg = ghCfg();
+  cfg.repo = (document.getElementById('ghRepo')?.value||'').trim();
+  cfg.branch = (document.getElementById('ghBranch')?.value||'main').trim() || 'main';
+  cfg.file = (document.getElementById('ghFile')?.value||'insurance-vault.html').trim() || 'insurance-vault.html';
+  cfg.versionFile = (document.getElementById('ghVerFile')?.value||'version.json').trim() || 'version.json';
+  saveQuiet();
+  return cfg;
+}
+function ghVersionUrl(cfg){ return `https://raw.githubusercontent.com/${cfg.repo}/${cfg.branch}/${cfg.versionFile}`; }
+function ghHtmlUrl(cfg){ return `https://raw.githubusercontent.com/${cfg.repo}/${cfg.branch}/${cfg.file}`; }
+function cmpVer(a,b){ return String(a).localeCompare(String(b), undefined, {numeric:true}); }
+
+function updateV(){
+  const cfg = ghCfg();
+  return `<div class="card"><h3>עדכון מול GitHub - בודק ומריץ</h3><div class="mut">אתה בגרסה <b>${BUILD}</b>. הכפתור בודק מול GitHub בלבד. אם יש חדש - הוא מגבה, מתקין ומריץ. בלי הוראות, בלי בחירת קובץ ידנית.</div></div>
+  <div class="card"><b>מקור העדכון ב-GitHub - מוגדר פעם אחת</b><div class="mut">הכנס את ה-Repo שבו נמצאת הגרסה החדשה. לדוגמה: <b>roy/insurance-vault</b></div>
+  <label>Repo ב-GitHub - owner/repo</label><input id="ghRepo" value="${esc(cfg.repo||'')}" placeholder="owner/repo - למשל roy/insurance-vault">
+  <div class="row"><div style="flex:1"><label>Branch</label><input id="ghBranch" value="${esc(cfg.branch||'main')}"></div><div style="flex:1"><label>קובץ ה-HTML</label><input id="ghFile" value="${esc(cfg.file||'insurance-vault.html')}"></div></div>
+  <label>קובץ גרסה - version.json</label><input id="ghVerFile" value="${esc(cfg.versionFile||'version.json')}">
+  <div class="small">המנוע יבדוק קודם את <span dir="ltr">version.json</span> ב-Repo, ואם אין אותו - יבדוק ישירות את קובץ ה-HTML ויקרא ממנו את מספר הגרסה.</div>
+  <button class="btn" onclick="ghCheck()">בדוק מול GitHub עכשיו</button><div id="ghOut" class="mut" style="margin-top:10px">עדיין לא נבדק.</div>
+  <button class="btn" id="ghInstallBtn" style="display:none" onclick="ghInstall()">התקן והרץ את הגרסה החדשה עכשיו</button></div>
+  <div class="card"><b>איך זה עובד?</b><div class="mut">1. בדיקה מול GitHub. 2. אם יש חדש - גיבוי אוטומטי נוצר. 3. הורדת ה-HTML החדש מ-GitHub ופתיחה שלו בלשונית חדשה. 4. בגרסה החדשה: גיבוי ושחזור > שחזר את הגיבוי.</div></div>
+  <button class="btn o" onclick="nav('home')">חזרה לבית</button>`;
+}
+async function ghCheck(){
+  const cfg = ghSaveCfg();
+  const out = document.getElementById('ghOut');
+  const btn = document.getElementById('ghInstallBtn');
+  if(btn) btn.style.display='none';
+  window._ghNew = null;
+  if(!cfg.repo || !cfg.repo.includes('/')){ if(out) out.textContent='הגדר קודם Repo בפורמט owner/repo, למשל roy/insurance-vault.'; return; }
+  if(out) out.textContent='בודק מול GitHub...';
+  let remoteVer = '', notes = '', htmlUrl = ghHtmlUrl(cfg);
+  try{
+    const r = await fetch(ghVersionUrl(cfg), {cache:'no-store'});
+    if(r.ok){
+      const j = await r.json();
+      remoteVer = String(j.version||j.tag||'');
+      notes = j.notes||j.changes||'';
+      if(j.htmlUrl) htmlUrl = j.htmlUrl;
+      if(j.file) htmlUrl = `https://raw.githubusercontent.com/${cfg.repo}/${cfg.branch}/${j.file}`;
+    } else throw new Error('no version.json');
+  }catch(e){
+    // Fallback: fetch HTML directly and parse BUILD
+    try{
+      const rh = await fetch(htmlUrl, {cache:'no-store'});
+      if(!rh.ok) throw new Error('GitHub '+rh.status);
+      const txt = await rh.text();
+      const m = txt.match(/const BUILD='([^']+)'/);
+      if(!m) throw new Error('לא נמצאה גרסה בקובץ');
+      remoteVer = m[1];
+      window._ghHtmlText = txt;
+    }catch(e2){
+      if(out) out.textContent='הבדיקה מול GitHub נכשלה: '+String(e2.message||'').slice(0,120)+'. בדוק את שם ה-Repo, את ה-Branch, ואת החיבור לאינטרנט.';
+      return;
+    }
+  }
+  if(!remoteVer){ if(out) out.textContent='לא נמצאה גרסה ב-GitHub. בדוק את הקובץ version.json או את קובץ ה-HTML.'; return; }
+  const cmp = cmpVer(remoteVer, BUILD);
+  if(cmp<=0){
+    if(out) out.innerHTML='אין חדש. אתה בגרסה <b>'+BUILD+'</b>, וב-GitHub הגרסה היא <b>'+remoteVer+'</b>. אתה מעודכן.';
+    return;
+  }
+  window._ghNew = {ver: remoteVer, htmlUrl, notes};
+  if(out) out.innerHTML='נמצאה גרסה חדשה ב-GitHub: <b>'+remoteVer+'</b> (שלך: '+BUILD+'). '+(notes?esc(String(notes)).slice(0,300):'')+'<br>לחץ להתקנה והרצה.';
+  if(btn){ btn.style.display=''; btn.textContent='התקן והרץ גרסה '+remoteVer+' עכשיו'; }
+}
+async function ghInstall(){
+  const n = window._ghNew;
+  if(!n) return toast('בדוק קודם מול GitHub');
+  // 1. Backup first
+  try{ await doBackup(); }catch(e){}
+  const out = document.getElementById('ghOut');
+  if(out) out.textContent='מוריד גרסה '+n.ver+' מ-GitHub ומריץ...';
+  try{
+    let txt = window._ghHtmlText || '';
+    // If we came from version.json path, fetch HTML now
+    if(!txt){
+      const r = await fetch(n.htmlUrl, {cache:'no-store'});
+      if(!r.ok) throw new Error('GitHub '+r.status);
+      txt = await r.text();
+    }
+    const m = txt.match(/const BUILD='([^']+)'/);
+    if(!m || cmpVer(m[1], BUILD)<=0) throw new Error('הקובץ שהורד אינו חדש יותר');
+    const blob = new Blob([txt], {type:'text/html'});
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+    if(out) out.textContent='גרסה '+n.ver+' נפתחה בלשונית חדשה. שם: גיבוי ושחזור > שחזר את הגיבוי שנוצר עכשיו.';
+    toast('הגרסה החדשה נפתחה. שחזר בה את הגיבוי.');
+  }catch(e){
+    if(out) out.textContent='ההתקנה נכשלה: '+String(e.message||'').slice(0,140);
+  }
+}
+function checkUpdate(){
+  const msg = 'אתה בגרסה ' + BUILD + '.\n\nכדי לעדכן לגרסה חדשה יותר:\n1. גבה את הכספת הנוכחית: הגדרות > גיבוי ושחזור > צור גיבוי.\n2. פתח את הקובץ החדש שקיבלת בספארי.\n3. בקובץ החדש: הגדרות > גיבוי ושחזור > שחזר את הגיבוי.\n\nאם פתחת עכשיו קובץ חדש והמספר בראש המסך עדיין ישן - סגור את הלשונית הישנה ופתח רק את החדשה. קבצים ישנים לא מתעדכנים מעצמם.';
+  const el = document.getElementById('updMsg') || document.getElementById('updMsg2');
+  if(el) el.textContent = 'אתה בגרסה ' + BUILD + ' - לעדכון: גבה קודם, פתח את הקובץ החדש, ושחזר את הגיבוי שם.';
+  alert(msg);
+}
+function versionBadge(){ return 'גרסה ' + BUILD; }
+
+
+function updateV(){
+  return `<div class="card"><h3>עדכון גרסה - עושה, לא רק מסביר</h3><div class="mut">אתה בגרסה <b>${BUILD}</b>. העדכון נעשה ב-3 לחיצות אמיתיות, בלי הוראות בעל-פה.</div></div>
+  <div class="card"><b>שלב 1 מתוך 3 - גיבוי אמיתי, עכשיו</b><div class="mut">לחיצה אחת יוצרת את קובץ הגיבוי המוצפן ושומרת / משתפת אותו. בלי זה - לא ממשיכים.</div><div class="mut">גיבוי אחרון: ${S.bk?new Date(S.bk).toLocaleString('he-IL'):'עדיין לא גובה'}</div><button class="btn" onclick="doBackupForUpdate()">צור גיבוי עכשיו</button><div id="updStep1" class="mut" style="margin-top:8px"></div></div>
+  <div class="card"><b>שלב 2 מתוך 3 - בחר את הקובץ החדש שקיבלת ממני</b><div class="mut">בחר כאן את קובץ ה-HTML החדש. האפליקציה תקרא אותו, תבדוק את מספר הגרסה שלו, ותפתח אותו בלשונית חדשה - זו כבר הגרסה החדשה באמת.</div><input id="newVerFile" type="file" accept=".html,text/html" onchange="handleNewVersionFile(this)"><div id="updStep2" class="mut" style="margin-top:8px">עדיין לא נבחר קובץ חדש.</div><button class="btn o" id="openNewVerBtn" style="display:none" onclick="openNewVersion()">פתח את הגרסה החדשה</button></div>
+  <div class="card"><b>שלב 3 מתוך 3 - שחזור בגרסה החדשה</b><div class="mut">אחרי שהגרסה החדשה נפתחה, לך בה להגדרות > גיבוי ושחזור, ובחר את קובץ הגיבוי שיצרת בשלב 1. המערכת תבדוק אותו לפני החלפה.</div><button class="btn" onclick="nav('backup')">פתח גיבוי ושחזור</button></div>
+  <button class="btn o" onclick="nav('home')">חזרה לבית</button>`;
+}
+async function doBackupForUpdate(){
+  await doBackup();
+  const el=document.getElementById('updStep1');
+  if(el) el.textContent='גיבוי נוצר. עכשיו עבור לשלב 2 ובחר את הקובץ החדש.';
+}
+async function handleNewVersionFile(inp){
+  const f=inp.files[0]; if(!f) return;
+  const txt=await f.text();
+  const m=txt.match(/const BUILD='([^']+)'/);
+  const ver=m?m[1]:'לא זוהתה';
+  window._newVersionText=txt; window._newVersionName=f.name; window._newVersion=ver;
+  const el=document.getElementById('updStep2');
+  const btn=document.getElementById('openNewVerBtn');
+  if(!m){ if(el) el.textContent='הקובץ שנבחר לא נראה כמו קובץ הכספת - לא נמצא בו מספר גרסה. בחר שוב את הקובץ שקיבלת ממני.'; if(btn) btn.style.display='none'; return; }
+  const cmp=ver.localeCompare(BUILD, undefined, {numeric:true});
+  if(el) el.innerHTML='נמצאה גרסה <b>'+ver+'</b> בקובץ '+f.name+'. הגרסה הנוכחית שלך היא <b>'+BUILD+'</b>. '+(cmp>0?'זו גרסה חדשה יותר - לחץ לפתיחה.':cmp===0?'זו אותה גרסה שכבר פתוחה.':'זו גרסה ישנה יותר מהנוכחית.');
+  if(btn) btn.style.display=cmp>=0?'':'none';
+  if(cmp>0&&btn) btn.textContent='פתח את גרסה '+ver+' עכשיו';
+}
+function openNewVersion(){
+  if(!window._newVersionText) return toast('בחר קודם קובץ גרסה חדשה בשלב 2');
+  const blob=new Blob([window._newVersionText],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+  window.open(url,'_blank');
+  toast('הגרסה החדשה נפתחה בלשונית חדשה. שם: גיבוי ושחזור > שחזר את הגיבוי משלב 1.');
+}
+function checkUpdate(){ nav('update'); }
 
 </script>
 <script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script>
