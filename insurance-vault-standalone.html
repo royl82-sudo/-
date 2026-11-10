@@ -1,415 +1,513 @@
-<!DOCTYPE html>
-<html lang="he" dir="rtl"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>כספת ביטוח</title>
-<meta name="apple-mobile-web-app-title" content="כספת">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADcElEQVR4nO3dy1LjMBRFUdPVI/j/T2XOID1IdTiJk/hxdbXWlMJlRdtCMQ58fH5+LvCbP2efAHWJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQfT37BM43/f3d/rS19fXkWdSzce0f7zlThO35qxkxjieyuLabInMFcfLWVybJ5GJNqSblLHhceqbYuXYaTrbLyH9V479LvT2S0jzOPaev959dI7jmJlr3EfbOI6cs6599Izj+Nlq2Yfb58sS3ne0nO+nNHwru+198ZnvsneLY/1cPjWROx22uJ57joeencJOU75eqzhWXt+vzfTK7+q0U2kVxxrvrAGzrR994lhzyb4/u2uO0Gbx6BMHm2sSxzHLxvrj9Fg8msTBHjrEceSysf5oDRaPDnGwkyni2OMt6Axva4ePo/LqXfnc1hg+jof2u8TbLx794+Bl4iAaO476P9Trn+EdY8fx0N7bgt7bjuZx8A5xEImDaOA4RtnrjXKetwaO46FjdouN96Sd4+BN4iASB5E4iMRBJA6ibp+VZUNWDiJxEImDSBxE4iASB5E4iMRBNN6fmhz32ZlltIc/RrpDOnQW10ZJZIw42mRxrX4iA+w5WpaxjDCu6nHUfwXfUXx0peMo/tptovIYS8fBuerGUfmS2lbZkdaNg9MVjaPsxbSTmuMtGgcViINIHETiIBIHkTiIxEEkDiJxEImDaLxnSHfy33NZNe9nH8zKsSy/PbFX/xm+A4gjdqCP2eO4X8DkfUwdx5q5n7mPqePgPnEQiYNIHERTx7HmTtfMd8OmjmN5NPczl7GIY8kFTF7GIo6L2w6UsYiDO8RBJA4icRCJg0gcROIgEgeROIjEQSQOInEQ+VDTP37TdsvKQSQOInEQiYNIHETiICoax2yfUK053qJxUEHdOGpeTHsoO9K6cXC60nGUvaQ2VHmMpeNYar927ys+uupxLOVfwZfVH9cY/3T4os0vTutncTFSHBdDJzJKFhfjxcFhBthzcBZxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcRD96Z7kFWiDCOQAAAABJRU5ErkJggg==">
+<html lang="he" dir="rtl"><head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#122A4D">
+<title>הכספת שלי · ניהול הביטוחים המשפחתי</title>
 <style>
-:root{--bg:#f5f5f7;--c:#fff;--t:#1d1d1f;--m:#6e6e73;--l:#e5e5ea;--a:#007aff;--r:#ff3b30;--g:#2e7d32;--w:#b45309;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--c:#1c1c1e;--t:#f5f5f7;--m:#98989d;--l:#38383a;--a:#0a84ff;--r:#ff453a;--g:#66bb6a;--w:#fbbf24;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#000;--c:#1c1c1e;--t:#f5f5f7;--m:#98989d;--l:#38383a;--a:#0a84ff;--r:#ff453a;--g:#66bb6a;--w:#fbbf24;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--t);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
-#app{max-width:480px;margin:0 auto;padding:16px 16px 110px}
-h1{font-size:30px;margin:8px 0 2px}h2{font-size:20px;margin:0}h3{font-size:15px;margin:14px 0 4px}
-.m{color:var(--m);font-size:13px}
-.card{background:var(--c);border:1px solid var(--l);border-radius:18px;padding:14px;margin:10px 0}
-.row{display:flex;gap:10px;align-items:center}.sp{justify-content:space-between;margin-top:14px}.sp>*{flex:1}
-.ic{font-size:28px}
-.btn{display:flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:0 14px;border:0;border-radius:14px;background:var(--a);color:#fff;font:inherit;font-weight:700;width:100%;text-decoration:none;margin-top:8px;cursor:pointer}
-.btn.r{background:var(--r)}.btn.g{background:var(--g)}.btn.o{background:transparent;color:var(--t);border:1px solid var(--l)}.btn.big{min-height:64px;font-size:19px}
-input,select,textarea{width:100%;min-height:46px;padding:10px 12px;border:1px solid var(--l);border-radius:12px;background:var(--c);color:var(--t);font:inherit}
-label{display:block;font-size:13px;color:var(--m);margin:12px 0 4px}
-.chips{display:flex;gap:8px;overflow-x:auto;margin:12px 0;padding-bottom:4px}
-.chip{flex:none;min-height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--l);background:var(--c);color:var(--t);font:inherit;font-size:14px;cursor:pointer}.chip.on{background:var(--t);color:var(--bg)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tile{min-height:96px;border-radius:18px;border:1px solid var(--l);background:var(--c);color:var(--t);font:inherit;font-weight:700;font-size:17px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer}.tile span{font-size:32px}
-.bar{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.x{border:0;background:var(--c);color:var(--t);width:40px;height:40px;border-radius:20px;font-size:18px;cursor:pointer;border:1px solid var(--l)}
-.kv{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--l);font-size:15px}.kv span{color:var(--m)}
-.acts{margin-top:6px}ul{margin:4px 0;padding-inline-start:20px}li{margin:2px 0}
-.b{font-size:12px;font-weight:700}
-img.at{max-width:100%;border-radius:10px;margin:6px 0;border:1px solid var(--l)}
-.fab{position:fixed;inset-inline-end:max(16px,calc(50% - 224px));bottom:calc(20px + env(safe-area-inset-bottom,0px));width:60px;height:60px;border-radius:30px;border:0;background:var(--a);color:#fff;font-size:32px;box-shadow:0 6px 18px rgba(0,0,0,.3);cursor:pointer}
-.lock{text-align:center;padding-top:12vh}.lock input{margin:8px 0}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(100px + env(safe-area-inset-bottom,0px));background:#000;color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
-html{-webkit-text-size-adjust:100%;touch-action:manipulation}body{overscroll-behavior-y:none;min-height:100dvh;-webkit-touch-callout:none}
-button,a,input,select,textarea,label,summary{touch-action:manipulation}input,select,textarea{font-size:16px}
-.ver{font-size:11px;color:var(--m);text-align:center;margin-top:14px}
-.btn.big{min-height:60px}.chips{-webkit-overflow-scrolling:touch}
-@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-#app>*{animation:fi .22s ease both}@media(prefers-reduced-motion:reduce){#app>*{animation:none}}
-.av{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;flex:none}
-.pill{display:inline-block;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700;border:1px solid currentColor;white-space:nowrap}
-.card.pol{border-inline-start:5px solid var(--ac,var(--l))}
-mark{background:rgba(255,204,0,.4);color:inherit;border-radius:3px;padding:0 2px}
-.ob{padding-inline-start:20px}.ob li{margin:8px 0}
-button,a{unicode-bidi:isolate}
-.kv b,.m,li{unicode-bidi:plaintext}li{text-align:start}
-textarea,input{unicode-bidi:plaintext;text-align:start}
-.paper{background:#fff;color:#111;border:1px solid var(--l);border-radius:12px;padding:16px;line-height:1.75;font-size:15px;white-space:pre-wrap;unicode-bidi:plaintext;text-align:right;direction:rtl}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .paper{background:#1c1c1e;color:#f5f5f7}}
-</style></head><body>
-<div id="app"></div><div id="t" class="toast"></div>
+:root{--bg:#F6F3EE;--card:#fff;--ink:#122A4D;--ink2:#3A4A63;--mut:#7A8699;--line:#E9E2D6;--navy:#122A4D;--tur:#0FB5A8;--tur2:#E6F7F5;--green:#16825E;--greenBg:#E7F5EE;--amber:#C77E0A;--amberBg:#FEF3DC;--red:#C92F2F;--redBg:#FDECEC;--r:14px;--r2:20px;--sh:0 6px 24px rgba(18,42,77,.07)}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Heebo","Assistant","Segoe UI",Arial,sans-serif;line-height:1.5;padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+a{color:inherit}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.top{position:sticky;top:0;z-index:20;background:rgba(246,243,238,.92);backdrop-filter:blur(10px);padding:14px 18px 10px;border-bottom:1px solid var(--line)}
+.top h1{margin:0;font-size:22px;letter-spacing:-.3px}.top p{margin:2px 0 0;color:var(--mut);font-size:13px}
+.wrap{max-width:760px;margin:0 auto;padding:16px 16px 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);padding:16px;box-shadow:var(--sh);margin-bottom:12px}
+.card h3{margin:0 0 8px;font-size:16px}.mut{color:var(--mut);font-size:13px}.small{font-size:12px;color:var(--mut)}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}.stat b{font-size:26px;display:block;line-height:1}.stat span{font-size:12.5px;color:var(--mut)}
+.stat.warn{border-color:#F3D9A8}.stat.bad{border-color:#F2B8B8}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.qbtn{background:var(--navy);color:#fff;border:0;border-radius:16px;padding:16px 12px;text-align:right;display:flex;flex-direction:column;gap:6px;min-height:88px}
+.qbtn small{opacity:.78;font-size:12px}.qbtn.light{background:#fff;color:var(--ink);border:1px solid var(--line)}.qbtn.tur{background:var(--tur);color:#fff}
+.qbtn .ic{font-size:22px}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:12px;padding:12px 16px;font-weight:700;width:100%;margin:6px 0}
+.btn.o{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.tur{background:var(--tur)}.btn.red{background:var(--red)}.btn.ghost{background:transparent;color:var(--navy);border:0;width:auto;padding:8px 10px}
+.btn.sm{width:auto;padding:9px 13px;font-size:14px}.btn:disabled{opacity:.55}
+input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;color:var(--ink);margin:5px 0 10px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--tur);box-shadow:0 0 0 3px var(--tur2)}label{font-size:13px;font-weight:700;color:var(--ink2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:13px}.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:700}
+.pill.ok{background:var(--greenBg);color:var(--green)}.pill.warn{background:var(--amberBg);color:var(--amber)}.pill.bad{background:var(--redBg);color:var(--red)}.pill.info{background:var(--tur2);color:#0A7A73}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px dashed #EEE7D8;font-size:14px}.kv:last-child{border:0}.kv span{color:var(--mut)}.kv b{text-align:left}
+.row{display:flex;gap:10px;align-items:center}.row.between{justify-content:space-between}.grow{flex:1}
+.avatar{width:44px;height:44px;border-radius:12px;background:var(--tur2);color:#0A7A73;display:grid;place-items:center;font-size:22px;flex:0 0 44px}
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:#fff;border-top:1px solid var(--line);padding:8px 8px calc(8px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(6,1fr)}
+.nav button{border:0;background:none;padding:6px 2px;font-size:11px;color:var(--mut);display:flex;flex-direction:column;gap:2px;align-items:center}.nav button.on{color:var(--navy);font-weight:800}.nav button i{font-size:20px;font-style:normal}
+.attn{border-right:4px solid var(--amber)}.attn.bad{border-right-color:var(--red)}
+.table{width:100%;border-collapse:collapse;font-size:13.5px}.table th{text-align:right;color:var(--mut);font-weight:600;padding:8px 6px;border-bottom:1px solid var(--line)}.table td{padding:9px 6px;border-bottom:1px solid #F0EBE0;vertical-align:top}
+.badge{font-size:11px;padding:3px 7px;border-radius:999px;background:#EEF2F7;color:var(--ink2)}
+.lock{max-width:440px;margin:38px auto;text-align:center;padding:0 18px}.lock h1{margin:8px 0 4px}.ver{color:var(--mut);font-size:13px}
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 16px;border-radius:999px;font-size:14px;z-index:99;opacity:0;transition:.25s;max-width:92vw;text-align:center;pointer-events:none}
+.sheet{position:fixed;inset:0;background:rgba(10,20,40,.45);z-index:60;display:none;align-items:flex-end;justify-content:center}.sheet.open{display:flex}.sheet>div{background:#fff;width:100%;max-width:760px;max-height:88vh;overflow:auto;border-radius:22px 22px 0 0;padding:18px 18px calc(22px + env(safe-area-inset-bottom))}
+.qc-ok{color:var(--green)}.qc-mid{color:var(--amber)}.qc-bad{color:var(--red);font-weight:800}
+.progress{height:8px;background:#EEE7D8;border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;background:var(--tur);width:0;transition:.3s}
+details{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0;background:#FFFEFB}summary{cursor:pointer;font-weight:700}
+@media print{.nav,.top,.no-print{display:none!important}body{padding:0;background:#fff}.card{box-shadow:none;break-inside:avoid}}
+
+[data-theme="dark"]{--bg:#0F1626;--card:#1A2438;--ink:#F2F4F8;--ink2:#C3CEDD;--mut:#8A97AC;--line:#2A3650;--tur2:#123A38}
+.hero{background:linear-gradient(135deg,#122A4D 0%,#1B3A6B 55%,#0FB5A8 130%);color:#fff;border-radius:24px;padding:20px;box-shadow:0 14px 36px rgba(18,42,77,.28);margin-bottom:14px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(420px 160px at 15% 0%,rgba(255,255,255,.18),transparent 60%);pointer-events:none}
+.hero h2{margin:0;font-size:22px}.hero p{margin:4px 0 0;opacity:.85;font-size:13px}
+.hero .scoreRow{display:flex;gap:16px;align-items:center;margin-top:16px}
+.ring{width:92px;height:92px;flex:0 0 92px;position:relative}.ring svg{transform:rotate(-90deg)}.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:22px}
+.chip2{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 11px;font-size:12px}
+.insight{border-right:4px solid var(--tur);background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 14px;margin-bottom:10px;animation:slideUp .35s ease}
+[data-theme="dark"] .insight{background:var(--card)}
+.insight.high{border-right-color:var(--red)}.insight.med{border-right-color:var(--amber)}.insight.low{border-right-color:var(--tur)}
+.insight b{font-size:14.5px}.insight p{margin:4px 0 8px;color:var(--mut);font-size:13px}
+@keyframes slideUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fade{animation:fadeIn .3s ease}
+.seg{display:flex;background:#EEE9DD;border-radius:999px;padding:4px;gap:4px}[data-theme="dark"] .seg{background:#232F48}
+.seg button{flex:1;border:0;background:transparent;border-radius:999px;padding:9px;font-size:13px;color:var(--mut)}.seg button.on{background:#fff;color:var(--ink);font-weight:800}
+.timeline{position:relative;padding-inline-start:18px}.timeline:before{content:"";position:absolute;right:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl{position:relative;padding-bottom:12px}.tl:before{content:"";position:absolute;right:-14px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--tur);border:2px solid #fff}
+.tl.warn:before{background:var(--amber)}.tl.bad:before{background:var(--red)}
+.chat{max-height:340px;overflow:auto;display:flex;flex-direction:column;gap:8px}
+.bubble{background:#F1F0EB;border-radius:16px 16px 4px 16px;padding:10px 12px;font-size:14px;max-width:88%;align-self:flex-start}[data-theme="dark"] .bubble{background:#2A3650}
+.bubble.me{background:var(--navy);color:#fff;align-self:flex-end;border-radius:16px 16px 16px 4px}
+.fabCenter{position:fixed;bottom:calc(28px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:40;width:56px;height:56px;border-radius:50%;background:var(--tur);color:#fff;border:0;font-size:26px;box-shadow:0 10px 24px rgba(15,181,168,.45)}
+.barRow{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:13px}.barRow span:first-child{width:70px;color:var(--mut)}.barRow .track{flex:1;height:10px;background:#EEE7D8;border-radius:999px;overflow:hidden}[data-theme="dark"] .barRow .track{background:#2A3650}
+.barRow i{display:block;height:100%;background:linear-gradient(90deg,var(--tur),#122A4D);border-radius:999px}
+
+</style>
+</head>
+<body>
+<div id="app"><div class="lock"><div style="font-size:56px">🔒</div><h1>הכספת שלי</h1><div class="ver">גרסה 6.0.0 · 10.11.2026 · Smart Premium · מוצפן מקומית AES-GCM</div><p class="mut">צור סיסמת מאסטר. אין דרך לשחזר אותה — אם תאבד אותה המידע אבוד.</p><input id="pw" type="password" placeholder="סיסמה" autocomplete="off"><input id="pw2" type="password" placeholder="אימות סיסמה" autocomplete="off"><label class="row" style="justify-content:center"><input type="checkbox" id="rm" checked="" style="width:auto"> זכור במכשיר זה</label><button class="btn" onclick="go()">צור כספת</button><p class="small">המידע נשמר מוצפן ב־IndexedDB במכשיר בלבד. סריקת AI שולחת מסמך לספק חיצוני רק לאחר אישור מפורש שלך לכל סריקה.</p><p id="er" style="color:var(--red)"></p></div></div>
+<div class="toast" id="toast"></div>
+<div class="sheet" id="sheet"><div id="sheetBody"></div></div>
 <script>
 const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const enc=new TextEncoder(),dec=new TextDecoder();
 const b64=b=>{let s='',u=new Uint8Array(b);for(let i=0;i<u.length;i+=32768)s+=String.fromCharCode.apply(null,u.subarray(i,i+32768));return btoa(s)};
-const ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const ub=s=>{try{return Uint8Array.from(atob(s),c=>c.charCodeAt(0))}catch(e){return new Uint8Array(0)}};
 const keyOf=async(pw,s)=>{const m=await crypto.subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt:s,iterations:300000,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])};
 const db=()=>new Promise((ok,no)=>{const r=indexedDB.open('kaspet',1);r.onupgradeneeded=()=>r.result.createObjectStore('k');r.onsuccess=()=>ok(r.result);r.onerror=no});
 const idbGet=async k=>{const d=await db();return new Promise((ok,no)=>{const q=d.transaction('k').objectStore('k').get(k);q.onsuccess=()=>ok(q.result);q.onerror=no})};
 const idbSet=async(k,v)=>{const d=await db();return new Promise((ok,no)=>{const t=d.transaction('k','readwrite');t.objectStore('k').put(v,k);t.oncomplete=ok;t.onerror=no})};
-const BUILD='4.3.0 · 10.11.2026';
-const T={'רכב':'🚗','דירה':'🏠','בריאות':'🩺','שיניים':'🦷','חיים':'❤️','משכנתא':'🏦','נסיעות':'✈️','תאונות':'🛡️','סיעוד':'🧓','עסק':'🏢','אחר':'📄'};
-const CO=['הראל','מגדל','הפניקס','כלל','מנורה','AIG','שירביט','ביטוח ישיר','הכשרה','איילון','ליברה','כללית','מכבי','מאוחדת','לאומית'];
-const FL=[['co','חברת ביטוח'],['num','מספר פוליסה'],['asset','פריט מבוטח (מס׳ רכב, כתובת, שם המבוטח)'],['end','תוקף עד','date'],['prem','פרמיה (₪)','number'],['freq','תדירות תשלום (חודשי / שנתי / רבעוני)'],['ded','השתתפות עצמית'],['cl','טלפון מוקד תביעות','tel'],['agn','שם הסוכן'],['ag','טלפון הסוכן','tel'],['prod','שם המוצר / התכנית (למשל מכבי שיניים)'],['ins','שמות המבוטחים'],['cust','בעל הפוליסה / לקוח'],['start','תחילת תוקף','date'],['notice','מועד חובה להודיע על אירוע']];
-let LASTID='',GATE=false,FID=null,SRT='exp',CU='',NV=false,QK=false,TMO=90000,AE='',REM=false,DR=null,EVT='',EVR='',S={p:[]},K=null,salt=null,R=null,V='home',F='',Q='',cur=null,edit=null,SO='',FA=[],DEL=null,H=0;
-const toast=t=>{const e=$('#t');e.textContent=t;e.style.opacity=1;setTimeout(()=>e.style.opacity=0,2400)};
-const P=id=>S.p.find(x=>x.id===id);
+const BUILD='6.0.0 · 10.11.2026 · Smart Premium';
+const TYPES={'רכב':'🚗','דירה':'🏠','בריאות':'🩺','שיניים':'🦷','חיים':'❤️','משכנתא':'🏦','נסיעות':'✈️','תאונות':'🛡️','סיעוד':'🧓','עסק':'🏢','אחר':'📄'};
+const CO_LIST=['הראל','מגדל','הפניקס','כלל ביטוח','מנורה מבטחים','AIG ישראל','שירביט','ביטוח ישיר','הכשרה','איילון','ליברה','כללית','מכבי','מאוחדת','לאומית','פספורטכארד','הדר','שומרה','ווישור (WeSure)','9 מיליון','שלמה ביטוח','ביטוח חקלאי'];
+const INS_DB=[['הראל',['הראל','harel'],['harel-group.co.il','harel.co.il'],[]],['מגדל',['מגדל','migdal'],['migdal.co.il'],[]],['הפניקס',['הפניקס','פניקס','phoenix','fenix'],['fnx.co.il','phoenix.co.il'],[]],['כלל ביטוח',['כלל ביטוח','כלל חברה לביטוח','clal'],['clalbit.co.il','clal.co.il'],['clal']],['מנורה מבטחים',['מנורה מבטחים','מנורה','menora'],['menoramivt.co.il'],[]],['איילון',['איילון','ayalon'],['ayalon-ins.co.il'],[]],['הכשרה',['הכשרה','hachshara'],['hachshara.co.il'],[]],['שומרה',['שומרה','shomera'],['shomera.co.il'],[]],['שירביט',['שירביט','shirbit'],['shirbit.co.il'],[]],['AIG ישראל',['aig','איי איי ג׳י'],['aig.co.il'],[]],['ביטוח ישיר',['ביטוח ישיר','איי די איי','idi'],['555.co.il'],[]],['ליברה',['ליברה','libra'],['libra.co.il'],[]],['ווישור (WeSure)',['ווישור','wesure'],['wesure.co.il'],[]],['שלמה ביטוח',['שלמה ביטוח','shlomo'],['shlomo.co.il'],[]],['9 מיליון',['9 מיליון','9million'],[],[]],['ביטוח חקלאי',['ביטוח חקלאי'],[],[]],['הדר',['הדר חברה לביטוח','הדר ביטוח'],[],[]],['מכבי',['מכבי','maccabi'],['maccabi4u.co.il'],['מכבי']],['כללית',['כללית','clalit'],['clalit.co.il'],['כללית']],['מאוחדת',['מאוחדת','meuhedet'],['meuhedet.co.il'],[]],['לאומית',['לאומית'],['leumit.co.il'],['לאומית']],['פספורטכארד',['פספורטכארד','passportcard'],['passportcard.co.il'],[]]];
+const NQ=s=>String(s==null?'':s).toLowerCase().replace(/[׳'"]/g,'').replace(/[-–—_,.():]/g,' ').replace(/\s+/g,' ').trim();
+function findCo(t){const N=' '+NQ(t)+' ',H=N.slice(0,2200),low=String(t||'').toLowerCase();let best=null;for(const [n,al,dm,wk] of INS_DB){let sc=0;for(const a of al){const k=NQ(a);if(!k)continue;const re=new RegExp('(?:^|\\s)'+k+'(?=\\s)','g'),c=(N.match(re)||[]).length;if(c){sc+=Math.min(c,5);if(H.includes(k))sc+=3;}}for(const d of dm){if(low.includes(d))sc+=8}for(const w of wk){if(low.includes(w))sc+=2}if(sc>0&&(!best||sc>best.sc))best={name:n,sc,conf:Math.min(98,55+sc*6)};}return best}
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const fd=d=>d?String(d).split('-').reverse().join('/'):'';
+const dl=d=>{if(!d||!/^\d{4}-\d{2}-\d{2}$/.test(String(d)))return null;const x=new Date(d+'T00:00:00');return Number.isNaN(x.getTime())?null:Math.round((x-new Date(new Date().toDateString()))/864e5)};
+const remTxt=p=>{const n=dl(p.end);if(n===null)return'';if(n<0)return'פגה';if(n>730)return'עוד '+Math.floor(n/365)+' שנים';if(n>60)return'עוד '+Math.round(n/30)+' חודשים';return'עוד '+n+' ימים'};
+function monthlyPrem(p){const n=Number(p.prem);if(!n||!p.freq)return null;if(p.freq==='שנתי')return n/12;if(p.freq==='רבעוני')return n/3;if(p.freq==='חצי שנתי')return n/6;if(p.freq==='חד פעמי')return 0;if(p.freq==='חודשי')return n;return null}
+const toast=t=>{const e=$('#toast');e.textContent=t;e.style.opacity=1;clearTimeout(e._t);e._t=setTimeout(()=>e.style.opacity=0,2600)};
 const cp=async t=>{try{await navigator.clipboard.writeText(t);toast('הועתק')}catch(e){toast('ההעתקה נחסמה בדפדפן')}};
 const ph=x=>String(x||'').replace(/[^\d+*#]/g,'');
 const wa=x=>{x=ph(x);return 'https://wa.me/'+(x[0]==='0'?'972'+x.slice(1):x.replace('+',''))};
-const dl=d=>{if(!d||!/^\d{4}-\d{2}-\d{2}$/.test(String(d)))return null;const x=new Date(d+'T00:00:00');return Number.isNaN(x.getTime())?null:Math.round((x-new Date(new Date().toDateString()))/864e5)};
-const monthlyPrem=p=>{const n=Number(p.prem)||0;return p.freq==='שנתי'?n/12:p.freq==='רבעוני'?n/3:p.freq==='חצי שנתי'?n/6:p.freq==='חד פעמי'?0:n};
 const rt=t=>String(t).split('\n').map(l=>l.trim()?'\u200F'+l:l).join('\n');
-const cleanTxt=t=>String(t).replace(/\*\*/g,'').replace(/^#+\s*/gm,'').replace(/^\s*[-*]\s+/gm,'• ');
-const badge=p=>{const n=dl(p.end);if(n===null)return'';return n<0?'<span class="b" style="color:var(--r)">פגה</span>':n<=45?`<span class="b" style="color:var(--w)">נותרו ${n} ימים</span>`:`<span class="b" style="color:var(--g)">עד ${esc(p.end)}</span>`};
-const ul=t=>`<ul>${String(t).split('\n').filter(Boolean).map(l=>`<li>${esc(l)}</li>`).join('')}</ul>`;
-const hay=p=>[p.co,p.num,p.asset,p.type,p.prod,p.ins,p.cust,p.who,p.notice,p.cov,p.ex,p.note,p.steps,p.docs,p.ph,p.full,p.raw,p.agn].join(' ');
-const NQ=s=>String(s==null?'':s).toLowerCase().replace(/[\u0591-\u05c7\u05f3\u05f4'"]/g,'').replace(/[-–—_,.():]/g,' ').replace(/\s+/g,' ');
-const SW=['של','את','על','עם','קרה','לי','אני','היה','הוא','זה','מה','אם','גם','לא','כי','או','אל','יש','כל'];
-const SY=[['מים','נזילה','צנרת','הצפה','רטיבות','צינור','סתימה'],['גניבה','פריצה','שוד','גנבו'],['אש','שריפה','עשן'],['תאונה','התנגשות','פגיעה','נזק עצמי','צד ג'],['גרירה','תקר','פנצר','מצבר','חילוץ'],['שמשה','חלון','זכוכית'],['ניתוח','אשפוז','רופא','תרופה','שיניים','בדיקה','מומחה'],['טיסה','מזוודה','כבודה','ביטול','חול'],['פטירה','מוות','נכות','מחלה קשה','אובדן כושר']];
-const xp=w=>SY.find(g=>g.some(t=>w===t||(t.length>2&&(w.includes(t)||(w.length>2&&t.includes(w))))))||[w];
-const lsearch=(q,L)=>{const ws=NQ(q).split(' ').filter(w=>w.length>1&&!SW.includes(w));if(!ws.length)return L.map(p=>({p,s:[]}));const ts=ws.flatMap(xp);
- return L.map(p=>{const h=NQ(hay(p)),sc=ws.filter(w=>xp(w).some(t=>h.includes(t))).length;if(!sc)return null;const s=[p.cov,p.ex,p.full,p.steps,p.docs,p.note,p.who,p.raw].join('\n').split('\n').filter(l=>l.trim()&&ts.some(t=>NQ(l).includes(t))).slice(0,5);return{p,s,sc}}).filter(Boolean).sort((a,b)=>b.sc-a.sc)};
-const phs=p=>String(p.ph||'').split('\n').filter(Boolean).map(l=>{const m=l.match(/\*?\d[\d\- ]{2,}\d/);return m?`<a class="btn o" href="tel:${ph(m[0])}">📞 ${esc(l.slice(0,l.indexOf(m[0])).replace(/[:\s]+$/,'').trim()||'טלפון')} <bdi dir="ltr">${esc(m[0])}</bdi></a>`:`<div class="m">${esc(l)}</div>`}).join('');
-const imV=()=>bar('ייבוא פוליסה')+`<p class="m">דרך חינמית ומדויקת: 1) לחץ "העתק הנחיה". 2) פתח צ׳אט של Claude, Gemini או ChatGPT, הדבק והעלה את הפוליסה. 3) העתק את ה-JSON שקיבלת ולחץ "הדבק מהלוח".</p><button class="btn" onclick="cp(SC+'\nהחזר JSON בלבד. הפוליסה מצורפת.')">📋 העתק הנחיית סריקה</button><textarea id="imt" rows="8" style="margin-top:10px"></textarea><button class="btn o" onclick="pst()">📋 הדבק מהלוח</button><button class="btn" onclick="imp()">ייבא לכספת</button>`;
-const pst=async()=>{try{$('#imt').value=await navigator.clipboard.readText()}catch(e){toast('הדבק ידנית בתיבה')}};
-async function imp(){try{const m=$('#imt').value.match(/[\[{][\s\S]*[\]}]/);let o=JSON.parse(m[0]);o=Array.isArray(o)?o:[o];const L=Lj;
- for(const x of o)S.p.unshift({id:Date.now()+''+Math.floor(Math.random()*1e4),type:T[x.type]?x.type:'אחר',co:L(x.co),num:L(x.num),asset:L(x.asset),end:L(x.end),prem:L(x.prem),ded:L(x.ded),cl:L(x.cl),agn:L(x.agn),ag:L(x.ag),prod:L(x.prod),start:L(x.start),ins:L(x.ins),cust:L(x.cust),who:L(x.who),notice:L(x.notice),cov:L(x.cov),ex:L(x.ex),note:L(x.note),steps:L(x.steps),docs:L(x.docs),ph:L(x.ph),full:L(x.full),f:[]});
- await save();toast('יובאו '+o.length+' פוליסות');nav('home')}catch(e){toast('ה-JSON לא תקין')}}
-const KEYS=['type','co','prod','ins','cust','num','asset','start','end','prem','freq','ded','cl','agn','ag','cov','ex','who','notice','steps','docs','ph','note','full'];
-const hasK=()=>{mig();return!!(S.ks&&Object.keys(S.ks).length)};
-const dg=x=>String(x||'').replace(/\D/g,'');
-const lab=k=>k==='type'?'סוג':(FL.find(f=>f[0]===k)||[0,k])[1];
-function ground(o,raw){const t=NQ(raw),d=dg(raw),ok=[],nok=[];
- const D=(k,v)=>{const n=dg(v);if(n.length>=4)(d.includes(n)?ok:nok).push(k)};
- if(o.num)D('num',o.num);for(const k of['cl','ag','ded'])if(o[k])D(k,o[k]);
- for(const k of['start','end'])if(o[k]){const m=String(o[k]).match(/(\d{4})-(\d\d)-(\d\d)/);if(m){const y=m[1],yy=y.slice(2),c=[m[3]+'/'+m[2]+'/'+y,m[3]+'.'+m[2]+'.'+y,m[3]+'-'+m[2]+'-'+y,m[3]+'/'+m[2]+'/'+yy,m[3]+'.'+m[2]+'.'+yy,String(+m[3])+'/'+String(+m[2])+'/'+y];(c.some(x=>raw.includes(x))?ok:nok).push(k)}}
- if(o.co)(t.includes(NQ(o.co))?ok:nok).push('co');
- const nm=String(o.ins||'').split(/[,،]/).map(x=>x.trim()).filter(Boolean);if(nm.length)(nm.some(n=>n.split(' ').filter(w=>w.length>2).some(w=>t.includes(NQ(w))))?ok:nok).push('ins');
- return{ok,nok}}
-const chkLines=g=>[g.ok.length?'✓ אומת מול טקסט המקור: '+g.ok.map(lab).join(', '):'',g.nok.length?'⚠ לא נמצא בטקסט המקור: '+g.nok.map(lab).join(', '):''].filter(Boolean).join('\n');
-const VP='חלץ מהטקסט רק את השדות הבאים והחזר JSON בלבד (אובייקט אחד): type (רכב, דירה, בריאות, שיניים, חיים, משכנתא, נסיעות, תאונות, סיעוד, עסק, אחר), co (חברת הביטוח), num (מספר פוליסה), start ו-end (תאריכים בפורמט YYYY-MM-DD), ins (שמות המבוטחים מופרדים בפסיקים), cl (טלפון מוקד תביעות), ded (השתתפות עצמית), prem (פרמיה חודשית). אל תמציא; שדה שלא מופיע השאר ריק.';
-async function vfy(p){const raw=p.raw||'';if(raw.length<200)return;const g=ground(p,raw),un=new Set([...(p.un||[]),...g.nok]),lines=[];
- if(g.ok.length)lines.push('✓ אומת מול טקסט המקור: '+g.ok.map(lab).join(', '));if(g.nok.length)lines.push('⚠ לא נמצא בטקסט המקור: '+g.nok.map(lab).join(', '));
- const ids=Object.keys(S.ks||{}).filter(id=>S.ks[id].k&&id!==LASTID),A=(PV[LASTID]||{n:'AI'}).n.split(' (')[0];
- if(ids.length){const ex=raw.slice(0,5000)+'\n...\n'+raw.split('\n').filter(l=>/תביע|טלפון|השתתפות|פרמיה|תוקף|עד תאריך/.test(l)).join('\n').slice(0,1500);
-  for(const id of ids){const B=PV[id].n.split(' (')[0];try{const o2=pJ(await call1(id,VP+'\n\nטקסט הפוליסה:\n'+ex,[],true,null)),diff=[],conf=[];
-   for(const k of['type','co','num','start','end','ins','cl','ded','prem']){const v1=String(p[k]||'').trim(),v2=String(o2[k]||'').trim();if(!v1||!v2)continue;
-    if(NQ(v1).replace(/\s/g,'')===NQ(v2).replace(/\s/g,'')||(dg(v1)&&dg(v1)===dg(v2))){conf.push(k);continue}
-    const a2=ground({[k]:v2},raw).ok.includes(k),a1=ground({[k]:v1},raw).ok.includes(k);
-    if(a2&&!a1){p[k]=v2;diff.push(lab(k)+' תוקן מ-'+v1+' ל-'+v2)}else if(a1&&!a2){lines.push('ℹ️ '+B+' הציע '+lab(k)+' '+v2+', אך '+v1+' נמצא בטקסט המקור ולכן נשמר')}else{un.add(k);diff.push(lab(k)+': '+A+' '+v1+' | '+B+' '+v2)}}
-   if(conf.length)lines.push('✓ אומת גם ע״י '+B+': '+conf.map(lab).join(', '));if(diff.length)lines.push('⚠ '+diff.join('; '));break}
-   catch(e){lines.push('בדיקה שנייה ('+B+') לא הושלמה: '+String(e.code||e.message||'').slice(0,90))}}}
- p.un=[...un];p.chk=lines.join('\n')}
-async function bgv(id){const p=P(id);if(!p||!p.vf)return;p.vf=0;try{toast('מאמת נתונים מול מקור שני…');await vfy(p);await save();toast('האימות הושלם');if(K&&(V==='home'||(V==='p'&&cur===id)))render()}catch(e){await save()}}
-async function reanCore(p){
- const files=(p.f||[]).filter(a=>/^data:(application\/pdf|image\/)/.test(a.d)).map(a=>({t:a.d.slice(5,a.d.indexOf(';')),b:a.d.split(',')[1]}));
- const tx=async()=>{const hp=(p.f||[]).some(a=>a.d.startsWith('data:application/pdf'));if(p.raw&&(p.rv===2||!hp))return p.raw;let t='';for(const a of p.f||[])if(a.d.startsWith('data:application/pdf'))t+=await pdfText(d2b(a.d))+'\n';p.raw=fixRtl(t).slice(0,60000);p.rv=2;return p.raw};
- if(!files.length&&!(await tx()))throw{code:'אין קובץ או טקסט שמור לניתוח'};
- try{await tx()}catch(e){}const o=await AI.json(SC,{files,tx});
- for(const k of KEYS){const v=Lj(o[k]);if(v&&String(v).trim())p[k]=v}
- p.lo=0;p.un=Array.isArray(o.unsure)?o.unsure:[];try{await vfy(p)}catch(e){}await save()}
-async function rean(id){const p=P(id),st=$('#rs2');try{st.textContent='מנתח את הפוליסה… (עד דקה)';await reanCore(p);toast('עודכן');render()}catch(e){st.textContent='נכשל: '+(e.code||e.message||'')}}
-async function bg(id){const p=P(id);if(!p||!p.lo||!hasK())return;toast('מריץ ניתוח עמוק ברקע…');try{await reanCore(p);toast('הניתוח העמוק הושלם ✅');if(K&&(V==='home'||(V==='p'&&cur===id)))render()}catch(e){toast('הניתוח העמוק נכשל: '+String(e.code||e.message||'').slice(0,60))}}
-async function bgAll(){for(const p of S.p.filter(x=>x.lo))await bg(p.id)}
-const CORE=['בריאות','חיים','דירה','רכב','נסיעות','תאונות','סיעוד'];
-function gapH(){const L=S.p.filter(p=>!CU||p.cust===CU);if(!L.length)return'';const act=L.filter(p=>{const n=dl(p.end);return n===null||n>=0}),has=t=>act.some(p=>p.type===t),ms=CORE.filter(t=>!has(t)),dup=[];
- for(const t of CORE){const a=act.filter(p=>p.type===t&&insl(p));for(let i=0;i<a.length;i++)for(let k=i+1;k<a.length;k++){const sx=new Set(insl(a[i]).split(', ')),both=insl(a[k]).split(', ').filter(n=>sx.has(n));if(both.length)dup.push(T[t]+' '+t+': '+a[i].co+' ו-'+a[k].co+' ('+both.join(', ')+')')}}
- return `<div class="card"><b>תמונת מצב${CU?' · '+esc(CU):''}</b><div class="chips" style="flex-wrap:wrap">${CORE.map(t=>`<span class="chip" style="color:${has(t)?'var(--g)':'var(--m)'}">${has(t)?'✓':'○'} ${T[t]} ${t}</span>`).join('')}</div>${ms.length?`<div class="m">אין כיסוי פעיל: ${ms.join(', ')}</div>`:''}${dup.length?`<div class="m" style="color:var(--w)">⚠️ בדוק חפיפה בין פוליסות:<br>${dup.map(esc).join('<br>')}</div>`:''}<button class="btn o" onclick="rpt()">📤 שתף דוח ${CU?'לקוח':'כולל'}</button></div>`}
-function rpt(){const L=S.p.filter(p=>!CU||p.cust===CU).sort((a,b)=>String(a.end).localeCompare(String(b.end)));shr('דוח ביטוחים'+(CU?' - '+CU:'')+' ('+new Date().toLocaleDateString('he-IL')+')\n\n'+L.map(p=>[(T[p.type]||'')+' '+p.co+' · '+p.type+(p.prod?' ('+p.prod+')':''),insl(p)?'מבוטחים: '+insl(p):'','פוליסה: '+(p.num||'—')+' | תקופה: '+(per(p)||'—')+(rem(p)?' ('+rem(p)+')':''),p.ded?'השתתפות עצמית: '+p.ded:'',p.cl?'מוקד תביעות: '+p.cl:'',p.ag?'סוכן: '+(p.agn||'')+' '+p.ag:''].filter(Boolean).join('\n')).join('\n\n')+(S.brand?'\n\n— '+S.brand:''))}
-const SCN_STOP=['האם','אני','שלי','היה','קרה','בגלל','במקרה','כמה','יכול','יכולה','הפוליסה','של','על','עם','לא','יש'];
-const SCN='אתה יועץ ביטוח בישראל. נתון מקרה ומידע על פוליסה. החזר JSON בלבד (אובייקט אחד): verdict (כן, חלקי, לא ברור או לא), summary (2-3 משפטים בעברית), clauses (מערך ציטוטים קצרים מהקטעים שניתנו, עם עמוד או סעיף כשידוע), limits, deductible, exclusions (מערך), conditions (מערך), steps (מערך פעולות מיידיות), missing (מערך מידע שחסר כדי להכריע). אל תמציא סעיפים שלא מופיעים בקטעים שניתנו, וציין כשהמידע אינו מספיק.';
-const sec=(t,a)=>a&&(Array.isArray(a)?a.length:String(a).trim())?`<h3>${t}</h3>${ul(Lj(a))}`:'';
-const scnBox=p=>`<div class="card" style="border-color:var(--a)"><b>🧠 ניתוח תרחיש ביטוחי</b><div class="m">תאר מקרה קונקרטי. המערכת תאתר סעיפים רלוונטיים, גבולות, חריגים ותנאים בטקסט השמור${hasK()?' ותנתח עם AI':''}.</div><textarea id="scn-${p.id}" rows="3" placeholder="לדוגמה: הילד שבר בטעות טלוויזיה בסלון. האם יש כיסוי ומה התקרה?" style="margin-top:8px"></textarea><button class="btn" onclick="scn('${p.id}')">נתח את המקרה</button><div id="scr-${p.id}"></div></div>`;
-function relLines(p,q,n=40){const ws=NQ(q).split(' ').filter(w=>w.length>2&&!SCN_STOP.includes(w)),ts=ws.flatMap(xp),lines=[p.cov,p.ex,p.note,p.full,p.raw].join('\n').split('\n').map(l=>l.trim()).filter(l=>l.length>6),seen=new Set(),out=[];
- const sc=lines.map(l=>({l,s:ts.filter(t=>NQ(l).includes(t)).length})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s);for(const x of sc){if(seen.has(x.l))continue;seen.add(x.l);out.push(x.l);if(out.length>=n)break}return out}
-async function scn(id){const p=P(id),q=($('#scn-'+id)||{}).value||'',r=$('#scr-'+id);if(!q.trim()){toast('תאר את המקרה');return}
- const rl=relLines(p,q),lim=(p.raw||'').split('\n').filter(l=>/השתתפות עצמית|גבול אחריות|סכום ביטוח|תקרה|₪/.test(l)).slice(0,12);
- const loc=`<h3>סעיפים רלוונטיים (מהטקסט השמור)</h3>${rl.length?ul(rl.slice(0,10).join('\n')):'<div class="m">לא נמצאו סעיפים מתאימים.</div>'}<h3>גבולות והשתתפות עצמית</h3>${lim.length?ul(lim.join('\n')):'<div class="m">לא אותרו.</div>'}`;
- if(!hasK()){r.innerHTML='<div class="card">'+loc+'<div class="m">חיפוש מקומי בלבד, אינו חוות דעת. הגדר מפתח AI לניתוח מעמיק.</div></div>';return}
- r.textContent='מנתח…';
- try{const ctx=JSON.stringify({חברה:p.co,סוג:p.type,מוצר:p.prod,מבוטחים:insl(p),תקופה:per(p),השתתפות:p.ded,כיסויים:p.cov,חריגים:p.ex,הערות:p.note,תנאים:p.notice,צעדים:p.steps}),o=await AI.json(SCN+'\nמקרה: '+q+'\nנתוני פוליסה: '+ctx+'\nקטעים רלוונטיים מהטקסט:\n'+rl.join('\n').slice(0,6000),{}),col=o.verdict==='כן'?'var(--g)':o.verdict==='לא'?'var(--r)':'var(--w)';
-  r.innerHTML=`<div class="card" style="border-color:${col}"><b style="color:${col}">${esc(o.verdict||'לא ברור')}</b><div>${esc(o.summary||'')}</div>${sec('סעיפים רלוונטיים',o.clauses)}${o.limits?`<h3>גבולות</h3><div>${esc(Lj(o.limits))}</div>`:''}${o.deductible?`<h3>השתתפות עצמית</h3><div>${esc(Lj(o.deductible))}</div>`:''}${sec('חריגים אפשריים',o.exclusions)}${sec('תנאים וחובות',o.conditions)}${sec('מה עושים עכשיו',o.steps)}${sec('מידע שחסר',o.missing)}<div class="m" style="margin-top:8px">ניתוח אוטומטי בלבד. ההחלטה הסופית בידי המבטח, ואין זו חוות דעת ביטוחית או משפטית.</div><button class="btn o" onclick="shr(document.getElementById('scr-${id}').innerText)">שתף</button></div>`}
- catch(e){r.innerHTML='<div class="card">'+loc+'<div class="m">ניתוח ה-AI נכשל: '+esc(String(e.code||e.message||''))+'</div></div>'}}
-function evl(){const t=$('#evt').value.trim(),r=$('#evr');EVT=t;const x=lsearch(t,S.p);EVR=x.length?x.map(y=>`<div class="card"><b>${T[y.p.type]||''} ${esc(y.p.co)}</b>${y.s.map(l=>`<div class="m">• ${esc(l)}</div>`).join('')}</div>`+card(y.p)).join(''):'<p class="m">לא נמצא בכספת. נסה ניתוח מעמיק עם Claude.</p>';r.innerHTML=EVR}
+let K=null,salt=null,R=null,V='home',F='',Q='',CU='',CUST_F='',VALID_F='',VIEW='card',cur=null,edit=null,SO='',GATE=false,FID=null,REM=false,EVT='',NV=false,H=0,SCAN_Q=[],SCAN_CUR=null;
+let S={p:[],family:{people:[],assets:[]},claims:[],renewals:[],tasks:[],history:[],me:'',bk:0,settings:{localOnly:false,autoLockMin:5,aiProvider:'gemini',aiKeys:{},aiAllowed:['gemini','groq','claude'],requireConsent:true},ai:{}};
+function defaults(s){s.p=s.p||[];s.family=s.family||{people:[],assets:[]};s.family.people=s.family.people||[];s.family.assets=s.family.assets||[];s.claims=s.claims||[];s.renewals=s.renewals||[];s.tasks=s.tasks||[];s.history=s.history||[];s.chat=s.chat||[];s.settings=Object.assign({theme:'light',localOnly:false,autoLockMin:5,aiProvider:'gemini',aiKeys:{},aiAllowed:['gemini','groq','claude'],requireConsent:true},s.settings||{});s.ai=s.ai||{};return s}
+function logHist(action,detail){try{S.history.unshift({ts:Date.now(),action,detail:String(detail||'').slice(0,160)});S.history=S.history.slice(0,200)}catch(e){}}
+async function save(){if(!K)throw new Error('הכספת נעולה');try{const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},K,enc.encode(JSON.stringify(S)));await idbSet('v',{s:b64(salt),i:b64(iv),d:b64(ct)});return true}catch(e){toast('השמירה נכשלה — המידע לא נשמר. נסה שוב');throw e}}
+async function saveQuiet(){try{await save();return true}catch(e){return false}}
+function P(id){return S.p.find(x=>x.id===id)}
+function normalizePolicy(raw){const p={id:raw.id||uid(),type:raw.type||'אחר',co:raw.co||'',prod:raw.prod||'',ins:raw.ins||'',cust:raw.cust||'',num:raw.num||'',asset:raw.asset||'',start:raw.start||'',end:raw.end||'',prem:raw.prem==null?'':Number(raw.prem)||'',freq:raw.freq||'',ded:raw.ded||'',cl:raw.cl||'',agn:raw.agn||'',ag:raw.ag||'',who:raw.who||'',cov:raw.cov||'',ex:raw.ex||'',notice:raw.notice||'',steps:raw.steps||'',docs:raw.docs||'',ph:raw.ph||'',note:raw.note||'',full:raw.full||'',raw:raw.raw||'',personIds:raw.personIds||[],assetIds:raw.assetIds||[],docType:raw.docType||'',quality:raw.quality||null,createdAt:raw.createdAt||Date.now(),updatedAt:Date.now()};if(Array.isArray(p.who))p.who=p.who.join('\n');if(Array.isArray(p.cov))p.cov=p.cov.join('\n');if(Array.isArray(p.ex))p.ex=p.ex.join('\n');if(Array.isArray(p.steps))p.steps=p.steps.join('\n');if(Array.isArray(p.docs))p.docs=p.docs.join('\n');if(Array.isArray(p.ph))p.ph=p.ph.join('\n');return p}
+function miss(p){const m=[];if(!p.co)m.push('חברת ביטוח');if(!p.num)m.push('מספר פוליסה');if(!p.end)m.push('תוקף');if(!p.prem)m.push('פרמיה');if(!p.freq)m.push('תדירות');if(!p.cust)m.push('בעל פוליסה');return m}
+function needsCheck(p){return miss(p).length>0||dl(p.end)!==null&&dl(p.end)<=45}
+function monthlyStats(){let sum=0,unknown=0,known=0;for(const p of S.p){const m=monthlyPrem(p);if(m===null){if(p.prem)unknown++}else{sum+=m;if(p.prem)known++}}return{sum,unknown,known}}
+function expiringSoon(){return S.p.filter(p=>{const n=dl(p.end);return n!==null&&n>=0&&n<=45})}
+function closeSheet(){$('#sheet').classList.remove('open')}
+function nav(v){V=v;render()}
+function render(){const a=$('#app');window.scrollTo(0,0);if(K&&GATE){a.innerHTML=gateV();return}
+if(!K){a.innerHTML=lockV();return}
+let body='';if(V==='home')body=homeV();else if(V==='pol')body=polV();else if(V==='claims')body=claimsV();else if(V==='settings')body=settingsV();else if(V==='policy')body=policyV();else if(V==='claim')body=claimV();else if(V==='form')body=formV();else if(V==='family')body=familyV();else if(V==='coverage')body=coverageV();else if(V==='scan')body=scanV();else if(V==='assistant')body=assistantV();else if(V==='import')body=importV();else if(V==='backup')body=backupV();else body=homeV();
+a.innerHTML=`<div class="top"><h1>${V==='home'?'הכספת שלי':V==='pol'?'הפוליסות שלי':V==='claims'?'תביעות':V==='settings'?'הגדרות':V==='family'?'תיק משפחתי':V==='coverage'?'תמונת מצב':V==='scan'?'סריקת פוליסה':V==='assistant'?'עוזר חכם':V==='import'?'ייבוא':V==='backup'?'גיבוי ושחזור':'הכספת שלי'}</h1><p>${V==='home'?'ניהול הביטוחים המשפחתי':V==='pol'?'חיפוש, סינון וניהול':V==='claims'?'אירוע חדש, בדיקת כיסוי ומעקב':V==='settings'?'אבטחה, גיבוי, ייבוא והגדרות AI':'ניהול הביטוחים המשפחתי'}</p></div><div class="wrap">${body}</div>`+bottomNav();
+if(V==='pol')renderList();document.documentElement.setAttribute('data-theme',S.settings.theme||'light');if(V==='home')setTimeout(()=>drawExpenseChart(),60);
+}
+function bottomNav(){const b=(v,i,l)=>`<button class="${V===v||(v==='pol'&&V==='policy')?'on':''}" onclick="nav('${v}')"><i>${i}</i>${l}</button>`;return `<nav class="nav">${b('home','⌂','בית')}${b('pol','▦','פוליסות')}<button onclick="nav('scan')" style="color:var(--tur)"><i>◉</i>סריקה</button>${b('assistant','✦','עוזר')}${b('claims','!','תביעות')}${b('settings','⚙','הגדרות')}</nav>`}
+function lockV(){return `<div class="lock"><div style="font-size:56px">🔒</div><h1>הכספת שלי</h1><div class="ver">גרסה ${BUILD} · מוצפן מקומית AES-GCM</div><p class="mut">${R?'הזן סיסמת מאסטר':'צור סיסמת מאסטר. אין דרך לשחזר אותה — אם תאבד אותה המידע אבוד.'}</p><input id="pw" type="password" placeholder="סיסמה" autocomplete="off">${R?'':'<input id="pw2" type="password" placeholder="אימות סיסמה" autocomplete="off">'}<label class="row" style="justify-content:center"><input type="checkbox" id="rm" checked style="width:auto"> זכור במכשיר זה</label><button class="btn" onclick="go()">${R?'פתח':'צור כספת'}</button><p class="small">המידע נשמר מוצפן ב־IndexedDB במכשיר בלבד. סריקת AI שולחת מסמך לספק חיצוני רק לאחר אישור מפורש שלך לכל סריקה.</p><p id="er" style="color:var(--red)"></p></div>`}
+function gateV(){return `<div class="lock"><div style="font-size:56px">🔒</div><h1>הכספת שלי</h1><div class="ver">גרסה ${BUILD}</div><p class="mut">פתיחה ביומטרית במכשיר בלבד — אינה מצפינה את הכספת. ההצפנה תמיד בסיסמה.</p><button class="btn" onclick="fid()">פתח עם Face ID / טביעת אצבע</button><button class="btn o" onclick="pwo()">פתח עם סיסמה</button></div>`}
+function homeV(){
+const st=monthlyStats(),need=S.p.filter(needsCheck).length,exp=expiringSoon().length;
+const cs=coverageScore(), ins=smartInsights().slice(0,4);
+const attn=[...S.p].filter(p=>dl(p.end)!==null&&dl(p.end)<=45).sort((a,b)=>dl(a.end)-dl(b.end)).slice(0,3);
+const upcoming=[...S.p].filter(p=>dl(p.end)!==null).sort((a,b)=>dl(a.end)-dl(b.end)).slice(0,4);
+const R=cs.score, C=2*Math.PI*38, dash=(R/100)*C;
+return `<div class="hero fade"><div class="row between"><div><h2>שלום, ${esc(S.me||'ברוך הבא')}</h2><p>${new Date().toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long'})} · הכספת החכמה שלך מעודכנת</p></div><button class="chip2" onclick="toggleTheme()">${S.settings.theme==='dark'?'בהיר':'כהה'}</button></div>
+<div class="scoreRow"><div class="ring"><svg width="92" height="92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="9"/><circle cx="46" cy="46" r="38" fill="none" stroke="#0FB5A8" stroke-width="9" stroke-linecap="round" stroke-dasharray="${dash} ${C}"/></svg><b>${R}</b></div>
+<div><b style="font-size:17px">ציון כיסוי ביטוחי · ${cs.grade}</b><div style="opacity:.88;font-size:13px">${esc(cs.summary)}</div><div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip2">${S.p.length} פוליסות</span><span class="chip2">₪${Math.round(st.sum)} / חודש</span><span class="chip2">${ins.length} תובנות חכמות</span></div></div></div></div>
+<div class="grid4"><div class="stat"><b>${S.p.length}</b><span>פוליסות מנוהלות</span></div><div class="stat ${need?'warn':''}"><b>${need}</b><span>דורשות בדיקה</span></div><div class="stat ${exp?'bad':''}"><b>${exp}</b><span>פוקעות בקרוב</span></div><div class="stat"><b>${R}</b><span>ציון כיסוי / 100</span></div></div>
+${st.unknown?`<div class="small">* עלות חודשית מחושבת רק מפוליסות עם תדירות מאומתת. ${st.unknown} פוליסות ללא תדירות לא נכללו.</div>`:''}
+<h3>תובנות חכמות בשבילך</h3>${ins.length?ins.map(i=>`<div class="insight ${i.sev}"><div class="row between"><b>${esc(i.title)}</b><span class="pill ${i.sev==='high'?'bad':i.sev==='med'?'warn':'ok'}">${i.sev==='high'?'דחוף':i.sev==='med'?'לבדיקה':'טיפ'}</span></div><p>${esc(i.desc)}</p><button class="btn sm" onclick="${i.action}">${esc(i.actionLabel)}</button></div>`).join(''):'<div class="card">הכול נראה מסודר — אין תובנות דחופות כרגע.</div>'}
+<div class="card"><div class="row between"><h3 style="margin:0">הוצאות לפי סוג ביטוח</h3><button class="btn ghost" onclick="nav('coverage')">כל הכיסויים</button></div><canvas id="expChart" width="680" height="220" style="width:100%;height:auto"></canvas><div id="expLegend"></div></div>
+<div class="quick">
+<button class="qbtn" onclick="nav('scan')"><span class="ic">◉</span>סריקת פוליסה<small>חכמה · עם בקרת איכות</small></button>
+<button class="qbtn light" onclick="nav('assistant')"><span class="ic">✦</span>עוזר חכם<small>שאל כל שאלה על הכספת</small></button>
+<button class="qbtn tur" onclick="startClaim()"><span class="ic">!</span>קרה אירוע<small>בדיקת זכאות לתביעה</small></button>
+<button class="qbtn light" onclick="nav('coverage')"><span class="ic">◐</span>תמונת מצב<small>כיסויים והוצאות</small></button></div>
+<div class="card"><h3 style="margin:0 0 10px">מה מתקרב?</h3><div class="timeline">${upcoming.length?upcoming.map(p=>{const n=dl(p.end);return `<div class="tl ${n<=7?'bad':n<=30?'warn':''}"><b>${esc(p.co)} · ${esc(p.type)}</b><div class="mut">${fd(p.end)} · ${remTxt(p)} · ${p.num?'מס׳ '+esc(p.num):''}</div></div>`}).join(''):'<p class="mut">אין פקיעות קרובות עם תאריך ידוע.</p>'}</div></div>
+${attn.length?`<h3>דורש את תשומת הלב שלך</h3>`+attn.map(p=>{const n=dl(p.end);return `<div class="card attn ${n<0?'bad':''}"><div class="row"><div class="avatar">${TYPES[p.type]||'📄'}</div><div class="grow"><b>${esc(p.co||'ללא חברה')} · ${esc(p.type)}</b><div class="mut">${n<0?'תוקף הפוליסה פג':`תוקף הפוליסה מסתיים בקרוב · ${fd(p.end)}`}</div></div><button class="btn ghost" onclick="openPolicy('${p.id}')">פרטים</button></div></div>`}).join(''):''}
+<h3>פוליסות אחרונות</h3>${S.p.slice(0,4).map(p=>policyRow(p)).join('')||'<p class="mut">עדיין אין פוליסות. סרוק את הראשונה — זה לוקח דקה.</p>'}
+<div class="card"><div class="row between"><b>עוזר חכם</b><button class="btn ghost" onclick="nav('assistant')">פתח צ׳אט</button></div><div class="mut">שאל בעברית חופשית: מה מכסה ביטוח הדירה בנזילה? התשובה מבוססת רק על הפוליסות שלך, בלי המצאות.</div></div>
+<div class="card"><div class="row between"><b>תיק משפחתי</b><button class="btn ghost" onclick="nav('family')">ניהול</button></div><div class="mut">${S.family.people.length} אנשים · ${S.family.assets.length} נכסים · ${S.p.length} פוליסות</div></div>`}
+function policyRow(p){const n=dl(p.end);let pill='';if(n!==null){pill=n<0?'<span class="pill bad">פגה</span>':n<=45?`<span class="pill warn">נותרו ${n} ימים</span>`:'<span class="pill ok">בתוקף</span>'}const m=monthlyPrem(p);return `<div class="card" style="cursor:pointer" onclick="openPolicy('${p.id}')"><div class="row"><div class="avatar">${TYPES[p.type]||'📄'}</div><div class="grow"><b>${esc(p.co||'—')} · ${esc(p.type)}</b><div class="mut">${esc(p.prod||'')} ${esc(p.asset||'')}</div><div class="mut">${p.num?'מס׳ '+esc(p.num)+' · ':''}${p.end?fd(p.end):'ללא תוקף'}</div></div>${pill}</div>${miss(p).length?`<div class="small" style="color:var(--amber);margin-top:8px">חסר: ${miss(p).join(', ')}</div>`:''}${m!==null?`<div class="small" style="margin-top:4px">₪${Math.round(m)} / חודש</div>`:p.prem?`<div class="small" style="margin-top:4px">פרמיה ₪${esc(p.prem)} · תדירות לא ידועה — לא מחושבת כחודשית</div>`:''}</div>`}
+function polV(){const types=[...new Set(S.p.map(p=>p.type))],cos=[...new Set(S.p.map(p=>p.co).filter(Boolean))];
+return `<input id="q" placeholder="חיפוש חופשי — למשל: נזילה, רכב, הראל…" value="${esc(Q)}" oninput="Q=this.value;renderList()">
+<div class="chips"><button class="chip ${!F?'on':''}" onclick="F='';render()">הכול</button>${types.map(t=>`<button class="chip ${F===t?'on':''}" onclick="F='${esc(t)}';render()">${TYPES[t]||''} ${esc(t)}</button>`).join('')}</div>
+<div class="row"><select id="coF" onchange="CUST_F=this.value;renderList()"><option value="">כל חברות הביטוח</option>${cos.map(c=>`<option ${CUST_F===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
+<select id="vF" onchange="VALID_F=this.value;renderList()"><option value="">כל התוקפים</option><option value="exp" ${VALID_F==='exp'?'selected':''}>פוקעות בקרוב / פגו</option><option value="ok" ${VALID_F==='ok'?'selected':''}>בתוקף בלבד</option><option value="miss" ${VALID_F==='miss'?'selected':''}>דורשות בדיקה</option></select></div>
+<div class="row between"><div class="mut"><span id="cnt"></span></div><div><button class="btn ghost" onclick="VIEW='card';render()">כרטיסים</button><button class="btn ghost" onclick="VIEW='list';render()">רשימה</button></div></div>
+<div id="list"></div><button class="btn o" onclick="nav('scan')">＋ סריקת פוליסה חדשה</button><button class="btn o" onclick="nav('import')">ייבוא מ־Claude / JSON</button>
+<div class="card"><b>שאלה בשפה טבעית על הכספת?</b><div class="mut">למשל: מה מכסה ביטוח הדירה במקרה של נזילה?</div><input id="evt" placeholder="כתוב מה קרה…" value="${esc(EVT)}"><button class="btn" onclick="askLocal()">חיפוש מקומי בכספת</button><button class="btn o" onclick="askAI()">שאל את ה־AI (באישור מפורש)</button><div id="evr"></div></div>`}
+function renderList(){const el=$('#list');if(!el)return;let L=S.p.filter(p=>(!F||p.type===F)&&(!CUST_F||p.co===CUST_F));if(VALID_F==='exp')L=L.filter(p=>{const n=dl(p.end);return n!==null&&n<=45});if(VALID_F==='ok')L=L.filter(p=>{const n=dl(p.end);return n===null||n>45});if(VALID_F==='miss')L=L.filter(needsCheck);
+if(Q.trim()){const q=NQ(Q);L=L.filter(p=>NQ([p.co,p.num,p.asset,p.type,p.prod,p.ins,p.cust,p.cov,p.ex,p.note,p.full].join(' ')).includes(q))}
+$('#cnt').textContent=L.length+' פוליסות';
+if(!L.length){el.innerHTML='<p class="mut">לא נמצאו תוצאות</p>';return}
+if(VIEW==='list'){el.innerHTML=`<div class="card" style="padding:6px 12px"><table class="table"><tr><th>חברה</th><th>סוג</th><th>תוקף</th><th>חודשי</th><th></th></tr>${L.map(p=>{const m=monthlyPrem(p);return `<tr><td>${esc(p.co)}</td><td>${esc(p.type)}</td><td>${p.end?fd(p.end):'—'}</td><td>${m!==null?'₪'+Math.round(m):'—'}</td><td><button class="btn ghost" onclick="openPolicy('${p.id}')">פתח</button></td></tr>`}).join('')}</table></div>`}else el.innerHTML=L.map(p=>policyRow(p)).join('')}
+function openPolicy(id){cur=id;V='policy';render()}
+function policyV(){const p=P(cur);if(!p){V='pol';return polV()}const m=monthlyPrem(p);const q=p.quality;
+return `<button class="btn ghost" onclick="nav('pol')">→ חזרה לפוליסות</button>
+<div class="card"><div class="row"><div class="avatar">${TYPES[p.type]||'📄'}</div><div class="grow"><b style="font-size:18px">${esc(p.co||'—')} · ${esc(p.type)}</b><div class="mut">${esc(p.prod||'')}</div></div><span class="pill ${dl(p.end)!==null&&dl(p.end)<0?'bad':dl(p.end)!==null&&dl(p.end)<=45?'warn':'ok'}">${dl(p.end)===null?'ללא תוקף':dl(p.end)<0?'פגה':dl(p.end)<=45?'פוקעת בקרוב':'בתוקף'}</span></div>
+<div style="margin-top:12px"><div class="kv"><span>מספר פוליסה</span><b><bdi>${esc(p.num||'—')}</bdi> ${p.num?`<button class="btn ghost" onclick="cp('${esc(p.num)}')">העתק</button>`:''}</b></div>
+<div class="kv"><span>פריט מבוטח</span><b>${esc(p.asset||'—')}</b></div>
+<div class="kv"><span>תקופת הביטוח</span><b>${p.start||p.end?((fd(p.start)||'—')+' – '+(fd(p.end)||'—')+' · '+remTxt(p)):'—'}</b></div>
+<div class="kv"><span>בעל הפוליסה</span><b>${esc(p.cust||'—')}</b></div><div class="kv"><span>מבוטחים</span><b>${esc(p.ins||'—')}</b></div>
+<div class="kv"><span>פרמיה</span><b>${p.prem?('₪'+esc(p.prem)+(p.freq?' · '+esc(p.freq):' · תדירות לא ידועה')):'—'}</b></div>
+${m!==null?`<div class="kv"><span>עלות חודשית מחושבת</span><b>₪${Math.round(m)}</b></div>`:''}
+<div class="kv"><span>השתתפות עצמית</span><b>${esc(p.ded||'—')}</b></div><div class="kv"><span>סוכן</span><b>${esc(p.agn||'—')} ${esc(p.ag||'')}</b></div><div class="kv"><span>מוקד תביעות</span><b>${esc(p.cl||'—')}</b></div></div></div>
+${q?`<div class="card"><b>איכות החילוץ</b><div class="mut">כל שדה מסומן: מפורש במסמך / הוסק / חסר. לעולם לא מציגים נתון שהוסק כוודאי.</div><table class="table">${q.map(r=>`<tr><td>${esc(r.label)}</td><td>${esc(r.value||'—')}</td><td><span class="${r.status==='explicit'?'qc-ok':r.status==='inferred'?'qc-mid':'qc-bad'}">${r.status==='explicit'?'מפורש':r.status==='inferred'?'הוסק':'חסר'}</span> ${r.conf!=null?r.conf+'%':''} ${r.page?'(עמ׳ '+r.page+')':''}</td></tr>`).join('')}</table></div>`:''}
+${p.cov?`<div class="card"><h3>כיסויים</h3><div style="white-space:pre-wrap">${esc(p.cov)}</div></div>`:''}
+${p.ex?`<div class="card"><h3>חריגים והגבלות</h3><div style="white-space:pre-wrap">${esc(p.ex)}</div></div>`:''}
+${p.note?`<div class="card"><h3>הערות ותנאים חשובים</h3><div style="white-space:pre-wrap">${esc(p.note)}</div></div>`:''}
+${p.full?`<details><summary>תקציר מלא של המסמך</summary><div style="white-space:pre-wrap">${esc(p.full)}</div></details>`:''}
+<div class="row"><button class="btn" onclick="startClaim('${p.id}')">קרה אירוע — פתח תביעה</button><button class="btn o" onclick="editPolicy('${p.id}')">ערוך</button></div>
+<div class="row"><button class="btn o" onclick="renewCompare('${p.id}')">השוואת חידוש</button><button class="btn o" onclick="delPolicy('${p.id}')">מחק</button></div>
+${p.cl?`<a class="btn tur" href="tel:${ph(p.cl)}">התקשר למוקד תביעות · ${esc(p.cl)}</a>`:''}
+${p.ag?`<a class="btn o" href="tel:${ph(p.ag)}">התקשר לסוכן</a>`:''}`}
+function editPolicy(id){edit=id;V='form';render()}
+async function delPolicy(id){if(!confirm('למחוק את הפוליסה? הפעולה תירשם ביומן.'))return;const p=P(id);S.p=S.p.filter(x=>x.id!==id);logHist('מחיקת פוליסה',(p?p.co+' · ':'')+id);const ok=await saveQuiet();if(!ok){toast('המחיקה לא נשמרה — בדוק אחסון');return}toast('נמחקה');nav('pol')}
+function formV(){const p=edit?P(edit):{type:'רכב',co:'',prod:'',ins:'',cust:S.me||'',num:'',asset:'',start:'',end:'',prem:'',freq:'',ded:'',cl:'',agn:'',ag:'',who:'',cov:'',ex:'',notice:'',steps:'',docs:'',ph:'',note:''};
+return `<button class="btn ghost" onclick="nav('pol')">→ חזרה</button><h3>${edit?'עריכת פוליסה':'פוליסה חדשה'}</h3>
+<label>סוג ביטוח</label><select id="f-type">${Object.keys(TYPES).map(t=>`<option ${p.type===t?'selected':''}>${t}</option>`).join('')}</select>
+<label>חברת ביטוח</label><input id="f-co" list="cos" value="${esc(p.co)}"><datalist id="cos">${CO_LIST.map(c=>`<option>${c}</option>`).join('')}</datalist>
+<label>שם המוצר / התכנית</label><input id="f-prod" value="${esc(p.prod)}">
+<label>מספר פוליסה</label><input id="f-num" value="${esc(p.num)}">
+<label>פריט מבוטח</label><input id="f-asset" value="${esc(p.asset)}" placeholder="מס׳ רכב, כתובת, שם מבוטח">
+<label>בעל הפוליסה</label><input id="f-cust" value="${esc(p.cust)}">
+<label>מבוטחים</label><input id="f-ins" value="${esc(p.ins)}">
+<div class="row"><div class="grow"><label>תחילת תוקף</label><input id="f-start" type="date" value="${esc(p.start)}"></div><div class="grow"><label>תוקף עד</label><input id="f-end" type="date" value="${esc(p.end)}"></div></div>
+<div class="row"><div class="grow"><label>פרמיה (₪)</label><input id="f-prem" type="number" inputmode="decimal" value="${esc(p.prem)}"></div><div class="grow"><label>תדירות — חובה לעלות חודשית</label><select id="f-freq"><option value="">לא ידועה — לא לחשב כחודשית</option>${['חודשי','רבעוני','חצי שנתי','שנתי','חד פעמי'].map(f=>`<option ${p.freq===f?'selected':''}>${f}</option>`).join('')}</select></div></div>
+<label>השתתפות עצמית</label><input id="f-ded" value="${esc(p.ded)}">
+<label>טלפון מוקד תביעות</label><input id="f-cl" value="${esc(p.cl)}">
+<div class="row"><div class="grow"><label>שם הסוכן</label><input id="f-agn" value="${esc(p.agn)}"></div><div class="grow"><label>טלפון הסוכן</label><input id="f-ag" value="${esc(p.ag)}"></div></div>
+<label>כיסויים (שורה לכל כיסוי)</label><textarea id="f-cov" rows="5">${esc(p.cov)}</textarea>
+<label>חריגים והגבלות</label><textarea id="f-ex" rows="4">${esc(p.ex)}</textarea>
+<label>הערות ותנאים</label><textarea id="f-note" rows="4">${esc(p.note)}</textarea>
+<button class="btn" onclick="saveForm()">שמור פוליסה</button><button class="btn o" onclick="nav('pol')">ביטול</button>`}
+async function saveForm(){const get=id=>document.getElementById(id).value.trim();
+const data={type:get('f-type'),co:get('f-co'),prod:get('f-prod'),num:get('f-num'),asset:get('f-asset'),cust:get('f-cust'),ins:get('f-ins'),start:get('f-start'),end:get('f-end'),prem:get('f-prem'),freq:get('f-freq'),ded:get('f-ded'),cl:get('f-cl'),agn:get('f-agn'),ag:get('f-ag'),cov:get('f-cov'),ex:get('f-ex'),note:get('f-note')};
+if(!data.co){toast('חסרה חברת ביטוח');return}
+if(edit){Object.assign(P(edit),normalizePolicy({...P(edit),...data}));logHist('עריכת פוליסה',data.co+' · '+data.num)}else{S.p.unshift(normalizePolicy(data));logHist('הוספת פוליסה',data.co+' · '+data.num)}
+const ok=await saveQuiet();if(!ok)return;edit=null;toast('נשמר');nav('pol')}
+function scanV(){return `<div class="card"><h3>סריקה חכמה — עם בקרת איכות לפני שמירה</h3><div class="mut">כל קובץ נסרק בנפרד. שום פוליסה לא נכנסת לכספת לפני שאישרת את השדות. מצב פרטיות: <b>${S.settings.localOnly?'מקומי בלבד — ללא שליחה חיצונית':'היברידי'}</b></div>
+<label style="margin-top:12px">בחר קבצים — PDF או תמונות (אפשר כמה)</label><input id="sf" type="file" accept="image/*,application/pdf" multiple onchange="queueScan(this)">
+<div id="scanProg"></div><div id="scanOut"></div></div>
+<div class="card"><b>איך זה עובד?</b><ol class="mut" style="padding-inline-start:18px"><li>זיהוי סוג המסמך — דף רשימה, פוליסה מלאה, נספח, אישור או הצעת חידוש</li><li>חילוץ טקסט מכל העמודים — לא רק 5 הראשונים</li><li>זיהוי חברת ביטוח עצמאי — מאגר שמות, שמות משפטיים וכותרות</li><li>חילוץ מובנה — מפורש / הוסק / חסר, עם עמוד ורמת ביטחון</li><li>מסך בקרת איכות — אתה מאשר או מתקן</li></ol></div>
+<div class="card"><b>פרטיות בסריקה</b><div class="mut">סריקת AI שולחת את המסמך לספק חיצוני. נבקש אישור מפורש לכל סריקה. במצב מקומי בלבד נשתמש רק בחילוץ מקומי.</div><label style="margin-top:8px"><input type="checkbox" id="localOnlyT" ${S.settings.localOnly?'checked':''} onchange="toggleLocalOnly(this.checked)" style="width:auto"> מצב מקומי בלבד</label></div>`}
+async function toggleLocalOnly(v){S.settings.localOnly=v;await saveQuiet();render()}
+async function queueScan(inp){const files=[...inp.files];if(!files.length)return;SCAN_Q=files;SCAN_CUR=0;processNextScan()}
+async function processNextScan(){if(SCAN_CUR>=SCAN_Q.length){$('#scanOut').innerHTML+='<div class="card"><b>סיימנו את כל הקבצים.</b></div>';return}
+const f=SCAN_Q[SCAN_CUR];$('#scanProg').innerHTML=`<div class="mut">קובץ ${SCAN_CUR+1} מתוך ${SCAN_Q.length}: ${esc(f.name)}</div><div class="progress"><i style="width:${Math.round((SCAN_CUR/SCAN_Q.length)*100)}%"></i></div>`;
+await scanOne(f);}
+async function scanOne(file){const out=$('#scanOut');out.innerHTML='<div class="card">מחלץ טקסט מכל העמודים…</div>';
+let text='',pages=0,docType='פוליסה מלאה';
+try{
+if(file.type==='application/pdf'||file.name.toLowerCase().endsWith('.pdf')){const r=await extractPdfAll(file);text=r.text;pages=r.pages}
+else{text=await extractImageText(file);pages=1}
+}catch(e){out.innerHTML=`<div class="card"><b>החילוץ נכשל</b><div class="mut">${esc(e.message||'שגיאה')}</div><button class="btn" onclick="nextScan()">המשך לקובץ הבא</button></div>`;return}
+if(/דף רשימה|דף מידע|הצעת חידוש|הצעה לחידוש/i.test(text))docType=/הצעת חידוש/.test(text)?'הצעת חידוש':'דף רשימה';
+else if(/נספח/.test(text))docType='נספח';
+else if(/אישור ביטוח|אישור קיום/.test(text))docType='אישור ביטוח';
+const coHit=findCo(text);
+let aiFields=null,usedAI=false;
+if(!S.settings.localOnly){
+const ok=confirm(`לשלוח את המסמך "${file.name}" ל־AI (${S.settings.aiProvider}) לצורך חילוץ? אפשר לסרב ולהשתמש בחילוץ מקומי בלבד.`);
+if(ok){try{aiFields=await aiExtract(text.slice(0,60000),file.name);usedAI=true}catch(e){toast('AI נכשל — עובר לחילוץ מקומי')}}}
+const local=localExtract(text,coHit);
+const merged=mergeFields(local,aiFields);
+showQC(file.name,docType,pages,text,merged,usedAI,coHit);}
+function nextScan(){SCAN_CUR++;processNextScan()}
+function localExtract(text,coHit){const find=re=>{const m=text.match(re);return m?m[1].trim():''};
+const dateRe=/(20\d{2})[-/.](\d{1,2})[-/.](\d{1,2})|(\d{1,2})[-/.](\d{1,2})[-/.](20\d{2})/g;const dates=[...text.matchAll(dateRe)].map(m=>{if(m[1])return `${m[1]}-${String(m[2]).padStart(2,'0')}-${String(m[3]).padStart(2,'0')}`;return `${m[6]}-${String(m[5]).padStart(2,'0')}-${String(m[4]).padStart(2,'0')}`});
+const premM=text.match(/פרמיה[^0-9]{0,20}([\d,]+\.?\d*)/)||text.match(/([\d,]+\.?\d*)\s*₪/);
+const numM=text.match(/מספר פוליסה[^0-9]{0,15}([0-9\-]{5,})/)||text.match(/פוליסה\s*(?:מס['’]?|מספר)?\s*[:#]?\s*([0-9\-]{5,})/);
+let freq='';if(/שנתי/.test(text))freq='שנתי';else if(/רבעוני/.test(text))freq='רבעוני';else if(/חצי שנתי/.test(text))freq='חצי שנתי';else if(/חודשי/.test(text))freq='חודשי';
+return{co:coHit?coHit.name:'',num:numM?numM[1]:'',start:dates[0]||'',end:dates[1]||dates[0]||'',prem:premM?premM[1].replace(/,/g,''):'',freq,ded:find(/השתתפות עצמית[^0-9]{0,25}([^\n]{0,60})/)||'',asset:find(/מספר רכב[^0-9]{0,10}([0-9\-]{5,})/)||'',cust:'',ins:'',prod:'',cl:find(/מוקד[^0-9]{0,20}([0-9*\- ]{7,})/)||'',cov:'',ex:'',note:''}}
+function mergeFields(local,ai){const fields=[];const labels={co:'חברת ביטוח',num:'מספר פוליסה',start:'תחילת תוקף',end:'תאריך סיום',prem:'פרמיה',freq:'תדירות תשלום',ded:'השתתפות עצמית',asset:'פריט מבוטח',cust:'בעל הפוליסה',ins:'מבוטחים',prod:'שם המוצר',cl:'מוקד תביעות'};
+for(const k of Object.keys(labels)){let v='',status='missing',conf=0,page='';
+if(ai&&ai[k]!=null&&String(ai[k]).trim()){v=String(ai[k]);status=ai._meta&&ai._meta[k]&&ai._meta[k].status?ai._meta[k].status:'explicit';conf=ai._meta&&ai._meta[k]&&ai._meta[k].conf!=null?ai._meta[k].conf:85;page=ai._meta&&ai._meta[k]&&ai._meta[k].page?ai._meta[k].page:''}
+else if(local[k]){v=String(local[k]);status=k==='co'?'explicit':'inferred';conf=k==='co'?80:55}
+fields.push({key:k,label:labels[k],value:v,status,conf,page})}
+return fields}
+function showQC(fileName,docType,pages,text,fields,usedAI,coHit){const out=$('#scanOut');
+const flags=[];if(!fields.find(f=>f.key==='co').value)flags.push('חברת ביטוח לא זוהתה — חובה למלא ידנית');if(!fields.find(f=>f.key==='num').value)flags.push('מספר פוליסה חסר');if(!fields.find(f=>f.key==='freq').value)flags.push('תדירות לא זוהתה — העלות החודשית לא תחושב עד שתאומת');if(!fields.find(f=>f.key==='end').value)flags.push('תוקף לא זוהה');
+out.innerHTML=`<div class="card"><h3>בקרת איכות — ${esc(fileName)}</h3><div class="mut">סוג מסמך: ${esc(docType)} · ${pages} עמודים · ${usedAI?'חילוץ AI + מקומי':'חילוץ מקומי בלבד'} ${coHit?`· חברה זוהתה בביטחון ${coHit.conf}%`:''}</div>
+${flags.length?`<div style="background:var(--redBg);border-radius:12px;padding:12px;margin:10px 0"><b style="color:var(--red)">דגלים אדומים</b><ul style="margin:6px 0;padding-inline-start:18px">${flags.map(f=>`<li>${esc(f)}</li>`).join('')}</ul></div>`:''}
+<table class="table"><tr><th>שדה</th><th>תוצאה</th><th>מצב</th></tr>${fields.map((f,i)=>`<tr><td>${esc(f.label)}</td><td><input id="qc-${i}" value="${esc(f.value)}" style="margin:0"></td><td><span class="${f.status==='explicit'?'qc-ok':f.status==='inferred'?'qc-mid':'qc-bad'}">${f.status==='explicit'?'מפורש':f.status==='inferred'?'הוסק':'חסר'}</span> ${f.conf?f.conf+'%':''} ${f.page?'(עמ׳ '+f.page+')':''}</td></tr>`).join('')}</table>
+<label>סוג ביטוח</label><select id="qc-type">${Object.keys(TYPES).map(t=>`<option>${t}</option>`).join('')}</select>
+<label>כיסויים (שורה לכל כיסוי)</label><textarea id="qc-cov" rows="4"></textarea>
+<label>חריגים</label><textarea id="qc-ex" rows="3"></textarea>
+<div class="row"><button class="btn" onclick="saveQC(${fields.length},'${esc(docType)}')">אשר ושמור לכספת</button><button class="btn o" onclick="nextScan()">דלג</button></div><div class="small">שמירה רק לאחר אישור שלך. נתון שהוסק מסומן כהוסק — לעולם לא כוודאי.</div></div>`;
+window._qcFields=fields;window._qcText=text}
+async function saveQC(n,docType){const f={};window._qcFields.forEach((fld,i)=>{f[fld.key]=document.getElementById('qc-'+i).value.trim()});
+const q=window._qcFields.map(fld=>({label:fld.label,value:document.getElementById('qc-'+window._qcFields.indexOf(fld)).value.trim(),status:fld.status,conf:fld.conf,page:fld.page}));
+const p=normalizePolicy({type:document.getElementById('qc-type').value,co:f.co,num:f.num,start:f.start,end:f.end,prem:f.prem,freq:f.freq,ded:f.ded,asset:f.asset,cust:f.cust,ins:f.ins,prod:f.prod,cl:f.cl,cov:document.getElementById('qc-cov').value,ex:document.getElementById('qc-ex').value,docType,quality:q,raw:window._qcText.slice(0,8000)});
+S.p.unshift(p);logHist('סריקת פוליסה',p.co+' · '+p.num);const ok=await saveQuiet();if(!ok)return;toast('הפוליסה נשמרה');nextScan()}
+async function extractPdfAll(file){if(S.settings.localOnly)throw new Error('במצב מקומי בלבד לא נטענות ספריות PDF חיצוניות. אפשר לייבא טקסט שהודבק מ־Claude.');
+await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const doc=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;let all='';for(let i=1;i<=doc.numPages;i++){const pg=await doc.getPage(i);const tc=await pg.getTextContent();const lines={};for(const it of tc.items){const y=Math.round(it.transform[5]);(lines[y]=lines[y]||[]).push(it.str)}all+=Object.keys(lines).sort((a,b)=>b-a).map(y=>lines[y].join(' ')).join('\n')+`\n--- עמוד ${i} ---\n`;if(i%5===0){const el=$('#scanOut');if(el)el.innerHTML=`<div class="card">מחלץ… עמוד ${i} מתוך ${doc.numPages}</div>`}}
+return{text:all,pages:doc.numPages}}
+async function extractImageText(file){if(S.settings.localOnly)throw new Error('במצב מקומי בלבד לא נטען OCR חיצוני. אפשר להדביק טקסט או להשתמש בייבוא.');
+await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js');
+const {data:{text}}=await Tesseract.recognize(file,'heb+eng');return text}
+function loadScript(src){return new Promise((ok,no)=>{if(document.querySelector(`script[src="${src}"]`))return ok();const e=document.createElement('script');e.src=src;e.onload=ok;e.onerror=()=>no(new Error('לא ניתן לטעון ספריית סריקה — בדוק אינטרנט'));document.head.appendChild(e)})}
+function familyV(){return `<div class="card"><h3>אנשים</h3>${S.family.people.map(pe=>`<div class="row between"><div><b>${esc(pe.name)}</b> <span class="mut">${esc(pe.role||'')}</span></div><button class="btn ghost" onclick="delPerson('${pe.id}')">מחק</button></div>`).join('')||'<p class="mut">עדיין לא הוגדרו אנשים.</p>'}
+<input id="p-name" placeholder="שם מלא"><input id="p-role" placeholder="תפקיד — למשל: אני, בת זוג, ילד"><button class="btn" onclick="addPerson()">הוסף אדם</button></div>
+<div class="card"><h3>נכסים</h3>${S.family.assets.map(a=>`<div class="row between"><div><b>${esc(a.label)}</b> <span class="mut">${esc(a.kind)} · ${esc(a.identifier||'')}</span></div><button class="btn ghost" onclick="delAsset('${a.id}')">מחק</button></div>`).join('')||'<p class="mut">עדיין לא הוגדרו נכסים.</p>'}
+<select id="a-kind"><option>רכב</option><option>דירה</option><option>משכנתא</option><option>עסק</option><option>אחר</option></select><input id="a-label" placeholder="שם הנכס — למשל: רכב משפחתי"><input id="a-id" placeholder="מזהה — מס׳ רכב / כתובת"><button class="btn" onclick="addAsset()">הוסף נכס</button></div>
+<div class="card"><b>קישור פוליסות לאנשים ונכסים</b><div class="mut">בעריכת פוליסה אפשר לקשר אותה לאדם או נכס. כאן רואים אילו פוליסות מכסות כל פריט — ולא רק כמה פוליסות קיימות.</div></div>`}
+async function addPerson(){const n=$('#p-name').value.trim(),r=$('#p-role').value.trim();if(!n)return toast('חסר שם');S.family.people.push({id:uid(),name:n,role:r});await saveQuiet();render()}
+async function delPerson(id){S.family.people=S.family.people.filter(x=>x.id!==id);await saveQuiet();render()}
+async function addAsset(){const k=$('#a-kind').value,l=$('#a-label').value.trim(),i=$('#a-id').value.trim();if(!l)return toast('חסר שם נכס');S.family.assets.push({id:uid(),kind:k,label:l,identifier:i});await saveQuiet();render()}
+async function delAsset(id){S.family.assets=S.family.assets.filter(x=>x.id!==id);await saveQuiet();render()}
+function coverageV(){const st=monthlyStats();const types=Object.keys(TYPES);
+const rows=types.map(t=>{const ps=S.p.filter(p=>p.type===t);const m=ps.reduce((a,p)=>a+(monthlyPrem(p)||0),0);return `<tr><td>${TYPES[t]} ${t}</td><td>${ps.length?ps.length+' פוליסות':'<span class="qc-bad">לא זוהה כיסוי</span>'}</td><td>${ps.length?'₪'+Math.round(m)+' / חודש':'—'}</td><td>${ps.length?ps.map(p=>esc(p.co)).join(', '):'<span class="mut">לא הוכח שאין כיסוי — רק שלא זוהה במסמכים שנשמרו</span>'}</td></tr>`}).join('');
+return `<div class="card"><h3>מפת כיסויים ופערים</h3><div class="mut">הבחנה חשובה: “לא זוהה” אינו הוכחה שאין כיסוי. הוא אומר שלא נמצאה פוליסה כזו בכספת.</div><table class="table"><tr><th>סוג</th><th>כיסוי</th><th>עלות</th><th>חברות</th></tr>${rows}</table></div>
+<div class="card"><h3>הוצאות</h3><div class="mut">סה״כ חודשי מחושב: ₪${Math.round(st.sum)} · ${st.unknown} פוליסות ללא תדירות מאומתת לא נכללו.</div>${S.p.map(p=>{const m=monthlyPrem(p);return `<div class="kv"><span>${esc(p.co)} · ${esc(p.type)}</span><b>${m!==null?'₪'+Math.round(m)+' / חודש':'תדירות לא ידועה'}</b></div>`}).join('')}</div>
+<div class="card"><h3>חפיפות אפשריות</h3><div class="mut">${dupHints()}</div></div>
+<button class="btn o" onclick="familyReport()">הפק דוח משפחתי (הדפסה / PDF)</button>`}
+function dupHints(){const by={};for(const p of S.p){const k=p.type+'|'+(p.ins||p.cust||'');(by[k]=by[k]||[]).push(p)}const dups=Object.values(by).filter(a=>a.length>1);if(!dups.length)return 'לא נמצאו חפיפות ברורות לפי סוג + מבוטח. כדאי לבדוק ידנית כיסויים דומים בין חברות.';
+return dups.map(a=>`יותר מפוליסה אחת ל־${esc(a[0].type)} · ${esc(a[0].ins||a[0].cust||'')} — ${a.map(x=>esc(x.co)+' ('+(x.num||'ללא מס׳')+')').join(' , ')} — בדוק אם יש כפל כיסוי.`).join('<br><br>')}
+function familyReport(){const w=window.open('','_blank');if(!w)return toast('הדפדפן חסם חלון חדש');w.document.write(`<html dir="rtl" lang="he"><head><meta charset="utf-8"><title>דוח ביטוח משפחתי</title><style>body{font-family:Arial,sans-serif;padding:24px}table{width:100%;border-collapse:collapse}td,th{border:1px solid #ddd;padding:8px;text-align:right}h1{color:#122A4D}
+[data-theme="dark"]{--bg:#0F1626;--card:#1A2438;--ink:#F2F4F8;--ink2:#C3CEDD;--mut:#8A97AC;--line:#2A3650;--tur2:#123A38}
+.hero{background:linear-gradient(135deg,#122A4D 0%,#1B3A6B 55%,#0FB5A8 130%);color:#fff;border-radius:24px;padding:20px;box-shadow:0 14px 36px rgba(18,42,77,.28);margin-bottom:14px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(420px 160px at 15% 0%,rgba(255,255,255,.18),transparent 60%);pointer-events:none}
+.hero h2{margin:0;font-size:22px}.hero p{margin:4px 0 0;opacity:.85;font-size:13px}
+.hero .scoreRow{display:flex;gap:16px;align-items:center;margin-top:16px}
+.ring{width:92px;height:92px;flex:0 0 92px;position:relative}.ring svg{transform:rotate(-90deg)}.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:22px}
+.chip2{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 11px;font-size:12px}
+.insight{border-right:4px solid var(--tur);background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 14px;margin-bottom:10px;animation:slideUp .35s ease}
+[data-theme="dark"] .insight{background:var(--card)}
+.insight.high{border-right-color:var(--red)}.insight.med{border-right-color:var(--amber)}.insight.low{border-right-color:var(--tur)}
+.insight b{font-size:14.5px}.insight p{margin:4px 0 8px;color:var(--mut);font-size:13px}
+@keyframes slideUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fade{animation:fadeIn .3s ease}
+.seg{display:flex;background:#EEE9DD;border-radius:999px;padding:4px;gap:4px}[data-theme="dark"] .seg{background:#232F48}
+.seg button{flex:1;border:0;background:transparent;border-radius:999px;padding:9px;font-size:13px;color:var(--mut)}.seg button.on{background:#fff;color:var(--ink);font-weight:800}
+.timeline{position:relative;padding-inline-start:18px}.timeline:before{content:"";position:absolute;right:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl{position:relative;padding-bottom:12px}.tl:before{content:"";position:absolute;right:-14px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--tur);border:2px solid #fff}
+.tl.warn:before{background:var(--amber)}.tl.bad:before{background:var(--red)}
+.chat{max-height:340px;overflow:auto;display:flex;flex-direction:column;gap:8px}
+.bubble{background:#F1F0EB;border-radius:16px 16px 4px 16px;padding:10px 12px;font-size:14px;max-width:88%;align-self:flex-start}[data-theme="dark"] .bubble{background:#2A3650}
+.bubble.me{background:var(--navy);color:#fff;align-self:flex-end;border-radius:16px 16px 16px 4px}
+.fabCenter{position:fixed;bottom:calc(28px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:40;width:56px;height:56px;border-radius:50%;background:var(--tur);color:#fff;border:0;font-size:26px;box-shadow:0 10px 24px rgba(15,181,168,.45)}
+.barRow{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:13px}.barRow span:first-child{width:70px;color:var(--mut)}.barRow .track{flex:1;height:10px;background:#EEE7D8;border-radius:999px;overflow:hidden}[data-theme="dark"] .barRow .track{background:#2A3650}
+.barRow i{display:block;height:100%;background:linear-gradient(90deg,var(--tur),#122A4D);border-radius:999px}
 
-async function save(){try{const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},K,enc.encode(JSON.stringify(S)));await idbSet('v',{s:b64(salt),i:b64(iv),d:b64(ct)})}catch(e){toast('השמירה נכשלה - האחסון בדפדפן לא זמין')}}
-async function go(){const pw=$('#pw').value,er=$('#er');if(pw.length<6){er.textContent='לפחות 6 תווים';return}
- let r=null;try{r=await idbGet('v')}catch(e){}
- try{if(!r){const p2=$('#pw2');if(p2&&p2.value!==pw){er.textContent='הסיסמאות לא זהות';return}salt=crypto.getRandomValues(new Uint8Array(16));K=await keyOf(pw,salt);S={p:[]};await save();R=true}
- else{salt=ub(r.s);K=await keyOf(pw,salt);S=JSON.parse(dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(r.i)},K,ub(r.d))))}}
- catch(e){K=null;er.textContent='סיסמה שגויה';return}
- try{navigator.storage.persist()}catch(e){}REM=!!($('#rm')&&$('#rm').checked);try{await idbSet('dk',REM?K:null)}catch(e){REM=false}V='home';render()}
-async function lock(){try{await idbSet('dk',null)}catch(e){}REM=false;GATE=false;K=null;S={p:[]};V='home';try{R=await idbGet('v')||R}catch(e){}render()}
-document.addEventListener('visibilitychange',()=>{if(document.hidden)H=Date.now();else if(K&&!REM&&Date.now()-H>120000)lock();else if(K&&FID&&Date.now()-H>30000){GATE=true;render()}});
-
-const nav=v=>{if(v==='home')DR=null;V=v;render()};
-const bar=(t,b='home')=>`<div class="bar"><button class="x" onclick="nav('${b}')">→</button><h2>${t}</h2></div>`;
-const chip=(l,t)=>`<button class="chip${F===t?' on':''}" onclick="F='${t}';render()">${l}</button>`;
-
-const fd=d=>d?String(d).split('-').reverse().join('/'):'';
-const insl=p=>p.ins||String(p.who||'').split('\n').filter(l=>l&&!/מוטב|בנק|שעבוד|בעל הפוליסה|צד שלישי/.test(l)).map(l=>l.split(/[,;—–]|ת\.?\s?ז/)[0].replace(/^מבוטח\s*\d*\s*[:\-]?\s*/,'').trim()).filter(Boolean).slice(0,4).join(', ');
-const rem=p=>{const n=dl(p.end);if(n===null)return'';if(n<0)return'פגה';if(n>730)return'עוד '+Math.floor(n/365)+' שנים';if(n>60)return'עוד '+Math.round(n/30)+' חודשים';return'עוד '+n+' ימים'};
-const per=p=>p.start||p.end?(fd(p.start)||'—')+' – '+(fd(p.end)||'—'):'';
-const cuList=()=>[...new Set(S.p.map(p=>p.cust).filter(Boolean))];
-const hue=s=>[...String(s||'')].reduce((a,c)=>a+c.charCodeAt(0)*7,0)%360;
-const TC={'רכב':'#0a84ff','דירה':'#30b0c7','בריאות':'#34c759','שיניים':'#5ac8fa','חיים':'#ff2d55','משכנתא':'#af52de','נסיעות':'#ff9f0a','תאונות':'#ff6b35','סיעוד':'#8e8e93','עסק':'#64d2ff','אחר':'#98989d'};
-const av=co=>`<div class="av" style="background:hsl(${hue(co)} 52% 42%)">${esc(String(co||'?').trim()[0]||'?')}</div>`;
-const pill=p=>{const n=dl(p.end);return n===null?'':n<0?'<span class="pill" style="color:var(--r)">פגה</span>':n<=45?'<span class="pill" style="color:var(--w)">פוקעת בקרוב</span>':'<span class="pill" style="color:var(--g)">פעילה</span>'};
-function miss(p){const m=[];if(!p.num)m.push('מספר פוליסה');if(!p.end)m.push('תוקף');if(!insl(p))m.push('מבוטחים');if(!p.cl)m.push('טלפון תביעות');if(!p.cov)m.push('כיסויים');if(!p.notice&&!p.steps)m.push('הוראות לתביעה');return m}
-const cmpS=(a,b)=>SRT==='co'?String(a.p.co).localeCompare(String(b.p.co),'he'):SRT==='type'?String(a.p.type).localeCompare(String(b.p.type),'he'):String(a.p.end||'9999').localeCompare(String(b.p.end||'9999'));
-const CK={'רכב':['ודא שאין פצועים; במקרה של פציעה הזעק מד״א או משטרה','צלם את הזירה, הרכבים, לוחיות הרישוי והנזקים','החלף פרטים עם הצד השני: שם, ת.ז., רישיון וביטוח','הודע למבטח בהקדם ובדוק בפוליסה את המועד המחייב','שמור פרטי עדים ואל תחתום על הודאה באשמה'],'דירה':['צמצם את הנזק: סגור ברז ראשי ונתק חשמל אם יש סכנה','צלם ותעד את כל הנזקים לפני ניקוי או תיקון','הודע למבטח לפני תיקונים משמעותיים','שמור קבלות, הצעות מחיר ורשימת פריטים שניזוקו'],'בריאות':['שמור את כל המסמכים הרפואיים והקבלות','לפני ניתוח או אשפוז מתוכננים בקש מהמבטח התחייבות','בדוק בפוליסה תקופות אכשרה והשתתפות עצמית'],'נסיעות':['פנה למוקד החירום של המבטח לפני טיפול או הוצאה גדולה','שמור קבלות ואישורי חברת התעופה','על גניבה או אובדן דווח למשטרה המקומית וקבל אישור'],'חיים':['הודע למבטח ולסוכן ושמור תעודת פטירה ומסמכים רפואיים','בדוק מי המוטבים בפוליסה והאם קיים שעבוד לבנק'],'משכנתא':['הודע לבנק ולמבטח בהקדם','בדוק מי המוטב (לרוב הבנק) ומה נדרש להגשת תביעה'],'שיניים':['בדוק תקרת כיסוי, השתתפות עצמית ותקופת אכשרה לפני טיפול','בקש תוכנית טיפול והצעת מחיר בכתב'],'תאונות':['שמור מסמכים רפואיים ותיעוד האירוע','הודע למבטח בהקדם ובדוק בפוליסה מועדי הודעה']};
-const ckH=t=>CK[t]?`<div class="card"><b>מה עושים עכשיו (הנחיות כלליות)</b>${ul(CK[t].join('\n'))}<div class="m">בדוק מועדים ותנאים בפוליסה עצמה.</div></div>`:'';
-async function ics(id){const p=P(id);if(!p.end)return;const d=new Date(p.end+'T09:00:00');d.setDate(d.getDate()-30);const f=x=>x.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z',e=new Date(d.getTime()+36e5),t=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//kaspet//HE','BEGIN:VEVENT','UID:'+p.id+'@kaspet','DTSTAMP:'+f(new Date()),'DTSTART:'+f(d),'DTEND:'+f(e),'SUMMARY:'+('חידוש ביטוח '+p.type+' - '+p.co).replace(/[,;]/g,' '),'DESCRIPTION:'+('פוליסה '+(p.num||'')+' פוקעת ב-'+fd(p.end)).replace(/[,;]/g,' '),'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:חידוש ביטוח','TRIGGER:-PT0M','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n'),file=new File([t],'renewal.ics',{type:'text/calendar'});try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file]});return}}catch(x){if(x.name==='AbortError')return}window.open(URL.createObjectURL(file),'_blank')}
-function item(p,ls=[]){const hl=l=>{let h=esc(l);for(const w of NQ(Q).split(' ').filter(w=>w.length>1))h=h.split(esc(w)).join('<mark>'+esc(w)+'</mark>');return h};
- return `<div class="card pol" style="--ac:${TC[p.type]||'var(--l)'}" onclick="cur='${p.id}';nav('p')"><div class="row">${av(p.co)}<div style="flex:1;min-width:0"><b><bdi>${esc(p.co)}</bdi></b> · ${T[p.type]||''} ${esc(p.type)}${p.prod?`<div class="m">${esc(p.prod)}</div>`:''}</div>${pill(p)}</div>${insl(p)?`<div class="kv"><span>מבוטח</span><b>${esc(insl(p))}</b></div>`:''}${per(p)?`<div class="kv"><span>תקופה</span><b>${per(p)} <span class="b" style="color:var(--m)">${rem(p)}</span></b></div>`:''}${p.num?`<div class="kv"><span>פוליסה</span><b>${esc(p.num)}</b></div>`:''}${miss(p).length?`<div class="m" style="color:var(--w);margin-top:4px">חסר: ${miss(p).slice(0,3).join(', ')}</div>`:''}${ls.map(l=>`<div class="m">• ${hl(l)}</div>`).join('')}</div>`}
-function listH(){if(!S.p.length)return `<div class="card"><b>ברוך הבא! 3 צעדים להתחלה</b><ol class="ob"><li>⚙️ הגדר מפתח AI חינמי (Gemini או Groq) לסריקה אוטומטית</li><li>📷 סרוק פוליסה ראשונה (PDF או צילום)</li><li>💾 גבה את הכספת בקובץ</li></ol><button class="btn" onclick="nav('st')">⚙️ להגדרות AI</button></div>`;
- const r=lsearch(Q,S.p.filter(p=>(!F||p.type===F)&&(!CU||p.cust===CU)));if(!Q)r.sort(cmpS);return r.length?r.map(x=>item(x.p,x.s)).join(''):'<p class="m">לא נמצאו תוצאות</p>'}
-const list=()=>{$('#list').innerHTML=listH()};
-
-function home(){const cu=cuList(),ts=[...new Set(S.p.map(p=>p.type))],ex=S.p.filter(p=>{const n=dl(p.end);return n!==null&&n<=45}).length;
- return `<h1>כספת ביטוח <span class="b" style="color:var(--m)">v${BUILD}</span></h1><div class="m">${S.p.length} פוליסות · ₪${Math.round(S.p.reduce((a,p)=>a+monthlyPrem(p),0))} לחודש${ex?` · ${ex} פוקעות או פגו`:''}</div>
-${NV?'<div class="card" style="border-color:var(--a)"><button class="btn" onclick="upd()">🔄 יש גרסה חדשה, לחץ לעדכון</button></div>':''}<button class="btn r big" style="margin-top:14px" onclick="SO='';nav('sos')">🚨 קרה משהו? שלוף פוליסה</button>${ts.length?`<div class="chips">${ts.map(t=>`<button class="chip" onclick="SO='${t}';nav('sos')">${T[t]||''} ${t}</button>`).join('')}</div>`:''}<button class="btn big" onclick="$('#sf').click()">📷 הוסף פוליסה אוטומטית (סריקה)</button><input id="sf" type="file" accept="image/*,application/pdf" multiple hidden onchange="scan(this)"><button class="btn o" onclick="nav('im')">📥 ייבוא פוליסה מ-Claude (הדבק)</button><div id="ss" class="m" style="margin-top:6px"></div>${S.p.length&&!(S.bk&&Date.now()-S.bk<12096e5)?`<div class="card" style="border-color:var(--w)">⚠️ אין גיבוי עדכני. הנתונים נשמרים רק בדפדפן הזה.<button class="btn o" onclick="nav('bk')">גבה עכשיו</button></div>`:''}
-${S.p.filter(p=>{const n=dl(p.end);return n!==null&&n<=45}).map(p=>`<div class="card" style="border-color:var(--w)" onclick="cur='${p.id}';nav('p')">⏱ ${T[p.type]||''} ${esc(p.co)} · ${esc(p.asset||p.num)} ${badge(p)}</div>`).join('')}${S.p.some(p=>p.lo)?`<div class="card" style="border-color:var(--w)">⏳ ${S.p.filter(p=>p.lo).length} פוליסות חולצו מקומית בלבד<button class="btn" onclick="hasK()?bgAll():nav('st')">${hasK()?'הפעל ניתוח AI עמוק עכשיו':'הגדר מפתח AI לניתוח עמוק'}</button></div>`:''}${gapH()}<input id="q" style="margin-top:12px" placeholder="חיפוש: מים, גרירה, מספר פוליסה…" value="${esc(Q)}" oninput="Q=this.value;list()">
-<div class="chips">${chip('הכל','')}${ts.map(t=>chip((T[t]||'')+' '+t,t)).join('')}</div>${cu.length>1?`<div class="chips">${['',...cu].map((c,i)=>`<button class="chip${CU===c?' on':''}" onclick="CU=cuList()[${i-1}]||'';render()">${c?'👤 '+esc(c):'👥 כל הלקוחות'}</button>`).join('')}</div>`:''}
-<div class="chips">${[['exp','⏱ לפי תוקף'],['co','🏢 לפי חברה'],['type','📂 לפי סוג']].map(([k,l])=>`<button class="chip${SRT===k?' on':''}" onclick="SRT='${k}';render()">${l}</button>`).join('')}</div><div id="list">${listH()}</div>
-<div class="grid" style="margin-top:14px"><button class="btn o" onclick="nav('bk')">גיבוי ושחזור</button><button class="btn o" onclick="nav('st')">⚙️ הגדרות AI</button><button class="btn o" onclick="lock()">🔒 נעל</button><button class="btn o" onclick="upd()">🔄 בדוק עדכון</button></div>
-<button class="fab" aria-label="הוסף פוליסה" onclick="edit=null;nav('f')">＋</button>`}
-
-function sosV(){const ts=[...new Set(S.p.map(p=>p.type))];
- if(!SO)return bar('קרה משהו?')+evBox()+(ts.length?`<p class="m">מה סוג האירוע?</p><div class="grid">${ts.map(t=>`<button class="tile" onclick="SO='${t}';render()"><span>${T[t]||'📄'}</span>${t}</button>`).join('')}</div>`:'<p class="m">אין עדיין פוליסות בכספת.</p>');
- return `<div class="bar"><button class="x" onclick="SO='';render()">→</button><h2>${T[SO]||''} ${esc(SO)}</h2></div>`+S.p.filter(p=>p.type===SO&&p.cl).map(p=>`<a class="btn r big" href="tel:${ph(p.cl)}">📞 ${esc(p.co)} · מוקד תביעות</a>`).join('')+ckH(SO)+S.p.filter(p=>p.type===SO).map(p=>card(p)).join('')}
-
-function card(p,d){if(!p)return'';
- const kv=(l,v,c)=>v?`<div class="kv"${c?` onclick="cp(P('${p.id}').${c})"`:''}><span>${l}</span><b><bdi>${esc(v)}</bdi>${c?' ⧉':''}</b></div>`:'';
- return `<div class="card pol" style="--ac:${TC[p.type]||'var(--l)'}"><div class="row">${av(p.co)}<div style="flex:1"><b><bdi>${esc(p.co)}</bdi></b> · ${T[p.type]||''} ${esc(p.type)}<div class="m">${esc(p.prod||'')}</div><div class="m">${esc(p.asset)}</div></div>${badge(p)}</div>
-${kv('מבוטחים',insl(p))}${kv('תקופת הביטוח',per(p)?per(p)+' ('+rem(p)+')':'')}${kv('בעל הפוליסה',p.cust)}${kv('מספר פוליסה',p.num,'num')}${kv('השתתפות עצמית',p.ded)}${kv('פרמיה',p.prem?p.prem+' ₪':'')}${kv('סוכן',p.agn)}${kv('מוצר',p.prod)}${miss(p).length?`<div class="m" style="color:var(--w)">חסר: ${miss(p).join(', ')}</div>`:'<div class="m" style="color:var(--g)">✓ הפרטים מלאים</div>'}${p.chk?`<div class="m" style="white-space:pre-wrap;margin-top:4px">${esc(p.chk)}</div>`:''}${p.notice?`<div class="card" style="border-color:var(--w)"><b>⏱ חובה להודיע:</b> ${esc(p.notice)}</div>`:''}
-<div class="acts">${p.cl?`<a class="btn r" href="tel:${ph(p.cl)}">📞 מוקד תביעות</a>`:''}${p.ag?`<a class="btn g" href="tel:${ph(p.ag)}">📞 התקשר לסוכן</a><a class="btn o" target="_blank" rel="noopener" href="${wa(p.ag)}">וואטסאפ לסוכן</a>`:''}<button class="btn" onclick="cur='${p.id}';nav('cl')">✍️ הפק כתב תביעה</button><button class="btn o" onclick="cs('${p.id}')">העתק סיכום לתביעה</button>${p.end?`<button class="btn o" onclick="ics('${p.id}')">📅 תזכורת חידוש ליומן</button>`:''}${phs(p)}</div>
-${p.who?'<h3>מבוטחים ומוטבים</h3>'+ul(p.who):''}${p.cov?'<h3>כיסויים</h3>'+ul(p.cov):''}${p.ex?'<h3>חריגים</h3>'+ul(p.ex):''}${p.note?'<h3>הערות</h3>'+ul(p.note):''}${p.steps?'<h3>איך מגישים תביעה</h3>'+ul(p.steps):''}${p.docs?'<h3>מסמכים להכין</h3>'+ul(p.docs):''}${p.full?`<details><summary>כל פרטי הפוליסה</summary>${ul(p.full)}</details>`:''}${p.raw?`<details><summary>טקסט המקור המלא של הפוליסה</summary><div class="m" style="white-space:pre-wrap">${esc(p.raw)}</div></details>`:''}
-${d?`${scnBox(p)}${(p.f||[]).length?'<h3>קבצים</h3>':''}${(p.f||[]).map((a,i)=>a.d.startsWith('data:image')?`<img class="at" src="${a.d}" alt="${esc(a.n)}">`:`<button class="btn o" onclick="pdf('${p.id}',${i})">📄 ${esc(a.n)}</button>`).join('')}
-<button class="btn" onclick="rean('${p.id}')">🔁 נתח מחדש עם AI</button><div id="rs2" class="m"></div><div class="row"><button class="btn o" onclick="edit=P('${p.id}');nav('f')">עריכה</button><button class="btn o" style="color:var(--r)" onclick="del('${p.id}')">מחיקה</button></div>`
-:`<button class="btn o" onclick="cur='${p.id}';nav('p')">פרטים מלאים וקבצים</button>`}</div>`}
-
-const cs=id=>{const p=P(id);shr([`פוליסת ${p.type} - ${p.co}`,`מספר פוליסה: ${p.num||''}`,p.asset?`פריט מבוטח: ${p.asset}`:'',p.end?`תוקף עד: ${p.end}`:'',p.ded?`השתתפות עצמית: ${p.ded}`:'',p.cl?`מוקד תביעות: ${p.cl}`:'',p.agn||p.ag?`סוכן: ${p.agn||''} ${p.ag||''}`:''].filter(Boolean).join('\n'))};
-function pdf(id,i){const[h,x]=P(id).f[i].d.split(',');const m=h.match(/:(.*?);/)[1],a=atob(x),u=new Uint8Array(a.length);for(let k=0;k<a.length;k++)u[k]=a.charCodeAt(k);window.open(URL.createObjectURL(new Blob([u],{type:m})),'_blank')}
-async function del(id){if(DEL!==id){DEL=id;toast('לחץ שוב למחיקה סופית');return}S.p=S.p.filter(x=>x.id!==id);DEL=null;await save();nav('home');toast('נמחק')}
-
-function formV(){const p=edit||DR||{type:'רכב'};FA=[...(p.f||[])];
- return bar(edit?'עריכת פוליסה':'פוליסה חדשה')+`${DR&&DR.lo&&!edit?`<div class="card" style="border-color:var(--r)">⚠️ הניתוח העמוק של ה-AI לא הושלם: ${esc(DR.ae)}. אחרי השמירה הכספת תנסה שוב ברקע אוטומטית.</div>`:''}${(p.un||[]).length?'<div class="card" style="border-color:var(--w)">🔍 ה-AI לא בטוח בשדות: '+(p.un||[]).map(k=>(FL.find(f=>f[0]===k)||[0,k])[1]).join(', ')+'</div>':''}<label>סוג</label><select id="type">${Object.keys(T).map(t=>`<option${t===p.type?' selected':''}>${t}</option>`).join('')}</select>`
- +FL.map(([k,l,ty])=>`<label>${l}</label><input id="${k}" type="${ty||'text'}"${k==='co'?' list="cos"':k==='cust'?' list="cus"':''}${ty==='tel'?' inputmode="tel"':''}${(p.un||[]).includes(k)?' style="border-color:var(--w)"':''} value="${esc(p[k])}">`).join('')
- +`<datalist id="cos">${CO.map(c=>`<option>${c}</option>`).join('')}</datalist><datalist id="cus">${cuList().map(c=>`<option>${esc(c)}</option>`).join('')}</datalist>
-<label>מבוטחים, בעל הפוליסה ומוטבים (שורה לכל אחד)</label><textarea id="who" rows="4">${esc(p.who)}</textarea><label>כיסויים (שורה לכל כיסוי, למשל: נזקי מים — עד 100,000 ₪)</label><textarea id="cov" rows="6">${esc(p.cov)}</textarea>
-<label>חריגים</label><textarea id="ex" rows="3">${esc(p.ex)}</textarea><label>הערות</label><textarea id="note" rows="2">${esc(p.note)}</textarea><label>איך מגישים תביעה (צעדים)</label><textarea id="steps" rows="3">${esc(p.steps)}</textarea><label>מסמכים להכין לתביעה</label><textarea id="docs" rows="3">${esc(p.docs)}</textarea><label>טלפונים נוספים (שם: מספר, חירום, גרירה, מייל)</label><textarea id="ph" rows="3">${esc(p.ph)}</textarea><label>תקציר מלא של הפוליסה (לחיפוש)</label><textarea id="full" rows="6">${esc(p.full)}</textarea>
-<label>קבצים (תמונת פוליסה או PDF)</label><input type="file" accept="image/*,application/pdf" multiple onchange="att(this)"><div id="fl"></div>
-<button class="btn" style="margin-top:18px" onclick="sv()">שמור בכספת</button>`}
-const fl=()=>{const e=$('#fl');if(e)e.innerHTML=FA.map((a,i)=>`<div class="row sp" style="margin:4px 0"><span class="m">📎 ${esc(a.n)}</span><button class="x" style="flex:none" onclick="FA.splice(${i},1);fl()">✕</button></div>`).join('')};
-const rd=f=>new Promise(r=>{const x=new FileReader();x.onload=()=>r(x.result);x.readAsDataURL(f)});
-const shrink=d=>new Promise(r=>{const i=new Image();i.onload=()=>{const k=Math.min(1,1600/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);r(c.toDataURL('image/jpeg',.8))};i.src=d});
-async function att(i){for(const f of i.files){if(!f.type.startsWith('image/')&&f.size>3e6){toast('PDF גדול מדי (עד 3MB)');continue}let d=await rd(f);if(f.type.startsWith('image/'))d=await shrink(d);FA.push({n:f.name,d})}i.value='';fl()}
-async function sv(){const o={id:edit?edit.id:String(Date.now()),type:$('#type').value,cov:$('#cov').value,ex:$('#ex').value,note:$('#note').value,steps:$('#steps').value,docs:$('#docs').value,ph:$('#ph').value,full:$('#full').value,who:$('#who').value,raw:(edit?edit.raw:DR&&DR.raw)||'',rv:(edit?edit.rv:DR&&DR.rv)||0,lo:(edit?edit.lo:DR&&DR.lo)||0,un:(edit?edit.un:DR&&DR.un)||[],chk:(edit?edit.chk:DR&&DR.chk)||'',vf:(edit?edit.vf:DR&&DR.vf)||0,f:FA};FL.forEach(([k])=>o[k]=$('#'+k).value.trim());
- if(!o.co){toast('חסרה חברת ביטוח');return}S.p=edit?S.p.map(x=>x.id===o.id?o:x):[o,...S.p];await save();const nid=o.id,lo=o.lo,vf=o.vf;edit=null;nav('home');toast('נשמר ומוצפן');if(lo)setTimeout(()=>bg(nid),400);else if(vf)setTimeout(()=>bgv(nid),400)}
-
-async function bkV(){let r=null;try{r=await idbGet('v')}catch(e){}
- $('#app').innerHTML=bar('גיבוי ושחזור')+`<p class="m">הנתונים נשמרים רק בדפדפן הזה. העתק את הגיבוי המוצפן ושמור אותו במקום בטוח (למשל הערות או קבצים). בלי סיסמת המאסטר אי אפשר לפתוח אותו.</p><textarea id="bk" readonly rows="5">${esc(r?JSON.stringify(r):'')}</textarea><button class="btn" onclick="bkf()">💾 שמור גיבוי כקובץ (מומלץ)</button><button class="btn o" onclick="S.bk=Date.now();save();cp($('#bk').value)">העתק גיבוי כטקסט</button>
-<h3>שחזור (מחליף את הכספת הנוכחית)</h3><input type="file" accept=".txt,.json" onchange="rsf(this)"><textarea id="rs" rows="4" placeholder="או הדבק כאן גיבוי" style="margin-top:8px"></textarea><button class="btn o" onclick="rst()">שחזר ונעל</button>`}
-async function rst(){try{const r=JSON.parse($('#rs').value);if(!r.s||!r.i||!r.d)throw 0;await idbSet('v',r);await idbSet('dk',null);R=r;K=null;S={p:[]};V='home';render();toast('שוחזר. הזן את סיסמת הגיבוי')}catch(e){toast('גיבוי לא תקין')}}
-
-const d2b=d=>{const[h,x]=d.split(','),a=atob(x),u=new Uint8Array(a.length);for(let k=0;k<a.length;k++)u[k]=a.charCodeAt(k);return new Blob([u],{type:h.match(/:(.*?);/)[1]})};
-const SC=`אתה מומחה לקריאת פוליסות ביטוח בישראל. קרא את כל עמודי המסמך בקפידה, כולל נספחים, טבלאות ודפי פירוט, והחזר JSON בלבד (אובייקט אחד) עם השדות הבאים. כתוב בעברית, ואל תמציא: מה שלא מופיע במסמך יישאר ריק. חברת הביטוח היא המבטח המופיע בתחילת המסמך או בלוגו (למשל איילון, הראל, מגדל, הפניקס, כלל, מנורה), לא מילים כלליות בטקסט. השדות: type (אחד מ: רכב, דירה, בריאות, שיניים, חיים, משכנתא, נסיעות, תאונות, סיעוד, עסק, אחר; ביטוח חיים או נכס שמצורף למשכנתא הוא משכנתא), co (שם חברת הביטוח), prod (שם המוצר והתכנית, למשל מכבי שיניים או ריסק משכנתא), ins (שמות המבוטחים בלבד, מופרדים בפסיקים), cust (שם בעל הפוליסה או הלקוח), num (מספר פוליסה), asset (הפריט המבוטח), start ו-end (תאריך תחילה וסיום בפורמט YYYY-MM-DD), prem (סכום הפרמיה במספר), freq (תדירות הפרמיה: חודשי, שנתי, רבעוני או חצי שנתי), ded (השתתפות עצמית), cl (טלפון מוקד תביעות), agn (שם הסוכן), ag (טלפון הסוכן), who (מערך שורות: בעל הפוליסה; כל מבוטח עם שם, ת.ז., תאריך לידה וגיל; מוטבים וצדדים שלישיים כמו בנק משעבד או מוטב בלתי חוזר), cov (מערך שורות: כל כיסוי בפירוט בפורמט שם הכיסוי — סכום ביטוח — למי חל — תנאים והגבלות, כולל כיסויי נספחים ותוספות), ex (חריגים והגבלות), notice (תוך כמה זמן ולמי מודיעים על אירוע), steps (תהליך הגשת תביעה), docs (מסמכים נדרשים), ph (מערך טלפונים ומיילים של החברה בפורמט שם: מספר), note (הצמדה למדד, תקופת ביטוח ותשלום, תקופות אכשרה, חידוש וביטול, תנאים חשובים), full (תקציר מקיף ומסודר של כל המסמך בשורות קצרות, כך שאפשר להסתמך עליו בעת תביעה או הליך משפטי, כולל מספרי סעיפים ועמודים בכל מקום שמצוין). ידע רקע על פוליסות בישראל: חברות הביטוח הנפוצות הן הראל, מגדל, הפניקס, כלל, מנורה מבטחים, איילון, הכשרה, שומרה, שירביט, AIG, ביטוח ישיר, ליברה, ווישור (WeSure), שלמה, 9 מיליון, ביטוח חקלאי והדר, וכן מכבי, כללית, מאוחדת ולאומית בביטוחי בריאות ושיניים משלימים. שם המבטח מופיע בדרך כלל בכותרת העמוד, בתחתית או בכתובת האתר גם כשאין לוגו בטקסט. מבנה המסמך: דף רשימה או דף פרטי הביטוח (מספר פוליסה, תקופה, פרמיה, מבוטחים, כיסויים וסכומים), תנאים כלליים, נספחים והרחבות וחריגים. בפוליסת רכב: חובה, מקיף, צד ג׳, גנבה, שמשות, גרירה, רכב חלופי, נהג צעיר או חדש והשתתפות עצמית; מספר הרישוי והדגם הם הפריט המבוטח. בבריאות: ניתוחים, השתלות, תרופות מחוץ לסל, אמבולנס, יעוץ מומחה ותקופות אכשרה. בחיים וריסק: סכום ביטוח, מוטבים ושעבוד לבנק. בדירה: מבנה, תכולה, צד שלישי, רעידת אדמה ונזקי מים. חפש כל שדה בכל עמודי המסמך, גם בטבלאות ובהערות שוליים, והעדף את הערך שמופיע בדף הרשימה. unsure (מערך שמות שדות שאינך בטוח בהם). בסוף כל שורה ב-cov וב-ex ציין (עמוד X) כשידוע. אם קיבלת נתונים קודמים, השלם ועדכן אותם.`;
-const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-const fto=(u,o,ms=TMO)=>{const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);return fetch(u,{...o,signal:c.signal}).finally(()=>clearTimeout(t))};
-const ABT=e=>e&&e.name==='AbortError';
-async function upd(){try{const t=await(await fetch(location.pathname+'?c='+Date.now(),{cache:'no-store'})).text(),m=t.match(/const BUILD='([^']+)'/);if(m&&m[1]!==BUILD){toast('נמצאה גרסה חדשה, מעדכן…');setTimeout(()=>location.replace(location.pathname+'?v='+Date.now()),800)}else toast('הגרסה עדכנית: '+BUILD)}catch(e){toast('אין חיבור לבדיקת גרסה')}}
-const shr=t=>navigator.share?navigator.share({text:rt(t)}).catch(()=>{}):cp(rt(t));
-const Lj=x=>Array.isArray(x)?x.map(y=>y&&typeof y==='object'?Object.values(y).filter(Boolean).join(' — '):y).join('\n'):(x&&typeof x==='object'?Object.values(x).join(' — '):x==null?'':String(x));
-const INS_DB=[
-['הראל',['הראל','harel'],['harel-group.co.il','harel.co.il'],[]],
-['מגדל',['מגדל','migdal'],['migdal.co.il'],[]],
-['הפניקס',['הפניקס','פניקס','phoenix','fenix'],['fnx.co.il','phoenix.co.il'],[]],
-['כלל ביטוח',['כלל ביטוח','כלל חברה לביטוח','clal insurance'],['clalbit.co.il','clal.co.il'],['clal']],
-['מנורה מבטחים',['מנורה מבטחים','מנורה','menora'],['menoramivt.co.il','menora.co.il'],[]],
-['איילון',['איילון','ayalon'],['ayalon-ins.co.il'],[]],
-['הכשרה',['הכשרה','hachshara'],['hachshara.co.il'],[]],
-['שומרה',['שומרה','shomera'],['shomera.co.il'],[]],
-['שירביט',['שירביט','shirbit'],['shirbit.co.il'],[]],
-['AIG ישראל',['aig','איי איי ג׳י','איי איי גי'],['aig.co.il'],[]],
-['ביטוח ישיר',['ביטוח ישיר','איי די איי','idi insurance'],['555.co.il'],[]],
-['ליברה',['ליברה','libra'],['libra.co.il'],[]],
-['ווישור (WeSure)',['ווישור','wesure','we sure'],['wesure.co.il'],[]],
-['שלמה ביטוח',['שלמה ביטוח','שלמה חברה לביטוח','shlomo'],['shlomo.co.il'],[]],
-['9 מיליון',['9 מיליון','תשעה מיליון','9million'],[],[]],
-['ביטוח חקלאי',['ביטוח חקלאי'],[],[]],
-['הדר',['הדר חברה לביטוח','הדר ביטוח'],[],[]],
-['סקוריטס',['סקוריטס'],[],[]],
-['אנקור',['אנקור'],[],[]],
-['מכבי שירותי בריאות',['מכבי שירותי בריאות','מכבי שיניים','מכבי שלי','מכבי זהב','מכבי כסף'],['maccabi4u.co.il','mac.org.il'],['מכבי']],
-['כללית',['שירותי בריאות כללית','כללית מושלם','כללית פלטינום','clalit'],['clalit.co.il'],['כללית']],
-['מאוחדת',['מאוחדת','meuhedet'],['meuhedet.co.il'],[]],
-['לאומית',['לאומית שירותי בריאות','לאומית זהב','לאומית כסף'],['leumit.co.il'],['לאומית']],
-['פספורטכארד',['פספורטכארד','passportcard'],['passportcard.co.il'],[]]
-];
-const pfx='[בלמהוכש]?';
-function findCo(t){const N=' '+NQ(t)+' ',H=N.slice(0,1800),low=t.toLowerCase();let best=null;
- for(const[n,al,dm,wk]of INS_DB){let sc=0;for(const a of al){const k=NQ(a);if(!k)continue;const re=new RegExp('(?:^|\\s)'+pfx+k+'(?=\\s)','g'),c=(N.match(re)||[]).length;if(c){sc+=Math.min(c,5);if(new RegExp('(?:^|\\s)'+pfx+k+'(?=\\s)').test(H))sc+=3;if(new RegExp('(?:^|\\s)'+pfx+k+'\\s+(?:חברה\\s+)?ל?ביטוח').test(N))sc+=6}}
-  for(const a of wk){if(new RegExp('(?:^|\\s)'+pfx+NQ(a)+'(?=\\s)').test(H))sc+=2}
-  for(const d of dm)if(low.includes(d))sc+=4;
-  if(sc&&(!best||sc>best.sc))best={n,sc}}
- if(best&&best.sc>=5)return best.n;
- const g=t.match(/(?:^|\n)\s*([^\n]{2,40}?)\s+(?:חברה\s+)?לביטוח\s+בע["״']?מ/);
- if(g){const x=g[1].replace(/["'״׳()]/g,'').replace(/^(?:פוליסה|ביטוח)\s+/,'').trim();if(x.length>=2&&!/^(?:חברה|ה)$/.test(x))return x}
- return best?best.n:''}
-const TYK=[['רכב',/רכב|מקיף|ביטוח חובה|צד ג|נזק עצמי|שמשות|גרירה|נהג צעיר|רישוי|לוחית/g],['דירה',/דירה|דיור|מבנה|תכולה|רעידת אדמה|נזקי מים|פריצה/g],['בריאות',/בריאות|ניתוח|השתלות|תרופות|אשפוז|אמבולנס|יעוץ מומחה|ייעוץ מומחה/g],['שיניים',/שיניים|דנטל|יישור|שתל|טיפולי פה/g],['חיים',/ביטוח חיים|ריסק|פטירה|אובדן כושר|מחלות קשות/g],['משכנתא',/משכנתא|שעבוד|בנק מלווה/g],['נסיעות',/נסיעות|חו["״]ל|כבודה|ביטול נסיעה|טיסה/g],['תאונות',/תאונות אישיות/g],['סיעוד',/סיעוד/g],['עסק',/עסק|אחריות מקצועית|אחריות מעבידים|אובדן רווחים/g]];
-function classify(t){const hd=t.slice(0,1500),sc={};for(const[n,re]of TYK){const b=(t.match(re)||[]).length,h=(hd.match(re)||[]).length;sc[n]=Math.min(b,12)+h*3}
- let best='',bs=2;for(const n in sc)if(sc[n]>bs){bs=sc[n];best=n}
- if((best==='חיים'||best==='דירה')&&sc['משכנתא']>=3)best='משכנתא';
- if(best==='בריאות'&&sc['שיניים']>=3&&sc['שיניים']*2>=sc['בריאות'])best='שיניים';
- return best}
-
-
-const iso=(d,m,y)=>{y=+y;if(y<100)y+=2000;return y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0')};
-const fixRtl=t=>{const rev=(t.match(/הסילופ|חוטיב|יוסיכ/g)||[]).length,ok=(t.match(/פוליסה|ביטוח|כיסוי/g)||[]).length;return rev>ok?t.replace(/[\u0590-\u05ff]+/g,w=>[...w].reverse().join('')):t};
-function heur(t){const o={full:t.slice(0,20000),raw:t.slice(0,60000)},co=findCo(t);if(co)o.co=co;const ty=classify(t);if(ty)o.type=ty;
- const L=t.split('\n').map(l=>l.trim()).filter(Boolean);
- const pn=t.match(/(?:מס(?:פר|['׳])?\s*(?:ה)?פוליסה|פוליסה\s*(?:מס(?:פר|['׳])?)?|מס['׳]?\s*פוליסה)\s*[:\-]?\s*(\d[\d\-\/]{4,14})/);if(pn)o.num=pn[1];
- const ds=[...t.matchAll(/(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})/g)].filter(m=>+m[2]<=12&&+m[1]<=31).map(m=>({d:iso(m[1],m[2],m[3]),c:t.slice(Math.max(0,m.index-30),m.index)}));
- const e=ds.find(x=>/עד|תום|סיום|פקיע/.test(x.c))||ds.slice().sort((a,b)=>a.d<b.d?1:-1)[0],s0=ds.find(x=>/מתאריך|תחילת|התחלת|החל מ/.test(x.c));
- if(e)o.end=e.d;if(s0)o.start=s0.d;
- const pl=t.match(/(?:מספר\s*רישוי|מס['׳]?\s*רישוי|רישוי|לוחית)[^\d\n]{0,14}(\d{2,3}[-\s]?\d{2,3}[-\s]?\d{2,3})/),md=t.match(/(?:דגם|יצרן)\s*[:\-]?\s*([^\n]{3,30})/);
- if(pl||md)o.asset=[pl&&pl[1],md&&md[1].trim()].filter(Boolean).join(' · ');
- const mi=[...t.matchAll(/(?:^|\n)\s*(?:שם )?(?:המבוטח|מבוטח\s*\d*)\s*[:\-]\s*([^\n]{3,40})/g)].map(m=>m[1].replace(/(?:מספר זהו?ת|ת\.?\s?ז).*$/,'').trim()).filter(Boolean);if(mi.length)o.ins=[...new Set(mi)].slice(0,4).join(', ');
- const ow=t.match(/בעל\s+הפוליסה\s*[:\-]\s*([^\n]{3,40})/);if(ow)o.cust=ow[1].replace(/(?:מספר זהו?ת|ת\.?\s?ז).*$/,'').trim();
- const seen=new Set(),ph=[];for(const m of t.matchAll(/(?<![\d\-\/])(?:\*\d{3,4}|0(?:[23489]|[57]\d)-\d{7}|0(?:[23489]|[57]\d)-\d{3}-\d{4}|1-?[78]00-\d{3}-?\d{3})(?![\d\-\/])/g)){const n=m[0].replace(/\s/g,'');if(seen.has(n))continue;seen.add(n);ph.push({n,c:t.slice(Math.max(0,m.index-28),m.index).split('\n').pop().replace(/[:\s]+$/,'').trim()})}
- const cl=ph.find(x=>/תביע/.test(x.c))||ph.find(x=>/נזק|אירוע|הודעה/.test(x.c));if(cl)o.cl=cl.n;
- const ma=[...new Set(t.match(/[\w.+-]+@[\w-]+\.[\w.]+/g)||[])].slice(0,3);
- o.ph=[...ph.slice(0,8).map(x=>(x.c||'טלפון')+': '+x.n),...ma.map(x=>'מייל: '+x)].join('\n');
- o.cov=L.filter(l=>/₪|ש["״]ח|שקל|כיסוי|גבול אחריות/.test(l)&&l.length<170).slice(0,40).join('\n');
- o.ex=L.filter(l=>/חריג|לא יכוס|מוחרג|למעט|אינו מכוס/.test(l)&&l.length<220).slice(0,15).join('\n');
- o.steps=L.filter(l=>/להגיש תביעה|הגשת תביעה|יש להמציא|יש להודיע|מסמכים נדרשים/.test(l)&&l.length<220).slice(0,10).join('\n');
- const dd=t.match(/השתתפות עצמית[^\d]{0,25}([\d,]+)/);if(dd)o.ded=dd[1];
- const pm=t.match(/פרמיה[^\d\n]{0,30}([\d,]+(?:\.\d+)?)/);if(pm)o.prem=pm[1].replace(/,/g,'');
- const fq=t.match(/(?:פרמיה|תשלום)[^\n]{0,40}(חצי שנתי|חודשי|שנתי|רבעוני)/);if(fq)o.freq=fq[1];
- const nt=L.find(l=>/להודיע|הודעה על|תוך \d+ (?:ימים|שעות|יום)/.test(l));if(nt)o.notice=nt.slice(0,200);
- return o}
-function pJ(t){const m=String(t).match(/[\[{][\s\S]*[\]}]/);if(!m)throw{code:'תשובה לא תקינה: '+String(t).slice(0,80)};return JSON.parse(m[0])}
-const need=src=>new Promise((ok,no)=>{if(document.querySelector('script[src="'+src+'"]'))return ok();const e=document.createElement('script');e.src=src;e.onload=ok;e.onerror=()=>no({code:'לא ניתן לטעון רכיב סריקה (בדוק אינטרנט)'});document.head.appendChild(e)});
-const PJ='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf';
-async function pdfDoc(f){await need(PJ+'.min.js');pdfjsLib.GlobalWorkerOptions.workerSrc=PJ+'.worker.min.js';return pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise}
-const HB=/[\u0590-\u05ff]/;
-const DW=new Set(['ביטוח','פוליסה','מבוטח','המבוטח','חברה','כיסוי','פרמיה','תאריך','תקופת','סכום','השתתפות','עצמית','תביעה','תביעות','מספר','רכב','נספח','תנאי','סעיף','הביטוח','המבטח','בעל','תוקף','טלפון','שירות','מוקד','חריגים','סוכן','כתובת','תשלום','בע"מ','להלן','על','של','את','או','עד','לא','יש','כל','זה','הפוליסה','התאריך']);
-const scoreT=t=>{let n=0;for(const w of t.split(/[\s,.:;()\[\]׳'\/\-*]+/))if(DW.has(w.replace(/["״]/g,w==='בע"מ'?'"':'"')))n++;return n};
-const visRev=v=>[...v].reverse().join('').replace(/[A-Za-z0-9@._\-\/,:%*]+/g,m=>[...m].reverse().join(''));
-function mkTokens(a){const T=[];let cur=null,pe=null;for(const z of a){if(!z.s.trim()){cur=null;pe=z.x+z.w;continue}const gap=pe==null?0:z.x-pe;if(!cur||gap>0.2*(z.h||8)){cur={v:'',n:0,ch:true};T.push(cur)}cur.v+=z.s;cur.n++;if(z.s.length>2)cur.ch=false;pe=z.x+z.w}return T}
-function lineA(a,force){const T=mkTokens(a),txt=T.map(t=>t.v).join(''),h=(txt.match(/[\u0590-\u05ff]/g)||[]).length,lt=(txt.match(/[A-Za-z]/g)||[]).length;
- const lg=T.map(t=>HB.test(t.v)?{v:(force||(t.n>1&&t.ch))?visRev(t.v):t.v,h:1}:{v:t.v,h:0});
- if(h<=lt)return lg.map(x=>x.v).join(' ');
- const runs=[];let cur=[];for(const x of lg){if(x.h){if(cur.length)runs.push(cur.join(' '));cur=[];runs.push(x.v)}else cur.push(x.v)}if(cur.length)runs.push(cur.join(' '));return runs.reverse().join(' ')}
-function lineB(a){const txt=a.map(z=>z.s).join(''),h=(txt.match(/[\u0590-\u05ff]/g)||[]).length,lt=(txt.match(/[A-Za-z]/g)||[]).length;if(h<=lt)return a.map(z=>z.s).join(' ').replace(/\s+/g,' ').trim();const runs=[];let cur='';for(const z of a){if(HB.test(z.s)){if(cur.trim())runs.push(cur.trim());cur='';if(z.s.trim())runs.push(z.s.trim())}else cur+=z.s}if(cur.trim())runs.push(cur.trim());return runs.reverse().join(' ')}
-function pageCands(rows){const rs=rows.slice().sort((a,b)=>b.y-a.y),mk=f=>rs.map(r=>f(r.a.slice().sort((p,q)=>p.x-q.x),r.a)).join('\n')+'\n';
- return{A:mk(a=>lineA(a,false)),E:mk(a=>lineA(a,true)),B:mk(a=>lineB(a)),C:mk((a,st)=>st.map(z=>z.s).join(' ').replace(/\s+/g,' ').trim())}}
-function bestCand(c){let b='A',bs=-1;for(const k of['A','B','E','C']){const s=scoreT(c[k]);if(s>bs){bs=s;b=k}}return{t:c[b],k:b,s:bs}}
-async function pdfText(f){const d=await pdfDoc(f);let t='';for(let i=1;i<=d.numPages;i++){const c=await(await d.getPage(i)).getTextContent(),rows=[];
- for(const it of c.items){if(!it.str&&it.str!==' ')continue;const y=it.transform[5],x=it.transform[4],h=Math.abs(it.transform[3])||it.height||8;let r=rows.find(r=>Math.abs(r.y-y)<Math.max(2,0.4*h));if(!r){r={y,a:[]};rows.push(r)}r.a.push({x,y,w:it.width||0,h,s:it.str})}
- t+=bestCand(pageCands(rows)).t}return t}
-async function ocrImg(u,st){await need('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js');return(await Tesseract.recognize(u,'heb+eng',{logger:m=>{if(m.status==='recognizing text')st.textContent='קורא טקסט מהתמונה… '+Math.round(m.progress*100)+'%'}})).data.text}
-async function pdfOcr(f,st){const d=await pdfDoc(f);let t='';for(let i=1;i<=Math.min(d.numPages,5);i++){const g=await d.getPage(i),v=g.getViewport({scale:2}),c=document.createElement('canvas');c.width=v.width;c.height=v.height;await g.render({canvasContext:c.getContext('2d'),viewport:v}).promise;t+=await ocrImg(c.toDataURL('image/jpeg',.8),st)+'\n'}return t}
-async function ltext(fs,st){let t='';for(const f of fs){st.textContent='קורא טקסט מהקובץ…';let x;if(f.type==='application/pdf'){x=await pdfText(f);if(x.replace(/\s/g,'').length<80)x=await pdfOcr(f,st)}else x=await ocrImg(await shrink(await rd(f)),st);t+=x+'\n'}return t}
-async function lscan(fs,st){return heur(fixRtl(await ltext(fs,st)))}
-const PV={g:{n:'Google Gemini (חינמי)',m:'gemini-flash-latest'},c:{n:'Claude (Anthropic)',m:'claude-sonnet-5-5'},q:{n:'Groq (חינמי ומהיר)',u:'https://api.groq.com/openai/v1',m:'llama-3.3-70b-versatile'},o:{n:'OpenRouter (יש מודלים חינמיים)',u:'https://openrouter.ai/api/v1',m:'meta-llama/llama-3.3-70b-instruct:free'},m:{n:'Mistral',u:'https://api.mistral.ai/v1',m:'mistral-small-latest'},x:{n:'OpenAI',u:'https://api.openai.com/v1',m:'gpt-4o-mini'},z:{n:'מותאם (תואם OpenAI)',u:'',m:''}};
-const mig=()=>{if(S.key&&!S.ks){S.ks={};S.ks[S.pv||'g']={k:S.key,m:(S.pv==='c'?S.cm:S.gm)||''}}};
-async function oaOne(u,c,P,content){for(let a=0;a<(QK?1:5);a++){let r,j;try{r=await fto(u,{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+c.k},body:JSON.stringify({model:c.m||P.m,temperature:.1,messages:[{role:'user',content}]})});j=await r.json()}catch(e){throw{code:ABT(e)?'אין תגובה מהשרת':'שגיאת רשת (ייתכן שהספק חוסם דפדפן)'}}
- if(r.ok)return j.choices[0].message.content;const m=String((j.error&&(j.error.message||j.error))||r.status);
- if((r.status===429||r.status===503)&&!/too large/i.test(m)&&a<4){const w=m.match(/try again in ([\d.]+)\s*(ms|s|m)\b/),ms=w?parseFloat(w[1])*(w[2]==='ms'?1:w[2]==='s'?1000:60000):9000;await sleep(Math.min(60000,ms+1000));continue}
- throw{code:m}}}
-const SCS='השלם ועדכן את ה-JSON של פוליסת הביטוח לפי הטקסט החדש. החזר JSON בלבד (אובייקט אחד) עם השדות: type,co,prod,ins,cust,num,asset,start,end,prem,ded,cl,agn,ag,who,cov,ex,notice,steps,docs,ph,note,full,unsure. אל תמציא. שמור על מה שכבר חולץ והוסף ממה שנמצא בטקסט החדש.';
-async function oa(id,p,tx){const c=S.ks[id],P=PV[id],u=(c.u||P.u).replace(/\/$/,'')+'/chat/completions',t=tx?await tx():'';
- if(!t)return oaOne(u,c,P,p);
- let cs=4000,prev='',pos=0;const tot=Math.min(t.length,24000);
- while(pos<tot){const x=t.slice(pos,Math.min(pos+cs,tot));
-  try{prev=await oaOne(u,c,P,(prev?SCS+'\nנתונים קודמים:\n'+prev:p)+'\n\nטקסט הפוליסה:\n'+x);pos+=x.length}
-  catch(e){if(/too large|reduce your|context length|maximum context/i.test(String(e.code))&&cs>1200){cs=Math.floor(cs/2);continue}throw e}}
- return prev}
-async function call1(id,p,files,json,tx){const c=S.ks[id],P=PV[id];let r,j;
- if(id==='g'){const ms=[...new Set([c.m||P.m,'gemini-2.5-flash','gemini-2.5-flash-lite','gemini-2.0-flash'])];let er={code:'שגיאה'};const parts=[{text:p}];if(!files.length&&tx)parts.push({text:await tx()});parts.push(...files.map(f=>({inlineData:{mimeType:f.t,data:f.b}})));
-  const body=JSON.stringify({contents:[{parts}],generationConfig:json?{responseMimeType:'application/json'}:{}});
-  for(const m of(QK?ms.slice(0,2):ms))for(let a=0;a<(QK?1:2);a++){
-   try{r=await fto('https://generativelanguage.googleapis.com/v1beta/models/'+m+':generateContent?key='+encodeURIComponent(c.k),{method:'POST',headers:{'content-type':'application/json'},body});j=await r.json()}catch(e){er={code:ABT(e)?'אין תגובה מהשרת':'שגיאת רשת'};if(!QK)await sleep(1500);continue}
-   if(r.ok){const cd=(j.candidates||[])[0],gt=cd&&cd.content&&cd.content.parts?cd.content.parts.map(x=>x.text||'').join(''):'';if(gt.trim())return gt;const why=(cd&&cd.finishReason)||(j.promptFeedback&&j.promptFeedback.blockReason)||'';er={code:'תשובה ריקה'+(why?' ('+why+')':'')+' מהמודל '+m};continue}
-   er={code:(j.error&&j.error.message)||r.status};if(![404,429,500,503].includes(r.status))throw er;if(r.status!==404)await sleep(1500)}
-  throw er}
- if(id==='c'){try{r=await fto('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':c.k,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:c.m||P.m,max_tokens:8000,messages:[{role:'user',content:[...files.map(f=>({type:f.t==='application/pdf'?'document':'image',source:{type:'base64',media_type:f.t,data:f.b}})),{type:'text',text:p+(!files.length&&tx?'\n\n'+await tx():'')}]}]})});j=await r.json()}catch(e){throw{code:ABT(e)?'אין תגובה מהשרת':'שגיאת רשת'}}
-  if(!r.ok)throw{code:(j.error&&j.error.message)||r.status};return j.content.map(x=>x.text||'').join('')}
- return oa2(id,p,tx)}
-const vn=x=>{const m=x.match(/(\d+(?:\.\d+)?)/);return m?parseFloat(m[1]):0};
-async function models(id){const c=S.ks[id],P=PV[id];let r,j;
- if(id==='g'){r=await fto('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200&key='+encodeURIComponent(c.k),{});j=await r.json();if(!r.ok)throw{code:(j.error&&j.error.message)||r.status};return(j.models||[]).filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent')).map(m=>m.name.replace('models/',''))}
- if(id==='c'){r=await fto('https://api.anthropic.com/v1/models?limit=100',{headers:{'x-api-key':c.k,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'}});j=await r.json();if(!r.ok)throw{code:(j.error&&j.error.message)||r.status};return j.data.map(m=>m.id)}
- r=await fto((c.u||P.u).replace(/\/$/,'')+'/models',{headers:{authorization:'Bearer '+c.k}});j=await r.json();if(!r.ok)throw{code:String((j.error&&(j.error.message||j.error))||r.status)};return(j.data||[]).map(m=>m.id)}
-function best(id,L){const bad=/whisper|tts|guard|embed|moderation|orpheus|playai|audio|image|live|preview|exp|robotics|computer|vision|distil|safeguard|transcribe|dall|realtime|search/i,C=L.filter(x=>!bad.test(x));
- const pf={g:[/^gemini-\d+(\.\d+)?-flash$/,/^gemini-\d+(\.\d+)?-flash-lite$/,/flash/],c:[/sonnet/,/haiku/,/./],q:[/llama-3\.3-70b/,/gpt-oss-120b/,/llama-4-maverick/,/70b|120b/,/llama/,/./],o:[/llama.*70b.*:free/,/:free/,/./],m:[/mistral-small-latest/,/mistral-medium/,/mistral-small/,/./],x:[/gpt-4o-mini/,/gpt-4\.1-mini/,/gpt-5.*mini/,/gpt-4o/,/./],z:[/./]}[id]||[/./];
- for(const re of pf){const m=C.filter(x=>re.test(x));if(m.length){m.sort((a,b)=>vn(b)-vn(a)||a.length-b.length);return m[0]}}return L[0]||''}
-async function oa2(id,p,tx){try{return await oa(id,p,tx)}catch(e){if(/not exist|not found|decommission|no access|deprecat|invalid model|model_not_found/i.test(String(e.code))){let m='';try{m=best(id,await models(id))}catch(x){}if(m&&m!==S.ks[id].m){S.ks[id].m=m;await save();return await oa(id,p,tx)}}throw e}}
-async function aiCall(p,files=[],json,tx){mig();const ids=[...new Set([S.pv||'g',...Object.keys(PV)])].filter(id=>S.ks&&S.ks[id]&&S.ks[id].k);if(!ids.length)throw{code:'חסר מפתח API. הוסף בהגדרות'};const errs=[];
- for(const id of ids){try{const r=await call1(id,p,files,json,tx);LASTID=id;return r}catch(e){errs.push(PV[id].n.split(' (')[0]+': '+String(e.code||e.message||'שגיאה').slice(0,150))}}throw{code:errs.join(' | ')}}
-const AI=Object.assign(async(p,o={})=>({text:await aiCall(p,o.files,false,o.tx)}),{json:async(p,o={})=>pJ(await aiCall(p,o.files,true,o.tx))});
-async function scan(i){const fs=[...i.files],st=$('#ss');i.value='';
- try{AE='';st.textContent='מכין את המסמכים…';const at=[];let o=null;
-  for(const f of fs){if(f.type==='application/pdf'){if(f.size<=3e6)at.push({n:f.name,d:await rd(f)})}else at.push({n:f.name,d:await shrink(await rd(f))})}
-  mig();if(S.ks&&Object.keys(S.ks).length){try{st.textContent='קורא את הפוליסה בענן… (עד דקה)';const files=[];for(const f of fs){if(f.type==='application/pdf'){if(f.size>15e6)throw{code:'PDF גדול מדי'};files.push({t:f.type,b:(await rd(f)).split(',')[1]})}else files.push({t:'image/jpeg',b:(await shrink(await rd(f))).split(',')[1]})}
-   let TX=null;const tx=async()=>TX==null?(TX=fixRtl(await ltext(fs,st))):TX;
-   o=await AI.json(SC,{files,tx});if(fs.every(f=>f.type==='application/pdf'))try{o.raw=(await tx()).slice(0,60000)}catch(e){}try{if(o.raw){const g=ground(o,o.raw);o.unsure=[...new Set([...(Array.isArray(o.unsure)?o.unsure:[]),...g.nok])];o.chk=chkLines(g);o.vf=1}}catch(e){}
-  }catch(e){AE=String(e.code||e.message||'');toast('ה-AI נכשל: '+AE.slice(0,60));o=null}}
-  if(!o){o=await lscan(fs,st);if(!(o.raw||'').trim())AE=(AE?AE+' | ':'')+'לא נמצא טקסט בקובץ (ייתכן שזו תמונה או סריקה)';o.note='חולץ מקומית בלי AI'+(AE?' ('+AE.slice(0,150)+')':'')+'. בדוק את כל השדות והשלם ידנית.';o.lo=1;o.ae=AE||'לא הוגדר מפתח AI'}
-  const L=Lj;
-  DR={...o,rv:2,cov:L(o.cov),ex:L(o.ex),note:L(o.note),steps:L(o.steps),docs:L(o.docs),ph:L(o.ph),un:Array.isArray(o.unsure)?o.unsure:[],ins:L(o.ins),cust:L(o.cust),who:L(o.who),full:L(o.full),notice:L(o.notice),f:at};edit=null;st.textContent='';toast('חולץ. בדוק ושמור');nav('f')
- }catch(e){st.textContent='הסריקה נכשלה: '+(e.code||e.message||'שגיאה')}}
-const stV=()=>bar('הגדרות AI')+`<p class="m">בלי מפתח הסריקה פועלת מקומית וחינם (פחות מדויקת). אפשר להגדיר כמה ספקים: הכספת תנסה קודם את הראשי ואם הוא נכשל או עמוס, תעבור לבא אחריו. המפתחות נשמרים מוצפנים בכספת. החינמיים: Gemini (aistudio.google.com/apikey), Groq (console.groq.com/keys), OpenRouter (openrouter.ai/keys). בחינמיים ייתכן שימוש בנתונים לשיפור המוצר.</p><label>ספק ראשי</label><select id="pv">${Object.entries(PV).map(([k,v])=>`<option value="${k}"${(S.pv||'g')===k?' selected':''}>${v.n}</option>`).join('')}</select>`+Object.entries(PV).map(([k,v])=>{const c=(S.ks&&S.ks[k])||{};return `<details${c.k?' open':''}><summary>${v.n}${c.k?' ✓':''}</summary><label>מפתח API</label><input id="k_${k}" type="password" value="${esc(c.k)}" autocomplete="off"><label>מודל (ריק = ברירת מחדל)</label><input id="m_${k}" value="${esc(c.m)}" placeholder="${esc(v.m||'')}">${k==='z'?`<label>כתובת בסיס (עד v1)</label><input id="u_z" value="${esc(c.u)}" placeholder="https://.../v1">`:''}</details>`}).join('')+`<label>פרטי המשווק/הסוכן לדוחות (שם וטלפון)</label><input id="brd" value="${esc(S.brand)}"><button class="btn" onclick="sk()">שמור</button><button class="btn o" onclick="tk()">בדוק חיבור</button><div id="tr" class="m" style="margin-top:10px"></div><h3>אבטחה</h3>${FID?'<button class="btn o" onclick="fidOff()">כבה נעילת Face ID</button>':'<button class="btn o" onclick="fidOn()">🔐 הפעל נעילה עם Face ID (ניסיוני)</button>'}<div class="ver">גרסה v${BUILD}</div>`;
-async function sk(){mig();S.pv=$('#pv').value;S.brand=$('#brd')?$('#brd').value.trim():S.brand;S.ks={};for(const k of Object.keys(PV)){const v=$('#k_'+k).value.trim();if(v)S.ks[k]={k:v,m:$('#m_'+k).value.trim(),u:k==='z'?$('#u_z').value.trim():''}}delete S.key;await save();toast('נשמר')}
-async function tk(){await sk();const ids=Object.keys(S.ks||{}),r=[];if(!ids.length){$('#tr').textContent='לא הוגדר מפתח';return}QK=true;TMO=30000;try{for(const id of ids){const c=S.ks[id];$('#tr').innerHTML=r.concat(['⏳ בודק '+esc(PV[id].n)+'…']).join('<br>');
- try{const L=await models(id),b=best(id,L);if(b&&(!c.m||!L.includes(c.m))){c.m=b;await save()}
-  await call1(id,'Reply with: OK',[],false,null);r.push(PV[id].n+' ✅ '+esc(c.m||''))}
- catch(e){r.push(PV[id].n+' ❌ '+esc(ABT(e)?'אין תגובה מהשרת (ייתכן שהרשת חוסמת את הספק)':String(e.code||e.message||'')).slice(0,110))}}}finally{QK=false;TMO=90000}$('#tr').innerHTML=r.join('<br>')}
-const pj=()=>JSON.stringify(S.p.map(p=>({id:p.id,type:p.type,co:p.co,num:p.num,asset:p.asset,end:p.end,ded:p.ded,cl:p.cl,ag:p.ag,cov:p.cov,ex:p.ex,note:p.note})));
-const evBox=()=>`<textarea id="evt" rows="3" placeholder="ספר מה קרה: למשל פרצה צנרת במטבח, תאונה עם רכב אחר, אשפוז…" oninput="EVT=this.value">${esc(EVT)}</textarea><button class="btn" onclick="evl()">🔎 חיפוש מהיר בכספת (חינם)</button><button class="btn o" onclick="ev()">🧠 ניתוח מעמיק עם AI (עולה כסף)</button><div id="evr">${EVR}</div><p class="m">החיפוש החכם שולח את פרטי הפוליסות לשירות ה-AI שהגדרת.</p>`;
-async function ev(){const t=$('#evt').value.trim(),r=$('#evr');if(!t||!S.p.length)return;EVT=t;r.textContent='בודק את כל הפוליסות…';
- try{const o=await AI.json(`אתה עוזר ביטוח בישראל. תאריך היום: ${new Date().toISOString().slice(0,10)}. אירוע: ${t}\nפוליסות (JSON): ${pj()}\nבדוק אילו פוליסות עשויות לכסות את האירוע, גם מסוגים שונים. החזר JSON בלבד: {"m":[{"id":"...","v":"כן|חלקי|לא ברור|לא","why":"הסבר קצר עם הכיסוי או החריג הרלוונטי","steps":["פעולה 1"]}],"urgent":"מועדי הודעה וצעדים ראשונים"}. סדר מהרלוונטית ביותר. אל תמציא כיסוי שלא מופיע; אם המידע חסר כתוב לא ברור. פוליסה שתוקפה פג סמן לא.`,{cache:false});
-  EVR=(o.urgent?`<div class="card"><b>⏱ קודם כל</b><div>${esc(o.urgent)}</div></div>`:'')+(o.m||[]).map(x=>{const p=P(x.id);return p?`<div class="card" style="border-color:${x.v==='כן'?'var(--g)':x.v==='לא'?'var(--r)':'var(--w)'}"><b>${esc(x.v)}</b> · ${esc(x.why)}${(x.steps||[]).length?'<h3>מה עושים</h3>'+ul(x.steps.join('\n')):''}</div>`+card(p):''}).join('');r.innerHTML=EVR}
- catch(e){r.textContent='החיפוש נכשל ('+(e.code||'שגיאה')+')'}}
-function clV(){const p=P(cur);return bar('כתב תביעה','p')+`<div class="card"><b>${esc(p.co)} · ${esc(p.type)}</b><div class="m">${esc(p.num)}</div></div><label>שם מלא</label><input id="cn" value="${esc(S.me)}"><label>תאריך האירוע</label><input id="cd" type="date" value="${new Date().toISOString().slice(0,10)}"><label>מה קרה (ככל שיותר מפורט)</label><textarea id="ce" rows="5">${esc(EVT)}</textarea><button class="btn" onclick="gen()">✍️ הפק כתב תביעה</button><div id="co2"></div>`}
-async function gen(){const p=P(cur),o=$('#co2');S.me=$('#cn').value;await save();o.textContent='כותב…';
- try{const {text}=await AI(`כתוב כתב תביעה רשמי בעברית לחברת הביטוח, בנוסח מקצועי ותמציתי. שם המבוטח: ${S.me}. פוליסה: ${JSON.stringify({co:p.co,type:p.type,num:p.num,asset:p.asset,end:p.end,ded:p.ded,cov:p.cov,ex:p.ex,note:p.note})}. תאריך האירוע: ${$('#cd').value}. תיאור האירוע: ${$('#ce').value}.\nמבנה: נושא בשורה הראשונה, פנייה, פרטי הפוליסה, תיאור האירוע, סעיפי הכיסוי הרלוונטיים מהפוליסה, בקשה מפורשת לפתיחת תביעה ולהעברת רשימת מסמכים, פרטי קשר. בסוף תחת הכותרת רשימת מסמכים להכין, מסמכים רלוונטיים לסוג האירוע. אל תמציא עובדות שלא נמסרו; השאר [ ] לפרט חסר. כתוב בטקסט רגיל בלבד: בלי כוכביות, סולמיות או מרקדאון; כל סעיף בשורה נפרדת עם כותרת קצרה; תאריכים בפורמט dd/mm/yyyy; כל פרט קשר בשורה נפרדת.`,{cache:false,onText:({text})=>{o.textContent=text}});
-  o.innerHTML=`<textarea id="clt" rows="18" class="paper">${esc(cleanTxt(text))}</textarea><button class="btn" onclick="cp(rt($('#clt').value))">העתק כתב תביעה</button>${p.cl?`<a class="btn r" href="tel:${ph(p.cl)}">📞 מוקד תביעות</a>`:''}${p.ag?`<a class="btn g" href="tel:${ph(p.ag)}">📞 סוכן</a><a class="btn o" target="_blank" rel="noopener" href="${wa(p.ag)}?text=${encodeURIComponent(text)}">שלח לסוכן בוואטסאפ</a>`:''}`}
- catch(e){o.textContent='ההפקה נכשלה ('+(e.code||'שגיאה')+')'}}
-const gateV=()=>`<div class="lock"><div style="font-size:56px">🔒</div><h1>כספת ביטוח</h1><div class="ver">v${BUILD}</div><button class="btn big" onclick="fid()">🔓 פתח עם Face ID</button><button class="btn o" onclick="pwo()">פתח עם סיסמה</button></div>`;
+</style></head><body><h1>דוח ביטוח משפחתי</h1><p>נכון ל־${new Date().toLocaleDateString('he-IL')} · ${S.p.length} פוליסות</p><table><tr><th>חברה</th><th>סוג</th><th>מס׳ פוליסה</th><th>תוקף</th><th>פרמיה</th></tr>${S.p.map(p=>`<tr><td>${esc(p.co)}</td><td>${esc(p.type)}</td><td>${esc(p.num)}</td><td>${fd(p.end)}</td><td>${p.prem?esc(p.prem)+' ₪ · '+(p.freq||'תדירות לא ידועה'):''}</td></tr>`).join('')}</table><p style="color:#666;font-size:12px">דוח זה מבוסס על המסמכים שנשמרו בכספת בלבד. אין בו חוות דעת ביטוחית.</p></body></html>`);w.document.close();w.focus();w.print()}
+function claimsV(){return `<div class="card"><h3>תביעות ואירועים</h3><div class="mut">כל אירוע: פוליסות רלוונטיות, מסמכים נדרשים, פעולות, תיעוד שיחות וסטטוס.</div><button class="btn" onclick="startClaim()">＋ אירוע חדש</button></div>
+${S.claims.map(c=>`<div class="card"><div class="row between"><div><b>${esc(c.title)}</b><div class="mut">${c.date||''} · ${esc(c.type||'')}</div></div><span class="pill ${c.status==='סגורה'?'ok':c.status==='הוגשה'?'info':'warn'}">${esc(c.status||'פתוחה')}</span></div>
+<div class="mut">${esc(c.note||'')}</div><div class="mut">פוליסות: ${(c.policyIds||[]).map(id=>{const p=P(id);return p?esc(p.co+' · '+p.type):''}).join(', ')||'—'}</div>
+<div class="mut">שיחות: ${(c.calls||[]).length} · מסמכים: ${(c.docs||[]).length}</div>
+<div class="row"><button class="btn sm" onclick="openClaim('${c.id}')">פתח</button><button class="btn ghost" onclick="delClaim('${c.id}')">מחק</button></div></div>`).join('')||'<p class="mut">עדיין אין תביעות.</p>'}
+<div class="card"><h3>יומן ביטוחי</h3>${S.history.slice(0,12).map(h=>`<div class="kv"><span>${new Date(h.ts).toLocaleDateString('he-IL')}</span><b>${esc(h.action)} · ${esc(h.detail)}</b></div>`).join('')||'<p class="mut">אין רשומות עדיין.</p>'}</div>`}
+function startClaim(pid){const id=uid();S.claims.unshift({id,title:EVT||'אירוע חדש',date:new Date().toISOString().slice(0,10),type:'',policyIds:pid?[pid]:[],status:'פתוחה',note:EVT||'',steps:[],docs:[],calls:[]});cur=id;V='claim';render()}
+function openClaim(id){cur=id;V='claim';render()}
+async function delClaim(id){if(!confirm('למחוק את התביעה?'))return;S.claims=S.claims.filter(x=>x.id!==id);await saveQuiet();nav('claims')}
+function claimV(){const c=S.claims.find(x=>x.id===cur);if(!c){V='claims';return claimsV()}
+return `<button class="btn ghost" onclick="nav('claims')">→ חזרה לתביעות</button><div class="card"><h3>${esc(c.title||'תביעה')}</h3>
+<label>כותרת</label><input id="cl-title" value="${esc(c.title)}"><label>תאריך אירוע</label><input id="cl-date" type="date" value="${esc(c.date)}">
+<label>סטטוס</label><select id="cl-status">${['פתוחה','הוגשה','בטיפול','ממתין למסמכים','סגורה'].map(s=>`<option ${c.status===s?'selected':''}>${s}</option>`).join('')}</select>
+<label>תיאור</label><textarea id="cl-note" rows="3">${esc(c.note)}</textarea>
+<label>פוליסות רלוונטיות</label><select id="cl-pol" multiple style="min-height:90px">${S.p.map(p=>`<option value="${p.id}" ${(c.policyIds||[]).includes(p.id)?'selected':''}>${esc(p.co)} · ${esc(p.type)} · ${esc(p.num||'')}</option>`).join('')}</select>
+<label>פעולות לביצוע (שורה לכל פעולה)</label><textarea id="cl-steps" rows="3">${esc((c.steps||[]).join('\n'))}</textarea>
+<label>מסמכים נדרשים / שהוגשו (שורה לכל מסמך)</label><textarea id="cl-docs" rows="3">${esc((c.docs||[]).join('\n'))}</textarea>
+<button class="btn" onclick="saveClaim()">שמור תביעה</button></div>
+<div class="card"><h3>תיעוד שיחות</h3>${(c.calls||[]).map((call,i)=>`<div class="kv"><span>${esc(call.date)} · ${esc(call.who)}</span><b>${esc(call.note)}</b></div>`).join('')||'<p class="mut">עדיין אין שיחות מתועדות.</p>'}
+<input id="call-who" placeholder="עם מי דיברת?"><input id="call-note" placeholder="מה סוכם?"><button class="btn o" onclick="addCall()">הוסף שיחה</button></div>
+${(c.policyIds||[]).map(id=>{const p=P(id);return p?`<div class="card"><b>${esc(p.co)} · ${esc(p.type)}</b><div class="mut">${esc(p.num||'')} · מוקד: ${esc(p.cl||'—')}</div>${p.cl?`<a class="btn tur" href="tel:${ph(p.cl)}">התקשר למוקד</a>`:''}</div>`:''}).join('')}
+<button class="btn o" onclick="claimDoc('${c.id}')">הפק כתב תביעה (AI — באישור מפורש)</button><div id="claimDocOut"></div>`}
+async function saveClaim(){const c=S.claims.find(x=>x.id===cur);if(!c)return;c.title=$('#cl-title').value;c.date=$('#cl-date').value;c.status=$('#cl-status').value;c.note=$('#cl-note').value;c.policyIds=[...$('#cl-pol').selectedOptions].map(o=>o.value);c.steps=$('#cl-steps').value.split('\n').filter(Boolean);c.docs=$('#cl-docs').value.split('\n').filter(Boolean);logHist('עדכון תביעה',c.title);await saveQuiet();toast('נשמר');render()}
+async function addCall(){const c=S.claims.find(x=>x.id===cur);if(!c)return;const who=$('#call-who').value.trim(),note=$('#call-note').value.trim();if(!note)return toast('חסר סיכום שיחה');c.calls=c.calls||[];c.calls.unshift({date:new Date().toLocaleDateString('he-IL'),who,note});await saveQuiet();render()}
+async function renewCompare(pid){const p=P(pid);if(!p)return;const prev=S.renewals.filter(r=>r.policyId===pid).sort((a,b)=>b.date-a.date)[0];
+const html=`<div class="card"><h3>השוואת חידוש · ${esc(p.co)} · ${esc(p.type)}</h3><div class="mut">השנה הנוכחית: פרמיה ${p.prem?esc(p.prem)+' ₪ · '+(p.freq||'תדירות לא ידועה'): '—'} · השתתפות עצמית: ${esc(p.ded||'—')}</div>
+${prev?`<div class="mut" style="margin-top:8px">חידוש קודם (${new Date(prev.date).toLocaleDateString('he-IL')}): פרמיה ${prev.prem||'—'} ₪ · השתתפות: ${esc(prev.ded||'—')} · ${esc(prev.note||'')}</div>`:''}
+<label>פרמיית חידוש מוצעת (₪)</label><input id="rn-prem" type="number"><label>השתתפות עצמית מוצעת</label><input id="rn-ded"><label>הערה</label><input id="rn-note" placeholder="מה השתנה? הרחבות?"><button class="btn" onclick="saveRenewal('${pid}')">שמור הצעת חידוש</button></div>
+<div class="card"><b>התראות חידוש</b><div class="mut">נשלחות / מוצגות 60, 30 ו־7 ימים לפני פקיעה. בדוק את רשימת “פוקעות בקרוב” במסך הבית.</div><div class="mut">פקיעה: ${p.end?fd(p.end)+' · '+remTxt(p):'לא ידוע'}</div></div>`;
+$('#sheetBody').innerHTML=html;$('#sheet').classList.add('open');$('#sheet').onclick=e=>{if(e.target.id==='sheet')closeSheet()}}
+async function saveRenewal(pid){const p=P(pid);S.renewals.push({id:uid(),policyId:pid,date:Date.now(),prem:$('#rn-prem').value,ded:$('#rn-ded').value,note:$('#rn-note').value});logHist('הצעת חידוש',p.co+' · '+p.num);await saveQuiet();closeSheet();toast('הצעת החידוש נשמרה')}
+function settingsV(){return `<div class="card"><h3>מראה</h3><div class="seg"><button class=""+(S.settings.theme!=="dark"?"on":"")+"" onclick="setTheme(0)">בהיר פרימיום</button><button class=""+(S.settings.theme==="dark"?"on":"")+"" onclick="setTheme(1)">כהה אלגנטי</button></div><div class="small" style="margin-top:8px">הבחירה נשמרת בכספת.</div></div><div class="card"><h3>אבטחה ופרטיות</h3>
+<div class="mut"><b>Face ID / ביומטריה:</b> פתיחה במכשיר בלבד. אינה מצפינה את הכספת ואינה מחליפה סיסמה. ההצפנה תמיד AES-GCM עם מפתח הנגזר מהסיסמה.</div>
+<div class="row" style="margin-top:10px"><button class="btn sm" onclick="fidOn()">הפעל Face ID</button><button class="btn o sm" onclick="fidOff()">כבה Face ID</button><button class="btn o sm" onclick="lock()">נעל כספת</button></div>
+<label style="margin-top:12px">נעילה אוטומטית לאחר חוסר פעילות (דקות)</label><select id="al" onchange="setAutoLock(this.value)">${[1,2,5,10,30].map(m=>`<option ${S.settings.autoLockMin===m?'selected':''}>${m}</option>`).join('')}</select>
+<label><input type="checkbox" id="lo2" ${S.settings.localOnly?'checked':''} onchange="toggleLocalOnly(this.checked)" style="width:auto"> מצב מקומי בלבד — ללא שליחת מסמכים לשירות חיצוני</label>
+<div class="small">כאשר מצב מקומי בלבד פעיל, סריקת AI וספריות PDF/OCR חיצוניות חסומות. ייבוא טקסט שהודבק עדיין עובד.</div></div>
+<div class="card"><h3>הגדרות AI</h3><label>ספק ברירת מחדל</label><select id="aiProv" onchange="setProv(this.value)">${['gemini','groq','claude'].map(x=>`<option ${S.settings.aiProvider===x?'selected':''}>${x}</option>`).join('')}</select>
+<label>מפתח ${S.settings.aiProvider}</label><input id="aiKey" type="password" placeholder="הדבק מפתח — נשמר מוצפן בכספת" value="${esc(S.settings.aiKeys[S.settings.aiProvider]||'')}"><button class="btn" onclick="saveKey()">שמור מפתח</button>
+<div class="small">המפתח נשמר מוצפן בתוך הכספת בלבד. כל סריקת AI דורשת אישור מפורש שלך לאותה סריקה.</div></div>
+<div class="card"><h3>נתונים</h3><button class="btn" onclick="nav('backup')">גיבוי ושחזור</button><button class="btn o" onclick="nav('import')">ייבוא פוליסה מ־Claude (הדבק)</button><button class="btn o" onclick="exportJSON()">ייצוא JSON (כל השדות — כולל תדירות)</button><button class="btn o" onclick="nav('family')">תיק משפחתי</button><button class="btn o" onclick="nav('coverage')">מפת כיסויים</button></div>
+<div class="card"><h3>אודות</h3><div class="mut">גרסה ${BUILD} · קובץ HTML יחיד · ללא שרת · IndexedDB + AES-GCM · PBKDF2 300,000 איטרציות</div><div class="mut" style="margin-top:6px">המידע באפליקציה אינו חוות דעת ביטוחית או משפטית. ההחלטה הסופית תמיד בידי המבטח.</div></div>`}
+async function setAutoLock(v){S.settings.autoLockMin=Number(v);await saveQuiet();toast('נשמר')}
+async function setProv(v){S.settings.aiProvider=v;await saveQuiet();render()}
+async function saveKey(){const k=$('#aiKey').value.trim();S.settings.aiKeys[S.settings.aiProvider]=k;await saveQuiet();toast('מפתח נשמר מוצפן')}
+function backupV(){return `<div class="card"><h3>גיבוי</h3><div class="mut">הגיבוי הוא העתק מוצפן של הכספת. הוא אינו מכיל את הסיסמה. שמור אותו במקום בטוח.</div><div class="mut">גיבוי אחרון: ${S.bk?new Date(S.bk).toLocaleString('he-IL'):'עדיין לא גובה'}</div><button class="btn" onclick="doBackup()">צור גיבוי ושמור / שתף</button></div>
+<div class="card"><h3>שחזור — עם הגנה</h3><div class="mut">לפני שחזור ניצור אוטומטית גיבוי של הכספת הנוכחית, ונבדוק שהגיבוי החדש תקין ותואם לסיסמה שלך. אם הבדיקה נכשלת — שום דבר לא יוחלף.</div><input id="rsf" type="file" accept=".txt,.json" onchange="loadRestoreFile(this)"><textarea id="rs" rows="5" placeholder="או הדבק כאן את תוכן הגיבוי"></textarea><button class="btn red" onclick="doRestore()">שחזר — לאחר בדיקה</button><div class="small">הגיבוי האוטומטי לפני שחזור נשמר גם במכשיר תחת “auto-backup-before-restore”.</div></div>
+<button class="btn o" onclick="nav('settings')">חזרה להגדרות</button>`}
+async function doBackup(){try{const cur=await idbGet('v');if(!cur){toast('אין מה לגבות');return}const txt=JSON.stringify(cur);const f=new File([txt],'kaspet-backup-'+new Date().toISOString().slice(0,10)+'.txt',{type:'text/plain'});let shared=false;try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f]});shared=true}}catch(e){if(e.name==='AbortError')return}
+if(!shared){const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
+S.bk=Date.now();await saveQuiet();toast('גיבוי נוצר. זמן הגיבוי עודכן רק לאחר יצירת הקובץ.');render()}catch(e){toast('הגיבוי נכשל: '+String(e.message||'').slice(0,60))}}
+async function loadRestoreFile(inp){const f=inp.files[0];if(!f)return;$('#rs').value=await f.text();toast('הקובץ נטען. לחץ שחזר — תתבצע בדיקה לפני החלפה')}
+async function doRestore(){const txt=$('#rs').value.trim();if(!txt)return toast('אין תוכן לשחזור');let obj;try{obj=JSON.parse(txt)}catch(e){return toast('קובץ גיבוי לא תקין — JSON שגוי')}
+if(!obj||typeof obj.s!=='string'||typeof obj.i!=='string'||typeof obj.d!=='string')return toast('גיבוי לא תקין — חסרים שדות הצפנה');
+const pw=prompt('הזן את סיסמת המאסטר כדי לאמת את הגיבוי לפני החלפה:');if(!pw)return;try{const k2=await keyOf(pw,ub(obj.s));const plain=dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(obj.i)},k2,ub(obj.d)));const parsed=JSON.parse(plain);if(!parsed||!Array.isArray(parsed.p))throw new Error('מבנה לא תקין');
+const curVault=await idbGet('v');if(curVault){try{await idbSet('backup-before-restore',curVault)}catch(e){}}
+await idbSet('v',obj);toast('הגיבוי אומת והוחלף. הכספת תינעל — פתח אותה עם הסיסמה.');await lock()}catch(e){toast('השחזור נכשל — הגיבוי לא תואם לסיסמה או פגום. שום דבר לא הוחלף.')}}
+function importV(){return `<div class="card"><h3>ייבוא פוליסה מ־Claude / JSON</h3><div class="mut">הדבק JSON או טקסט מובנה. הייבוא שומר את כל השדות — כולל תדירות הפרמיה (freq). לאחר הייבוא תראה מסך בקרת איכות.</div><textarea id="imp" rows="10" placeholder='{"co":"הראל","num":"123","freq":"שנתי","prem":1200,...} או מערך של פוליסות'></textarea><button class="btn" onclick="doImport()">ייבא והצג לבדיקה</button><div id="impOut"></div></div>`}
+async function doImport(){const t=$('#imp').value.trim();if(!t)return toast('אין מה לייבא');let arr;try{const j=JSON.parse(t);arr=Array.isArray(j)?j:(j.p||[j])}catch(e){return toast('JSON לא תקין')}
+const norm=arr.map(normalizePolicy);$('#impOut').innerHTML=`<div class="card"><b>${norm.length} פוליסות מוכנות לייבוא</b><table class="table">${norm.map(p=>`<tr><td>${esc(p.co)}</td><td>${esc(p.type)}</td><td>${esc(p.num)}</td><td>${p.freq||'ללא תדירות'}</td></tr>`).join('')}</table><button class="btn" onclick="confirmImport()">אשר ייבוא</button></div>`;window._imp=norm}
+async function confirmImport(){for(const p of window._imp){S.p.unshift(p);logHist('ייבוא פוליסה',p.co+' · '+p.num)}await saveQuiet();toast('יובא');nav('pol')}
+async function exportJSON(){const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='kaspet-export-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);toast('הייצוא כולל את כל השדות, כולל freq')}
+async function askLocal(){const q=$('#evt').value.trim();EVT=q;if(!q)return toast('כתוב מה קרה');const out=$('#evr');const hits=lsearch(q,S.p);out.innerHTML=hits.length?hits.map(h=>`<div class="card"><b>${esc(h.p.co)} · ${esc(h.p.type)}</b><div class="mut">${h.s.map(l=>'• '+esc(l)).join('<br>')||'נמצאה התאמה בכותרת הפוליסה'}</div><button class="btn sm" onclick="openPolicy('${h.p.id}')">פתח פוליסה</button></div>`).join(''):'<p class="mut">לא נמצא בכספת. נסה ניתוח AI.</p>'}
+function lsearch(q,L){const SW=['של','את','על','עם','קרה','לי','אני','היה','הוא','זה','מה','אם','גם','לא','כי','או','אל','יש','כל'];const SY=[['מים','נזילה','צנרת','הצפה','רטיבות'],['גניבה','פריצה','שוד'],['אש','שריפה','עשן'],['תאונה','התנגשות','פגיעה','צד ג'],['גרירה','תקר','פנצר','מצבר'],['ניתוח','אשפוז','רופא','תרופה','שיניים'],['טיסה','מזוודה','כבודה','ביטול'],['פטירה','מוות','נכות']];
+const ws=NQ(q).split(' ').filter(w=>w.length>1&&!SW.includes(w));if(!ws.length)return L.map(p=>({p,s:[]}));const ts=ws.flatMap(w=>{const g=SY.find(g=>g.some(t=>w===t||(t.length>2&&(w.includes(t)||t.includes(w)))));return g||[w]});
+return L.map(p=>{const h=NQ([p.co,p.num,p.asset,p.type,p.prod,p.ins,p.cust,p.cov,p.ex,p.note,p.steps,p.docs,p.full].join(' '));const sc=ws.filter(w=>ts.some(t=>h.includes(t))).length;if(!sc)return null;const s=[p.cov,p.ex,p.full,p.steps,p.docs,p.note].join('\n').split('\n').filter(l=>l.trim()&&ts.some(t=>NQ(l).includes(t))).slice(0,5);return{p,s,sc}}).filter(Boolean).sort((a,b)=>b.sc-a.sc)}
+async function askAI(){const q=$('#evt').value.trim();if(!q)return toast('כתוב שאלה');if(S.settings.localOnly)return toast('במצב מקומי בלבד AI חסום. אפשר להשתמש בחיפוש המקומי.');
+if(!confirm(`לשלוח שאלה ל־AI (${S.settings.aiProvider})? השאלה תכלול תקצירי פוליסות בלבד, לא מסמכים מלאים.`))return;const out=$('#evr');out.textContent='שואל את ה־AI…';try{const ctx=S.p.map(p=>({id:p.id,co:p.co,type:p.type,num:p.num,asset:p.asset,end:p.end,cov:(p.cov||'').slice(0,1200),ex:(p.ex||'').slice(0,600)}));const ans=await AI(`ענה בעברית על השאלה: ${q}\nפוליסות:\n${JSON.stringify(ctx,null,1)}\nהחזר JSON: {verdict, summary, matches:[{id,v,why,steps:[]}], urgent, missing}. אל תמציא. אם לא ברור כתוב לא ברור.`);const o=JSON.parse(ans.match(/\{[\s\S]*\}/)[0]);out.innerHTML=`<div class="card"><b>${esc(o.verdict||'לא ברור')}</b><div>${esc(o.summary||'')}</div>${(o.matches||[]).map(m=>{const p=P(m.id);return p?`<div style="margin-top:10px"><b>${esc(m.v)} · ${esc(p.co)} · ${esc(p.type)}</b><div class="mut">${esc(m.why||'')}</div><div class="mut">${(m.steps||[]).join(' · ')}</div><button class="btn sm" onclick="openPolicy('${p.id}')">פתח פוליסה</button></div>`:''}).join('')}<div class="mut" style="margin-top:8px">ניתוח אוטומטי בלבד. ההחלטה הסופית בידי המבטח.</div></div>`}catch(e){out.textContent='החיפוש נכשל ('+String(e.code||e.message||'שגיאה')+')'}}
+async function claimDoc(id){const c=S.claims.find(x=>x.id===id);if(!c)return;if(S.settings.localOnly)return toast('במצב מקומי בלבד AI חסום.');if(!confirm(`לשלוח את פרטי האירוע ל־AI (${S.settings.aiProvider}) לצורך ניסוח כתב תביעה?`))return;const out=$('#claimDocOut');out.textContent='כותב…';try{const txt=await AI(`כתוב כתב תביעה רשמי בעברית לחברת ביטוח. אירוע: ${c.title} בתאריך ${c.date}. תיאור: ${c.note}. פוליסות: ${JSON.stringify((c.policyIds||[]).map(i=>P(i)).filter(Boolean).map(p=>({co:p.co,type:p.type,num:p.num})))}. מבנה: נושא, פנייה, פרטי פוליסה, תיאור, כיסויים רלוונטיים, בקשה לפתיחת תביעה ורשימת מסמכים. אל תמציא עובדות. כתוב טקסט רגיל בלבד.`);out.innerHTML=`<textarea rows="14" style="margin-top:10px">${esc(txt)}</textarea><button class="btn" onclick="cp(document.querySelector('#claimDocOut textarea').value)">העתק כתב תביעה</button>`}catch(e){out.textContent='ההפקה נכשלה'}}
+async function aiExtract(text,fileName){const prompt=`חילוץ מובנה מפוליסת ביטוח בעברית. החזר JSON בלבד: {"co":"","prod":"","ins":"","cust":"","num":"","asset":"","start":"","end":"","prem":"","freq":"","ded":"","cl":"","agn":"","ag":"","who":"","cov":"","ex":"","notice":"","note":"","_meta":{"co":{"status":"explicit|inferred|missing","conf":0,"page":""},"num":{"status":"explicit|inferred|missing","conf":0,"page":""},"end":{"status":"explicit|inferred|missing","conf":0,"page":""},"prem":{"status":"explicit|inferred|missing","conf":0,"page":""},"freq":{"status":"explicit|inferred|missing","conf":0,"page":""}}}. תאריכים YYYY-MM-DD. freq רק: חודשי/שנתי/רבעוני/חצי שנתי או ריק אם לא זוהה. אל תמציא. מסמך:\n${text.slice(0,50000)}`;const raw=await AI(prompt);const m=raw.match(/\{[\s\S]*\}/);if(!m)throw new Error('תשובת AI לא תקינה');return JSON.parse(m[0])}
+async function AI(prompt){const prov=S.settings.aiProvider;const key=S.settings.aiKeys[prov]||S.ai[prov];if(!key)throw{code:'חסר מפתח AI — הגדר אותו בהגדרות'};
+if(prov==='gemini'){const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(key)}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});if(!r.ok)throw{code:'Gemini '+r.status};const j=await r.json();return j.candidates?.[0]?.content?.parts?.map(x=>x.text).join('')||''}
+if(prov==='groq'){const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}],temperature:0})});if(!r.ok)throw{code:'Groq '+r.status};const j=await r.json();return j.choices?.[0]?.message?.content||''}
+if(prov==='claude'){const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,messages:[{role:'user',content:prompt}]})});if(!r.ok)throw{code:'Claude '+r.status};const j=await r.json();return (j.content||[]).map(x=>x.text||'').join('')}
+throw{code:'ספק AI לא מוכר'}}
+async function go(){const pw=$('#pw').value,er=$('#er');if(pw.length<6){er.textContent='לפחות 6 תווים';return}let r=null;try{r=await idbGet('v')}catch(e){}
+try{if(!r){const p2=$('#pw2');if(p2&&p2.value!==pw){er.textContent='הסיסמאות לא זהות';return}salt=crypto.getRandomValues(new Uint8Array(16));K=await keyOf(pw,salt);S=defaults({p:[]});await save();R=true}
+else{salt=ub(r.s);K=await keyOf(pw,salt);S=defaults(JSON.parse(dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(r.i)},K,ub(r.d)))))}}
+catch(e){K=null;er.textContent='סיסמה שגויה';return}
+try{navigator.storage.persist()}catch(e){}REM=!!($('#rm')&&$('#rm').checked);try{await idbSet('dk',REM?K:null)}catch(e){REM=false}V='home';render()}
+async function lock(){try{await idbSet('dk',null)}catch(e){}REM=false;GATE=false;K=null;S=defaults({p:[]});V='home';try{R=await idbGet('v')||R}catch(e){}render()}
+async function pwo(){try{await idbSet('dk',null)}catch(e){}REM=false;K=null;S=defaults({p:[]});GATE=false;render()}
 async function fid(){try{await navigator.credentials.get({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),allowCredentials:[{id:ub(FID),type:'public-key'}],userVerification:'required',timeout:60000,rpId:location.hostname}});GATE=false;render()}catch(e){toast('האימות נכשל או בוטל. אפשר לפתוח עם סיסמה')}}
-async function pwo(){try{await idbSet('dk',null)}catch(e){}REM=false;K=null;S={p:[]};GATE=false;render()}
-async function fidOn(){try{const cr=await navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'כספת ביטוח',id:location.hostname},user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'user',displayName:'משתמש'},pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},timeout:60000}});FID=b64(cr.rawId);await idbSet('fid',FID);if(!REM){REM=true;await idbSet('dk',K)}toast('Face ID הופעל');render()}catch(e){toast('לא ניתן להפעיל Face ID: '+String(e.message||'').slice(0,50))}}
+async function fidOn(){try{const cr=await navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'הכספת שלי',id:location.hostname},user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'user',displayName:'משתמש'},pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},timeout:60000}});FID=b64(cr.rawId);await idbSet('fid',FID);if(!REM){REM=true;await idbSet('dk',K)}toast('Face ID הופעל — פתיחה במכשיר בלבד, לא הצפנה ביומטרית');render()}catch(e){toast('לא ניתן להפעיל Face ID: '+String(e.message||'').slice(0,50))}}
 async function fidOff(){FID=null;try{await idbSet('fid',null)}catch(e){}toast('Face ID כובה');render()}
-async function bkf(){let r=null;try{r=await idbGet('v')}catch(e){}if(!r){toast('אין מה לגבות');return}S.bk=Date.now();await save();r=await idbGet('v');const txt=JSON.stringify(r),f=new File([txt],'kaspet-backup-'+new Date().toISOString().slice(0,10)+'.txt',{type:'text/plain'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f]});return}}catch(e){if(e.name==='AbortError')return}cp(txt)}
-async function rsf(i){const f=i.files[0];if(!f)return;$('#rs').value=await f.text();toast('הקובץ נטען. לחץ שחזר ונעל')}
-function render(){const a=$('#app');scrollTo(0,0);if(K&&GATE){a.innerHTML=gateV();return}
- if(!K){a.innerHTML=`<div class="lock"><div style="font-size:56px">🔒</div><h1>כספת ביטוח</h1><div class="ver">v${BUILD}</div><p class="m">${R?'הזן סיסמת מאסטר':'צור סיסמת מאסטר. אין דרך לשחזר אותה, ואם תאבד אותה המידע אבוד.'}</p><input id="pw" type="password" placeholder="סיסמה" autocomplete="off">${R?'':'<input id="pw2" type="password" placeholder="אימות סיסמה" autocomplete="off">'}<label class="row" style="margin:10px 0;justify-content:center"><input type="checkbox" id="rm" checked style="width:auto;min-height:0"> זכור במכשיר זה (בלי סיסמה בכל פתיחה)</label><button class="btn" onclick="go()">${R?'פתח':'צור כספת'}</button><p id="er" class="m" style="color:var(--r)"></p></div>`;return}
- if(V==='home')a.innerHTML=home();else if(V==='sos')a.innerHTML=sosV();else if(V==='p')a.innerHTML=bar('פוליסה')+card(P(cur),1);
- else if(V==='f'){a.innerHTML=formV();fl()}else if(V==='cl')a.innerHTML=clV();else if(V==='im')a.innerHTML=imV();else if(V==='st')a.innerHTML=stV();else bkV()}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)H=Date.now();else if(K&&!REM&&Date.now()-H>(S.settings.autoLockMin||5)*60000)lock();else if(K&&FID&&Date.now()-H>30000){GATE=true;render()}});
+setInterval(()=>{if(K&&Date.now()-H>(S.settings.autoLockMin||5)*60000&&document.hidden)lock()},60000);
 addEventListener('unhandledrejection',e=>{try{toast('שגיאה: '+String((e.reason&&(e.reason.code||e.reason.message))||e.reason).slice(0,80))}catch(x){}});
 addEventListener('error',e=>{try{toast('שגיאה: '+String(e.message).slice(0,80))}catch(x){}});
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-(async()=>{try{R=await idbGet('v');const dk=await idbGet('dk');if(R&&dk){salt=ub(R.s);K=dk;S=JSON.parse(dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(R.i)},K,ub(R.d))));REM=true;try{FID=await idbGet('fid')}catch(x){}GATE=!!FID}}catch(e){K=null}render();try{const t=await(await fetch(location.pathname+'?c='+Date.now(),{cache:'no-store'})).text(),m=t.match(/const BUILD='([^']+)'/);if(m&&m[1]!==BUILD){NV=true;if(K)render()}}catch(e){}})();
-</script></body></html>
+(async()=>{try{R=await idbGet('v');const dk=await idbGet('dk');if(R&&dk){salt=ub(R.s);K=dk;S=defaults(JSON.parse(dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(R.i)},K,ub(R.d)))));REM=true;try{FID=await idbGet('fid')}catch(x){}GATE=!!FID}}catch(e){K=null}render()})();
+function coverageScore(){
+let score=0;
+const has=t=>S.p.some(p=>p.type===t);
+const weights=[['רכב',18],['דירה',18],['בריאות',20],['חיים',20],['משכנתא',8],['נסיעות',4],['תאונות',6],['סיעוד',6]];
+for(const [t,w] of weights){if(has(t)) score+=w;}
+const expiring=S.p.filter(p=>{const n=dl(p.end);return n!==null&&n<0}).length;
+if(expiring) score=Math.max(0,score-expiring*6);
+const missingFreq=S.p.filter(p=>p.prem&&!p.freq).length;
+if(missingFreq) score=Math.max(0,score-missingFreq*2);
+score=Math.min(100,Math.round(score));
+let grade=score>=85?'מצוין':score>=65?'טוב':score>=45?'בסיסי':'דורש חיזוק';
+let summary='';
+if(!has('חיים')) summary+='חסר ביטוח חיים. ';
+if(!has('בריאות')) summary+='חסר ביטוח בריאות. ';
+if(!has('דירה')) summary+='חסר ביטוח דירה. ';
+if(!has('רכב')) summary+='חסר ביטוח רכב. ';
+if(!summary) summary='כיסוי רחב — כדאי לבדוק חפיפות ועלויות.';
+return {score, grade, summary:summary.trim()};
+}
+function smartInsights(){
+const out=[];
+const push=(sev,title,desc,action,actionLabel)=>out.push({sev,title,desc,action,actionLabel});
+for(const p of S.p){
+const n=dl(p.end);
+if(n!==null&&n<0) push('high','פוליסה פגה: '+p.co+' · '+p.type,'התוקף פג ב-'+fd(p.end)+'. בדוק חידוש מיד.',"openPolicy('"+p.id+"')",'פתח פוליסה');
+else if(n!==null&&n<=7) push('high','פוקעת השבוע: '+p.co+' · '+p.type,'נותרו '+n+' ימים עד '+fd(p.end)+'.',"openPolicy('"+p.id+"')",'השווה חידוש');
+else if(n!==null&&n<=30) push('med','פוקעת החודש: '+p.co+' · '+p.type,'נותרו '+n+' ימים. זמן טוב לבקש הצעת חידוש.',"openPolicy('"+p.id+"')",'פתח פוליסה');
+if(p.prem&&!p.freq) push('med','תדירות חסרה: '+p.co,'הפרמיה ₪'+p.prem+' ללא תדירות מאומתת — העלות החודשית לא מחושבת.',"openPolicy('"+p.id+"')",'השלם תדירות');
+if(!p.num) push('med','מספר פוליסה חסר: '+p.co,'בלי מספר יהיה קשה לפתוח תביעה.',"openPolicy('"+p.id+"')",'השלם');
+if(!p.cov) push('low','אין פירוט כיסויים: '+p.co,'כדאי לסרוק שוב או להוסיף כיסויים ידנית.',"openPolicy('"+p.id+"')",'הוסף כיסויים');
+}
+const by={}; for(const p of S.p){const k=p.type+'|'+(p.ins||p.cust||''); (by[k]=by[k]||[]).push(p)}
+for(const k of Object.keys(by)){if(by[k].length>1) push('med','חפיפה אפשרית: '+by[k][0].type,'יותר מפוליסה אחת לאותו סוג + מבוטח — '+by[k].map(x=>x.co).join(', ')+'. בדוק כפל כיסוי.',"nav('coverage')",'בדוק חפיפות');}
+if(!S.p.some(p=>p.type==='חיים')) push('high','אין ביטוח חיים בכספת','אם יש ביטוח חיים שלא נסרק — סרוק אותו. אם אין — זה פער שכדאי להכיר.',"nav('scan')",'סרוק פוליסה');
+if(!S.p.some(p=>p.type==='בריאות')) push('med','אין ביטוח בריאות בכספת','בדוק אם יש פוליסת בריאות שלא נסרקה.',"nav('scan')",'סרוק');
+if(S.family.people.length===0) push('low','הגדר את התיק המשפחתי','הוסף אנשים ונכסים כדי לראות מי מכוסה במה.',"nav('family')",'הגדר תיק');
+if(!(S.bk&&Date.now()-S.bk<12096e5)&&S.p.length) push('med','כדאי לגבות','עבר יותר משבוע מאז הגיבוי האחרון.',"nav('backup')",'גיבוי עכשיו');
+for(const p of S.p){const prev=S.renewals.filter(r=>r.policyId===p.id).sort((a,b)=>b.date-a.date)[0]; if(prev&&prev.prem&&p.prem&&Number(p.prem)>Number(prev.prem)*1.1) push('med','התייקרות בחידוש: '+p.co,'הפרמיה עלתה מ-₪'+prev.prem+' ל-₪'+p.prem+'. שווה להשוות.',"openPolicy('"+p.id+"')",'השווה');}
+const order={high:0,med:1,low:2}; out.sort((a,b)=>order[a.sev]-order[b.sev]);
+return out;
+}
+function drawExpenseChart(){
+const cv=document.getElementById('expChart'); if(!cv) return;
+const ctx=cv.getContext('2d'); const W=cv.width,H=cv.height; ctx.clearRect(0,0,W,H);
+const by={}; for(const p of S.p){const m=monthlyPrem(p); if(m) by[p.type]=(by[p.type]||0)+m;}
+const entries=Object.entries(by).sort((a,b)=>b[1]-a[1]); if(!entries.length){ctx.fillStyle='#8A97AC'; ctx.font='16px Arial'; ctx.fillText('אין נתוני עלות עם תדירות מאומתת',20,100); return;}
+const max=Math.max(...entries.map(e=>e[1])); const bw=(W-40)/entries.length;
+entries.forEach(([t,v],i)=>{const h=(v/max)*(H-70); const x=20+i*bw+8; ctx.fillStyle=i===0?'#122A4D':'#0FB5A8'; ctx.fillRect(x,H-40-h,bw-16,h); ctx.fillStyle='#3A4A63'; ctx.font='13px Arial'; ctx.fillText('₪'+Math.round(v),x,H-44-h); ctx.fillText(t,x,H-18);});
+document.getElementById('expLegend').innerHTML=entries.map(e=>`<div class="barRow"><span>${e[0]}</span><div class="track"><i style="width:${Math.round(e[1]/max*100)}%"></i></div><b>₪${Math.round(e[1])}</b></div>`).join('');
+}
+async function setTheme(dark){S.settings.theme=dark?'dark':'light'; await saveQuiet(); document.documentElement.setAttribute('data-theme',S.settings.theme); render();}
+async function toggleTheme(){await setTheme(S.settings.theme!=='dark');}
+function assistantV(){
+const msgs=S.chat||[];
+return `<div class="card"><h3>עוזר חכם</h3><div class="mut">עונה רק מהכספת שלך. אם משהו לא כתוב בפוליסות — אגיד שלא מצאתי, לא אמציא.</div>
+<div class="chips"><button class="chip" onclick="askSmartPreset('מה מכסה ביטוח הדירה בנזילה?')">נזילה בדירה</button><button class="chip" onclick="askSmartPreset('איזה פוליסות פוקעות בקרוב?')">פוקעות בקרוב</button><button class="chip" onclick="askSmartPreset('כמה אני משלם בחודש על ביטוחים?')">כמה אני משלם?</button><button class="chip" onclick="askSmartPreset('האם יש לי כפל כיסוי?')">כפל כיסוי</button></div>
+<div class="chat" id="chatBox">${msgs.length?msgs.map(m=>`<div class="bubble ${m.me?'me':''}">${esc(m.text)}</div>`).join(''):'<div class="bubble">שלום! שאל אותי כל דבר על הביטוחים שלך — למשל: מה מכסה ביטוח הרכב בתאונה?</div>'}</div>
+<div class="row"><input id="chatIn" placeholder="כתוב שאלה..." onkeydown="if(event.key==='Enter')sendChat()"><button class="btn sm" style="width:auto" onclick="sendChat()">שלח</button></div>
+<button class="btn o" onclick="askAIChat()">שאל גם את ה-AI החיצוני (באישור מפורש)</button><div id="aiChatOut"></div></div>
+<div class="card"><h3>תובנות חכמות</h3>${smartInsights().slice(0,5).map(i=>`<div class="insight ${i.sev}"><b>${esc(i.title)}</b><p>${esc(i.desc)}</p></div>`).join('')||'<p class="mut">אין תובנות.</p>'}</div>`;
+}
+function askSmartPreset(q){document.getElementById('chatIn').value=q; sendChat();}
+async function sendChat(){
+const inp=document.getElementById('chatIn'); const q=inp.value.trim(); if(!q) return;
+S.chat=S.chat||[]; S.chat.push({me:true,text:q}); inp.value='';
+const ans=smartAnswer(q); S.chat.push({me:false,text:ans}); await saveQuiet(); render(); setTimeout(()=>{const c=document.getElementById('chatBox'); if(c) c.scrollTop=c.scrollHeight;},80);
+}
+function smartAnswer(q){
+const low=NQ(q);
+if(low.includes('כמה')&&(low.includes('משלם')||low.includes('עולה')||low.includes('חודש'))){const st=monthlyStats(); return 'סך העלות החודשית המחושבת היא ₪'+Math.round(st.sum)+' (רק מפוליסות עם תדירות מאומתת). '+(st.unknown?st.unknown+' פוליסות ללא תדירות לא נכללו.':'')+' פירוט מלא במסך תמונת מצב.';}
+if(low.includes('פוקע')||low.includes('פג')){const e=expiringSoon(); if(!e.length) return 'אין פוליסות שפוקעות ב-45 הימים הקרובים לפי התאריכים בכספת.'; return 'פוקעות בקרוב: '+e.map(p=>p.co+' · '+p.type+' — '+fd(p.end)+' ('+remTxt(p)+')').join(' ; ');}
+if(low.includes('כפל')||low.includes('חפיפה')||low.includes('כפול')){const d=dupHints(); return d.includes('לא נמצאו')?'לא מצאתי חפיפה ברורה לפי סוג + מבוטח.':('מצאתי חשד לחפיפה: '+d.replace(/<[^>]+>/g,' '));}
+if(low.includes('ציון')||low.includes('כיסוי')){const cs=coverageScore(); return 'ציון הכיסוי שלך הוא '+cs.score+' / 100 ('+cs.grade+'). '+cs.summary;}
+const hits=lsearch(q,S.p);
+if(!hits.length) return 'לא מצאתי התאמה בפוליסות שלך לשאלה הזו. נסה לנסח אחרת, או בדוק שהפוליסה הרלוונטית נסרקה ונשמרה.';
+return hits.slice(0,3).map(h=>h.p.co+' · '+h.p.type+' — '+(h.s[0]||('מספר פוליסה: '+(h.p.num||'לא ידוע')+', תוקף: '+(h.p.end?fd(h.p.end):'לא ידוע')))).join('\n\n');
+}
+async function askAIChat(){
+const last=(S.chat||[]).filter(m=>m.me).slice(-1)[0]; if(!last) return toast('כתוב שאלה קודם');
+if(S.settings.localOnly) return toast('במצב מקומי בלבד AI חיצוני חסום.');
+if(!confirm('לשלוח שאלה ל-AI ('+S.settings.aiProvider+')? יישלח תקציר פוליסות בלבד.')) return;
+const out=document.getElementById('aiChatOut'); out.textContent='שואל את ה-AI...';
+try{const ctx=S.p.map(p=>({co:p.co,type:p.type,num:p.num,asset:p.asset,end:p.end,cov:(p.cov||'').slice(0,800)})); const ans=await AI('ענה בעברית לשאלה: '+last.text+'\nפוליסות:\n'+JSON.stringify(ctx)+'\nאל תמציא. אם לא כתוב — כתוב שלא מצאת.'); out.innerHTML='<div class="card">'+esc(ans).slice(0,2000)+'</div>';}catch(e){out.textContent='ה-AI נכשל: '+String(e.code||e.message||'שגיאה');}
+}
+
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script>
+</body></html>
